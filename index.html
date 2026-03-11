@@ -5,77 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sena Personalizados</title>
 
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+
 <style>
 :root{
---cor-principal:#830064;
---cor-secundaria:#5e0047;
---cor-fundo:#f5f5f7;
+--cor:#830064;
+--cor2:#5e0047;
+--bg:#f4f4f6;
 }
 
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
-body{background:var(--cor-fundo)}
+body{background:var(--bg)}
 
-header{background:var(--cor-principal);color:white;padding:15px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.logo img{height:45px}
+header{background:var(--cor);color:white;padding:15px;display:flex;justify-content:space-between;align-items:center}
 
-.search{flex:1;margin:10px}
-.search input{width:100%;padding:10px;border-radius:6px;border:none}
+.logo{font-weight:bold;font-size:18px}
 
-.cart-btn{background:white;color:var(--cor-principal);padding:10px 15px;border-radius:6px;font-weight:bold;cursor:pointer}
+.cart-btn{background:white;color:var(--cor);padding:8px 14px;border-radius:6px;cursor:pointer}
 
-.hero{background:linear-gradient(90deg,var(--cor-principal),var(--cor-secundaria));color:white;padding:60px 20px;text-align:center}
-.hero h1{font-size:32px;margin-bottom:10px}
-.hero button{padding:12px 25px;border:none;border-radius:6px;background:white;color:var(--cor-principal);font-weight:bold;cursor:pointer;margin-top:15px}
+.hero{background:linear-gradient(90deg,var(--cor),var(--cor2));color:white;padding:50px 20px;text-align:center}
 
-.section{padding:40px 20px;max-width:1200px;margin:auto}
-.section h2{margin-bottom:20px}
+.banner{background:white;padding:20px;text-align:center;margin:20px;border-radius:10px}
+
+.section{max-width:1200px;margin:auto;padding:30px 20px}
 
 .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
 
-.card{background:white;padding:15px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);cursor:pointer;transition:.2s;position:relative}
-.card:hover{transform:scale(1.03)}
-
-.tag{position:absolute;top:10px;left:10px;background:#ff4d4d;color:white;font-size:12px;padding:4px 8px;border-radius:6px}
-
-.favorite{position:absolute;top:10px;right:10px;font-size:18px;cursor:pointer}
+.card{background:white;padding:15px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1)}
 
 .card img{width:100%;border-radius:6px;margin-bottom:10px}
 
-.desc{font-size:13px;color:#555;margin:6px 0}
-.sales{font-size:12px;color:#888}
+.price{color:var(--cor);font-weight:bold}
 
-.price{color:var(--cor-principal);font-weight:bold;margin-top:4px}
+button{padding:8px;border:none;border-radius:6px;cursor:pointer}
 
-.add{margin-top:10px;background:var(--cor-principal);color:white;padding:8px;border:none;width:100%;border-radius:6px;cursor:pointer}
-.buy{margin-top:5px;background:#222;color:white;padding:8px;border:none;width:100%;border-radius:6px;cursor:pointer}
+.add{background:var(--cor);color:white;width:100%;margin-top:8px}
 
-.categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
-.categories button{padding:8px 14px;border:none;border-radius:20px;background:var(--cor-principal);color:white;cursor:pointer}
+.buy{background:black;color:white;width:100%;margin-top:5px}
 
-.carousel{display:flex;overflow:auto;gap:15px}
-.carousel .card{min-width:200px}
+.footer{background:#111;color:white;text-align:center;padding:30px;margin-top:40px}
 
-.reviews{margin-top:5px;color:#ffaa00}
+/* CART */
 
-.footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-top:40px}
-.footer a{color:#25D366;margin:0 10px;text-decoration:none}
+.cart{position:fixed;right:0;top:0;width:320px;height:100%;background:white;padding:20px;overflow:auto;display:none;box-shadow:-3px 0 10px rgba(0,0,0,0.2)}
 
-.whatsapp-float{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:15px 18px;border-radius:50px;font-weight:bold;text-decoration:none}
-
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px}
-.modal-content{background:white;padding:20px;border-radius:10px;max-width:520px;width:100%}
-
-.modal-gallery{display:flex;gap:6px;margin-bottom:10px}
-.modal-gallery img{width:70px;height:70px;object-fit:cover;border-radius:6px;cursor:pointer}
-
-.modal-main{width:100%;margin-bottom:10px}
-
-.modal textarea,.modal input{width:100%;padding:8px;margin-top:8px}
-
-.cart-panel{position:fixed;right:0;top:0;width:320px;height:100%;background:white;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;overflow:auto;display:none}
 .cart-item{border-bottom:1px solid #eee;padding:10px 0}
 
-.summary{background:#f3f3f3;padding:10px;border-radius:6px;margin-top:10px;font-size:14px}
+/* ADMIN */
+
+.admin{position:fixed;top:0;left:0;width:100%;height:100%;background:white;display:none;padding:20px;overflow:auto}
+
+.admin input, .admin textarea{width:100%;padding:8px;margin:6px 0}
+
+.table{margin-top:20px}
+
+.table div{border-bottom:1px solid #ddd;padding:8px}
+
+.dashboard{background:#f3f3f3;padding:10px;border-radius:8px;margin-top:15px}
+
+.install{position:fixed;bottom:20px;left:20px;background:var(--cor);color:white;padding:10px 14px;border-radius:20px;display:none}
 
 </style>
 </head>
@@ -83,262 +72,257 @@ header{background:var(--cor-principal);color:white;padding:15px;display:flex;ali
 <body>
 
 <header>
-<div class="logo"><img src="logo.png"></div>
-
-<div class="search">
-<input type="text" placeholder="Buscar produtos..." onkeyup="searchProduct(this.value)">
+<div class="logo">Sena Personalizados</div>
+<div>
+<button onclick="openAdmin()">Admin</button>
+<span class="cart-btn" onclick="toggleCart()">Carrinho (<span id="cartCount">0</span>)</span>
 </div>
-
-<div class="cart-btn" onclick="toggleCart()">Carrinho (<span id="cartCount">0</span>)</div>
 </header>
 
 <section class="hero">
 <h1>Personalizados para momentos especiais</h1>
-<p>Kits, fotos e lembranças criativas</p>
-<button onclick="scrollToProducts()">Ver produtos</button>
+<p>Kits, fotos e lembranças</p>
 </section>
+
+<div class="banner" id="promoBanner"></div>
 
 <section class="section">
-<h2>Produtos mais vendidos</h2>
-<div class="carousel" id="bestSellers"></div>
-</section>
-
-<section class="section" id="products">
-<h2>Catálogo</h2>
-
-<div class="categories">
-<button onclick="filterCategory('all')">Todos</button>
-<button onclick="filterCategory('kit')">Kits</button>
-<button onclick="filterCategory('foto')">Fotos</button>
-<button onclick="filterCategory('chaveiro')">Chaveiros</button>
-</div>
-
+<h2>Produtos</h2>
 <div class="products" id="productList"></div>
 </section>
 
 <div class="footer">
-<h3>Sena Personalizados</h3>
-<p>Pedidos personalizados para todas ocasiões</p>
-<a href="https://wa.me/5591984233046">WhatsApp</a>
-<a href="https://instagram.com/sena__personalizados">Instagram</a>
-<p style="margin-top:15px">© 2026 Sena Personalizados</p>
+<p>Sena Personalizados</p>
+<p>WhatsApp: (91) 98423-3046</p>
+<p>Instagram: sena__personalizados</p>
 </div>
 
-<a class="whatsapp-float" href="https://wa.me/5591984233046">WhatsApp</a>
+<div class="cart" id="cart"></div>
 
-<div class="modal" id="modal">
-<div class="modal-content" id="modalContent"></div>
+<div class="admin" id="admin">
+<h2>Painel Administrativo</h2>
+
+<div class="dashboard">
+<p>Total de vendas: <span id="totalSales">0</span></p>
+<p>Pedidos realizados: <span id="orders">0</span></p>
 </div>
 
-<div class="cart-panel" id="cartPanel">
-<h3>Seu carrinho</h3>
-<button onclick="toggleCart()">Fechar</button>
-<div id="cartItems"></div>
-<h4 id="cartTotal"></h4>
-<textarea id="orderNote" placeholder="Observação do pedido"></textarea>
-<div class="summary" id="orderSummary"></div>
-<button class="add" onclick="finishOrder()">Finalizar no WhatsApp</button>
+<h3>Novo Produto</h3>
+
+<input id="pname" placeholder="Nome">
+<textarea id="pdesc" placeholder="Descrição"></textarea>
+<input id="pprice" placeholder="Preço">
+<input id="pimg" placeholder="URL da imagem">
+
+<button onclick="addProduct()">Salvar Produto</button>
+
+<h3>Produtos cadastrados</h3>
+
+<div class="table" id="productTable"></div>
+
+<button onclick="closeAdmin()">Fechar</button>
 </div>
+
+<button class="install" id="installBtn">Instalar APP</button>
 
 <script>
 
-let orderNumber=1000
-let favorites=[]
+let cart=[]
 
-let products=[
+let products=JSON.parse(localStorage.getItem("products"))||[
 {
 id:1,
 name:"Kit Dia das Mulheres",
-desc:"1 foto + chaveiro personalizado",
+desc:"1 foto + chaveiro",
 price:15,
-cat:"kit",
-sales:18,
-tag:"Mais vendido",
-images:[
-"https://picsum.photos/400?1",
-"https://picsum.photos/400?2"
-]
-},
-{
-id:2,
-name:"Foto Personalizada",
-desc:"Foto em papel fotográfico",
-price:10,
-cat:"foto",
-sales:7,
-tag:"Recomendado",
-images:[
-"https://picsum.photos/400?4",
-"https://picsum.photos/400?5"
-]
+img:"https://picsum.photos/400?1",
+sales:0
 }
 ]
 
-let cart=[]
+let orders=Number(localStorage.getItem("orders"))||0
+let totalSales=Number(localStorage.getItem("sales"))||0
 
-function renderProducts(list=products){
-const container=document.getElementById("productList")
-container.innerHTML=""
+function saveDB(){
+localStorage.setItem("products",JSON.stringify(products))
+localStorage.setItem("orders",orders)
+localStorage.setItem("sales",totalSales)
+}
 
-list.forEach(p=>{
-container.innerHTML+=`
-<div class="card" onclick="openProduct(${p.id})">
-<div class="tag">${p.tag}</div>
-<div class="favorite" onclick="event.stopPropagation();toggleFav(${p.id})">❤</div>
-<img src="${p.images[0]}">
+function renderProducts(){
+const list=document.getElementById("productList")
+list.innerHTML=""
+
+products.forEach(p=>{
+list.innerHTML+=`
+<div class="card">
+<img src="${p.img}">
 <h4>${p.name}</h4>
-<p class="desc">${p.desc}</p>
-<div class="reviews">⭐⭐⭐⭐⭐</div>
-<div class="sales">${p.sales} vendidos</div>
-<p class="price">R$ ${p.price}</p>
-<button class="add" onclick="event.stopPropagation();openProduct(${p.id})">Adicionar</button>
-<button class="buy" onclick="event.stopPropagation();buyNow(${p.id})">Comprar agora</button>
-</div>`
-})
-}
-
-function toggleFav(id){
-if(favorites.includes(id)){
-favorites=favorites.filter(f=>f!==id)
-}else{
-favorites.push(id)
-}
-}
-
-function renderBest(){
-const best=[...products].sort((a,b)=>b.sales-a.sales).slice(0,5)
-const container=document.getElementById("bestSellers")
-container.innerHTML=""
-
-best.forEach(p=>{
-container.innerHTML+=`
-<div class="card" onclick="openProduct(${p.id})">
-<img src="${p.images[0]}">
-<h4>${p.name}</h4>
-<div class="sales">${p.sales} vendidos</div>
-<p class="price">R$ ${p.price}</p>
-</div>`
-})
-}
-
-function openProduct(id){
-const p=products.find(x=>x.id===id)
-
-let thumbs=""
-p.images.forEach(img=>{
-thumbs+=`<img src="${img}" onclick="changeImage('${img}')">`
-})
-
-const content=document.getElementById("modalContent")
-
-content.innerHTML=`
-<img id="mainImage" class="modal-main" src="${p.images[0]}">
-<div class="modal-gallery">${thumbs}</div>
-<h3>${p.name}</h3>
 <p>${p.desc}</p>
 <p class="price">R$ ${p.price}</p>
-<label>Quantidade</label>
-<input type="number" id="qty" value="1" min="1">
-<label>Observação</label>
-<textarea id="note"></textarea>
-<button class="add" onclick="addCart(${p.id})">Adicionar ao carrinho</button>
-<button class="buy" onclick="buyNow(${p.id})">Comprar agora</button>
-`
-
-document.getElementById("modal").style.display="flex"
+<button class="add" onclick="addCart(${p.id})">Adicionar</button>
+<button class="buy" onclick="buyNow(${p.id})">Comprar</button>
+</div>`
+})
 }
 
-function changeImage(src){
-document.getElementById("mainImage").src=src
+function renderBanner(){
+const best=[...products].sort((a,b)=>b.sales-a.sales)[0]
+
+if(best){
+
+document.getElementById("promoBanner").innerHTML=
+`🔥 Promoção: ${best.name} por apenas R$ ${best.price}`
+
+}
 }
 
 function addCart(id){
 const p=products.find(x=>x.id===id)
-const qty=parseInt(document.getElementById("qty").value)
-const note=document.getElementById("note").value
-
-cart.push({product:p,qty,note})
+cart.push(p)
 updateCart()
-document.getElementById("modal").style.display="none"
-}
-
-function buyNow(id){
-openProduct(id)
 }
 
 function updateCart(){
-const items=document.getElementById("cartItems")
-items.innerHTML=""
+const cartDiv=document.getElementById("cart")
+
+cartDiv.innerHTML="<h3>Carrinho</h3>"
 
 let total=0
 
-cart.forEach((item,index)=>{
-const sub=item.qty*item.product.price
+cart.forEach((p,i)=>{
 
-total+=sub
+total+=p.price
 
-items.innerHTML+=`
+cartDiv.innerHTML+=`
 <div class="cart-item">
-<b>${item.product.name}</b><br>
-Qtd: <button onclick="changeQty(${index},-1)">-</button> ${item.qty} <button onclick="changeQty(${index},1)">+</button><br>
-Obs:${item.note||'-'}<br>
-R$ ${sub}<br>
-<button onclick="removeItem(${index})">Remover</button>
+${p.name}
+<button onclick="removeItem(${i})">Remover</button>
 </div>`
+
 })
 
-document.getElementById("cartTotal").innerText="Total: R$ "+total
+cartDiv.innerHTML+=`<h4>Total: R$ ${total}</h4>`
+cartDiv.innerHTML+=`<button onclick="finishOrder(${total})">Finalizar</button>`
+
 
 document.getElementById("cartCount").innerText=cart.length
-
-document.getElementById("orderSummary").innerText="Itens no pedido: "+cart.length
 }
 
-function changeQty(index,delta){
-cart[index].qty+=delta
-if(cart[index].qty<=0){cart.splice(index,1)}
-updateCart()
-}
-
-function removeItem(index){
-cart.splice(index,1)
+function removeItem(i){
+cart.splice(i,1)
 updateCart()
 }
 
 function toggleCart(){
-const panel=document.getElementById("cartPanel")
-panel.style.display=panel.style.display==='block'?'none':'block'
+const c=document.getElementById("cart")
+c.style.display=c.style.display==='block'?'none':'block'
 }
 
-function finishOrder(){
-orderNumber++
-let text=`Pedido #${orderNumber}%0A`
+function finishOrder(total){
+orders++
 
-cart.forEach(item=>{
-text+=`- ${item.product.name} | Qtd:${item.qty} | Obs:${item.note}%0A`
+totalSales+=total
+
+cart.forEach(p=>p.sales++)
+
+saveDB()
+
+cart=[]
+
+updateCart()
+
+alert("Pedido enviado no WhatsApp")
+}
+
+function openAdmin(){
+renderAdmin()
+
+document.getElementById("admin").style.display="block"
+}
+
+function closeAdmin(){
+document.getElementById("admin").style.display="none"
+}
+
+function addProduct(){
+
+const product={
+id:Date.now(),
+name:document.getElementById("pname").value,
+desc:document.getElementById("pdesc").value,
+price:Number(document.getElementById("pprice").value),
+img:document.getElementById("pimg").value,
+sales:0
+}
+
+products.push(product)
+
+saveDB()
+
+renderProducts()
+renderAdmin()
+
+}
+
+function renderAdmin(){
+
+const table=document.getElementById("productTable")
+
+table.innerHTML=""
+
+products.forEach(p=>{
+
+table.innerHTML+=`
+<div>
+${p.name} - R$ ${p.price}
+<button onclick="deleteProduct(${p.id})">Excluir</button>
+</div>`
+
 })
 
-text+="Observação geral: "+document.getElementById("orderNote").value
 
-window.open("https://wa.me/5591984233046?text="+text)
+document.getElementById("totalSales").innerText="R$ "+totalSales
+
+document.getElementById("orders").innerText=orders
+
 }
 
-function filterCategory(cat){
-if(cat==='all')return renderProducts()
-renderProducts(products.filter(p=>p.cat===cat))
-}
+function deleteProduct(id){
 
-function searchProduct(text){
-text=text.toLowerCase()
-renderProducts(products.filter(p=>p.name.toLowerCase().includes(text)))
-}
+products=products.filter(p=>p.id!==id)
 
-function scrollToProducts(){
-document.getElementById("products").scrollIntoView({behavior:'smooth'})
+saveDB()
+
+renderProducts()
+renderAdmin()
+
 }
 
 renderProducts()
-renderBest()
+renderBanner()
+
+/* PWA INSTALL */
+
+let deferredPrompt
+
+window.addEventListener('beforeinstallprompt',(e)=>{
+
+e.preventDefault()
+
+deferredPrompt=e
+
+const btn=document.getElementById("installBtn")
+
+btn.style.display="block"
+
+btn.onclick=()=>{
+
+deferredPrompt.prompt()
+
+}
+
+})
 
 </script>
 
