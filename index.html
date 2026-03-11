@@ -123,6 +123,11 @@
               <div id="monthlyProfitSummary"></div>
             </div>
           </div>
+          <div class="admin-card mt12">
+            <h3 style="margin-top:0">Resultados por categoria de pedido</h3>
+            <p class="small">Esses valores seguem os filtros de cliente e mês do dashboard.</p>
+            <div id="categoryDashboardSummary"></div>
+          </div>
         </section>
 
         <section id="productsSection" style="display:none">
@@ -272,6 +277,24 @@
       if(monthlyArea){
         const entries=Object.entries(monthly).sort((a,b)=>a[0].localeCompare(b[0])).slice(-6);
         monthlyArea.innerHTML=entries.length?entries.map(([m,v])=>`<div class="row between mt12"><span class="small">${m}</span><strong>R$ ${(v.rev-v.cost).toFixed(2).replace('.',',')}</strong></div>`).join(''):'<div class="empty">Sem dados mensais.</div>';
+      }
+
+      const catMap={};
+      filtered.forEach(o=>{
+        const items=parseOrderItems(o.product||'');
+        items.forEach(item=>{
+          const prod=products.find(p=>p.name===item.name);
+          const cat=prod?.category || 'Sem categoria';
+          if(!catMap[cat]) catMap[cat]={qty:0,revenue:0,cost:0};
+          catMap[cat].qty += item.qty;
+          catMap[cat].revenue += Number(prod?.price||0)*item.qty;
+          catMap[cat].cost += Number(prod?.cost||0)*item.qty;
+        });
+      });
+      const catArea=document.getElementById('categoryDashboardSummary');
+      if(catArea){
+        const catEntries=Object.entries(catMap).sort((a,b)=>b[1].revenue-a[1].revenue);
+        catArea.innerHTML=catEntries.length?catEntries.map(([cat,v])=>`<div class="admin-list-item"><div><strong>${cat}</strong><br><span class="small">Itens: ${v.qty}</span></div><div><div class="small">Venda: R$ ${v.revenue.toFixed(2).replace('.',',')}</div><div class="small">Custo: R$ ${v.cost.toFixed(2).replace('.',',')}</div><div><strong>Lucro: R$ ${(v.revenue-v.cost).toFixed(2).replace('.',',')}</strong></div></div></div>`).join(''):'<div class="empty">Sem dados por categoria.</div>';
       }
     }
 
