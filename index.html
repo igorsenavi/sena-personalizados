@@ -1,138 +1,238 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sena Personalizados</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-:root{--cor:#830064;--bg:#f6f6f8}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
-body{background:var(--bg)}
 
-header{background:var(--cor);color:white;padding:16px;display:flex;justify-content:space-between;align-items:center}
+:root{
+--cor:#830064;
+}
 
-header h2{font-size:20px}
+body{
+margin:0;
+font-family:Arial;
+background:#f5f5f5;
+}
 
-button{padding:8px 12px;border:none;border-radius:6px;cursor:pointer;background:var(--cor);color:white}
+header{
+background:var(--cor);
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+}
 
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:20px}
+button{
+background:var(--cor);
+color:white;
+border:none;
+padding:8px 12px;
+border-radius:6px;
+cursor:pointer;
+}
 
-.card{background:white;padding:15px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
-.card img{width:100%;border-radius:6px;margin-bottom:10px}
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
+}
 
-.price{color:var(--cor);font-weight:bold}
+.card{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
 
-.cart{position:fixed;right:0;top:0;width:320px;height:100%;background:white;padding:20px;overflow:auto;display:none;box-shadow:-3px 0 10px rgba(0,0,0,.2)}
+.card img{
+width:100%;
+border-radius:6px;
+}
 
-.cart textarea{width:100%;margin-top:10px}
+.price{
+color:var(--cor);
+font-weight:bold;
+}
 
-.qty{display:flex;gap:8px;align-items:center}
+.cart{
+position:fixed;
+right:0;
+top:0;
+width:320px;
+height:100%;
+background:white;
+padding:20px;
+display:none;
+overflow:auto;
+box-shadow:-3px 0 10px rgba(0,0,0,.2);
+}
 
-.admin{position:fixed;top:0;left:0;width:100%;height:100%;background:white;display:none;padding:20px;overflow:auto}
+textarea{
+width:100%;
+}
 
-.admin input,.admin textarea,.admin select{width:100%;padding:8px;margin:5px 0}
+.admin{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:white;
+display:none;
+padding:20px;
+overflow:auto;
+}
 
-.table div{border-bottom:1px solid #ddd;padding:8px}
+.login{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000000cc;
+display:none;
+align-items:center;
+justify-content:center;
+}
 
-.login{position:fixed;top:0;left:0;width:100%;height:100%;background:#000000cc;display:flex;align-items:center;justify-content:center}
+.login-box{
+background:white;
+padding:30px;
+border-radius:10px;
+width:300px;
+}
 
-.login-box{background:white;padding:30px;border-radius:10px;width:300px}
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:20px;
+}
 
-footer{background:#111;color:white;text-align:center;padding:20px;margin-top:40px}
+.banner{
+background:#830064;
+color:white;
+padding:40px;
+text-align:center;
+}
 
-.banner{background:linear-gradient(90deg,#830064,#b10086);color:white;padding:40px;text-align:center}
-
-canvas{max-width:600px;margin-top:20px}
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <h2>Sena Personalizados</h2>
+
 <div>
 <button onclick="openAdmin()">Admin</button>
 <button onclick="toggleCart()">Carrinho (<span id="cartCount">0</span>)</button>
 </div>
+
 </header>
 
 <div class="banner">
+
 <h2>Personalizados exclusivos</h2>
-<p>Envie sua foto e criamos algo único para você</p>
+<p>Envie sua foto e criamos algo único</p>
+
 </div>
 
 <section class="products" id="productList"></section>
 
 <div class="cart" id="cart"></div>
 
-<div class="login" id="login" style="display:none">
+<div class="login" id="login">
+
 <div class="login-box">
+
 <h3>Login Admin</h3>
+
 <input id="email" placeholder="Email">
+
 <input id="password" type="password" placeholder="Senha">
+
 <button onclick="login()">Entrar</button>
+
 </div>
+
 </div>
 
 <div class="admin" id="admin">
+
 <h2>Painel Administrativo</h2>
 
-<h3>Dashboard</h3>
 <p>Total vendido: R$ <span id="totalSales">0</span></p>
 <p>Total pedidos: <span id="orders">0</span></p>
 
 <canvas id="salesChart"></canvas>
 
 <h3>Novo Produto</h3>
+
 <input id="pname" placeholder="Nome">
+
 <textarea id="pdesc" placeholder="Descrição"></textarea>
+
 <input id="pprice" placeholder="Preço">
-<input id="pimg" placeholder="URL da imagem">
-<button onclick="addProduct()">Salvar Produto</button>
+
+<input id="pimg" placeholder="URL imagem">
+
+<button onclick="addProduct()">Salvar</button>
 
 <h3>Produtos</h3>
-<div class="table" id="productTable"></div>
+
+<div id="productTable"></div>
 
 <h3>Pedidos</h3>
-<div class="table" id="ordersTable"></div>
+
+<div id="ordersTable"></div>
 
 <button onclick="closeAdmin()">Fechar</button>
+
 </div>
 
 <footer>
+
 <p>WhatsApp: (91) 98423-3046</p>
 <p>Instagram: @sena__personalizados</p>
+
 </footer>
 
 <script>
 
-const SUPABASE_URL="https://bhvcxiiafdutoaloqflr.supabase.co"
-const SUPABASE_KEY="sb_publishable_3XViRAlVJHJ8C3R9moGhIw_TaBt-A4F"
+/* SUPABASE */
 
-const supabase = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
+const SUPABASE_URL = "https://bhvcxiiafdutoaloqflr.supabase.co"
+const SUPABASE_KEY = "sb_publishable_3XViRAlVJHJ8C3R9moGhIw_TaBt-A4F"
+
+const supabaseClient = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
+
+/* VARIAVEIS */
 
 let cart=[]
 let products=[]
 let ordersDB=[]
 
+/* PRODUTOS */
+
 async function loadProducts(){
 
-const {data}=await supabase.from("products").select("*")
+const {data}=await supabaseClient.from("products").select("*")
 
 products=data||[]
 
 renderProducts()
-
-}
-
-async function loadOrders(){
-
-const {data}=await supabase.from("orders").select("*")
-
-ordersDB=data||[]
 
 }
 
@@ -145,17 +245,28 @@ list.innerHTML=""
 products.forEach(p=>{
 
 list.innerHTML+=`
+
 <div class="card">
+
 <img src="${p.image}">
+
 <h4>${p.name}</h4>
-<p>${p.desc||""}</p>
+
+<p>${p.desc}</p>
+
 <p class="price">R$ ${p.price}</p>
+
 <button onclick="addCart(${p.id})">Adicionar</button>
-</div>`
+
+</div>
+
+`
 
 })
 
 }
+
+/* CARRINHO */
 
 function addCart(id){
 
@@ -181,29 +292,39 @@ const p=item.product
 
 const subtotal=p.price*item.qty
 
- total+=subtotal
+total+=subtotal
 
- c.innerHTML+=`
- <div>
- <b>${p.name}</b>
- <div class='qty'>
- <button onclick="changeQty(${i},-1)">-</button>
- ${item.qty}
- <button onclick="changeQty(${i},1)">+</button>
- </div>
- <textarea placeholder='Observação' onchange="saveObs(${i},this.value)">${item.obs}</textarea>
- <p>Subtotal R$ ${subtotal}</p>
- <button onclick="removeItem(${i})">Remover</button>
- </div>`
+c.innerHTML+=`
+
+<div>
+
+<b>${p.name}</b>
+
+<br>
+
+<button onclick="changeQty(${i},-1)">-</button>
+
+${item.qty}
+
+<button onclick="changeQty(${i},1)">+</button>
+
+<textarea placeholder="Observação" onchange="saveObs(${i},this.value)">${item.obs}</textarea>
+
+<p>Subtotal R$ ${subtotal}</p>
+
+<button onclick="removeItem(${i})">Remover</button>
+
+</div>
+
+`
 
 })
 
 c.innerHTML+=`<h4>Total R$ ${total}</h4>`
 
-c.innerHTML+=`<input type='file' id='photoUpload'>`
+c.innerHTML+=`<input type="file" id="photoUpload">`
 
 c.innerHTML+=`<button onclick="finishOrder(${total})">Finalizar Pedido</button>`
-
 
 document.getElementById("cartCount").innerText=cart.length
 
@@ -220,64 +341,46 @@ updateCart()
 }
 
 function saveObs(i,val){
+
 cart[i].obs=val
+
 }
 
 function removeItem(i){
+
 cart.splice(i,1)
+
 updateCart()
+
 }
 
 function toggleCart(){
 
 const c=document.getElementById("cart")
 
-c.style.display=c.style.display==='block'?'none':'block'
+c.style.display=c.style.display==="block"?"none":"block"
 
 }
+
+/* PEDIDO */
 
 async function finishOrder(total){
 
-let photo=""
+const items=cart.map(c=>`${c.product.name} x${c.qty} (${c.obs})`).join(",")
 
-const file=document.getElementById("photoUpload").files[0]
+await supabaseClient.from("orders").insert([
 
-if(file){
-
-const reader=new FileReader()
-
-reader.onload=async function(e){
-
-photo=e.target.result
-
-saveOrder(total,photo)
-
-}
-
-reader.readAsDataURL(file)
-
-}else{
-
-saveOrder(total,"")
-
-}
-
-}
-
-async function saveOrder(total,photo){
-
-const items=cart.map(c=>`${c.product.name} x${c.qty} (${c.obs})`).join(", ")
-
-await supabase.from("orders").insert([
 {
+
 product:items,
- total:total,
- status:"Novo",
- photo:photo
+total:total,
+status:"Novo"
+
 }
+
 ])
 
-alert("Pedido registrado com sucesso")
+alert("Pedido enviado")
 
 cart=[]
 
@@ -285,23 +388,32 @@ updateCart()
 
 }
 
+/* ADMIN */
+
 function openAdmin(){
- document.getElementById("login").style.display="flex"
+
+document.getElementById("login").style.display="flex"
+
 }
 
 function closeAdmin(){
- document.getElementById("admin").style.display="none"
+
+document.getElementById("admin").style.display="none"
+
 }
 
 async function login(){
 
 const email=document.getElementById("email").value
+
 const password=document.getElementById("password").value
 
-const {error}=await supabase.auth.signInWithPassword({email,password})
+const {error}=await supabaseClient.auth.signInWithPassword({email,password})
 
 if(error){
+
 alert("Erro no login")
+
 }else{
 
 document.getElementById("login").style.display="none"
@@ -317,92 +429,36 @@ renderAdmin()
 async function addProduct(){
 
 const name=document.getElementById("pname").value
+
 const desc=document.getElementById("pdesc").value
+
 const price=document.getElementById("pprice").value
+
 const image=document.getElementById("pimg").value
 
-await supabase.from("products").insert([
+await supabaseClient.from("products").insert([
+
 {name,desc,price,image}
+
 ])
 
 loadProducts()
-
-renderAdmin()
-
-}
-
-async function deleteProduct(id){
-
-await supabase.from("products").delete().eq("id",id)
-
-loadProducts()
-
-renderAdmin()
 
 }
 
 async function renderAdmin(){
 
-await loadOrders()
+const {data}=await supabaseClient.from("orders").select("*")
 
-const table=document.getElementById("productTable")
+ordersDB=data||[]
 
-let html=""
+let total=0
 
-products.forEach(p=>{
+ordersDB.forEach(o=>total+=Number(o.total))
 
-html+=`<div>${p.name} - R$ ${p.price} <button onclick="deleteProduct(${p.id})">Excluir</button></div>`
+document.getElementById("totalSales").innerText=total
 
-})
-
- table.innerHTML=html
-
-const ordersTable=document.getElementById("ordersTable")
-
-let ordersHTML=""
-
-let totalSales=0
-
-ordersDB.forEach(o=>{
-
- totalSales+=Number(o.total)
-
- ordersHTML+=`<div>
- Pedido ${o.id} | R$ ${o.total}
- <select onchange="updateStatus(${o.id},this.value)">
- <option ${o.status==='Novo'?'selected':''}>Novo</option>
- <option ${o.status==='Produção'?'selected':''}>Produção</option>
- <option ${o.status==='Enviado'?'selected':''}>Enviado</option>
- </select>
- </div>`
-
-})
-
-ordersTable.innerHTML=ordersHTML
-
- document.getElementById("totalSales").innerText=totalSales
-
- document.getElementById("orders").innerText=ordersDB.length
-
- renderChart()
-
-}
-
-async function updateStatus(id,status){
-
-await supabase.from("orders").update({status}).eq("id",id)
-
-loadOrders()
-
-}
-
-function renderChart(){
-
-const ctx=document.getElementById('salesChart')
-
-let totals=ordersDB.map(o=>Number(o.total))
-
-new Chart(ctx,{type:'bar',data:{labels:totals.map((_,i)=>"Pedido "+(i+1)),datasets:[{label:'Vendas',data:totals}]}})
+document.getElementById("orders").innerText=ordersDB.length
 
 }
 
