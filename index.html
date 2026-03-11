@@ -84,6 +84,30 @@
             <div class="metric"><div class="small">Pedidos recebidos</div><div class="n" id="metricOrders">0</div></div>
             <div class="metric"><div class="small">Cupons ativos</div><div class="n" id="metricCoupons">0</div></div>
           </div>
+          <div class="admin-grid mt12">
+            <div class="admin-card">
+              <h3 style="margin-top:0">Resumo financeiro</h3>
+              <div class="row between"><span class="small">Faturamento total</span><strong id="metricRevenue">R$ 0,00</strong></div>
+              <div class="row between mt12"><span class="small">Faturamento do mês</span><strong id="metricMonthRevenue">R$ 0,00</strong></div>
+              <div class="row between mt12"><span class="small">Ticket médio</span><strong id="metricAvgTicket">R$ 0,00</strong></div>
+            </div>
+            <div class="admin-card">
+              <h3 style="margin-top:0">Pedidos por status</h3>
+              <div id="statusSummary"></div>
+            </div>
+          </div>
+          <div class="admin-grid mt12">
+            <div class="admin-card">
+              <h3 style="margin-top:0">Produtos mais vendidos</h3>
+              <div id="bestSellersAdmin"></div>
+            </div>
+            <div class="admin-card">
+              <h3 style="margin-top:0">Filtros rápidos</h3>
+              <div class="field mb8"><input id="reportClientFilter" placeholder="Filtrar por cliente" oninput="filterOrdersAdmin()"></div>
+              <div class="field mb8"><select id="reportStatusFilter" onchange="filterOrdersAdmin()"><option value="">Todos os status</option></select></div>
+              <div class="field"><input id="reportDateFilter" type="month" onchange="filterOrdersAdmin()"></div>
+            </div>
+          </div>
         </section>
 
         <section id="productsSection" style="display:none">
@@ -107,7 +131,7 @@
           </div>
         </section>
 
-        <section id="ordersSection" style="display:none"><div class="admin-card"><h3 style="margin-top:0">Pedidos</h3><div id="adminOrders"></div></div></section>
+        <section id="ordersSection" style="display:none"><div class="admin-card"><div class="row between wrap"><h3 style="margin-top:0">Pedidos</h3><div class="row wrap"><div class="field"><input id="ordersClientFilter" placeholder="Buscar cliente" oninput="filterOrdersAdmin()"></div><div class="field"><select id="ordersStatusFilter" onchange="filterOrdersAdmin()"><option value="">Todos os status</option></select></div><div class="field"><input id="ordersDateFilter" type="month" onchange="filterOrdersAdmin()"></div></div></div><div id="adminOrders"></div></div></section>
 
         <section id="couponsSection" style="display:none">
           <div class="admin-grid">
@@ -141,7 +165,7 @@
     const BUCKET_NAME = "produtos";
     const ORDER_STATUSES = ['Novo','Enviado','Em produção','Pendente pagamento','Concluído','Excluído'];
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    let products=[], cart=[], coupons=[], categories=[], selectedCategory='', pendingTotal=0, settingsData={};
+    let products=[], cart=[], coupons=[], categories=[], selectedCategory='', pendingTotal=0, settingsData={}, ordersCache=[];
 
     async function loadSettings(){const {data}=await supabaseClient.from('store_settings').select('*'); settingsData={}; (data||[]).forEach(s=>settingsData[s.key]=s.value); applyBanner()}
     function applyBanner(){const hero=document.getElementById('heroBanner'); const title=settingsData.banner_title||'Criando personalizados para momentos únicos'; const subtitle=settingsData.banner_subtitle||'Soluções criativas para festas, brindes e impressões'; const image=settingsData.banner_image||''; document.getElementById('heroTitle').textContent=title; document.getElementById('heroSubtitle').textContent=subtitle; hero.style.backgroundImage=image?`url(${image})`:'linear-gradient(90deg, var(--cor), var(--cor2))'; const preview=document.getElementById('bannerPreview'); if(preview){preview.style.backgroundImage=image?`url(${image})`:'linear-gradient(90deg, var(--cor), var(--cor2))'; document.getElementById('bannerPreviewText').textContent=title}}
@@ -154,8 +178,36 @@
 
     async function loadProducts(){const {data,error}=await supabaseClient.from('products').select('*').order('id',{ascending:false}); if(error){console.log(error);document.getElementById('productList').innerHTML='<div class="empty">Erro ao carregar produtos.</div>';return} products=data||[]; renderProducts(applyFilters()); renderAdminProducts(); updateMetrics()}
     async function loadCoupons(){const {data}=await supabaseClient.from('coupons').select('*').order('id',{ascending:false}); coupons=data||[]; renderCoupons(); updateMetrics()}
-    async function loadOrders(){const {data}=await supabaseClient.from('orders').select('*').order('id',{ascending:false}); window.__ordersCache=data||[]; renderOrders(data||[]); updateMetrics()}
-    function updateMetrics(){document.getElementById('metricProducts').textContent=products.length||0; document.getElementById('metricCoupons').textContent=coupons.length||0; document.getElementById('metricOrders').textContent=(window.__ordersCache||[]).length||0}
+    async function loadOrders(){const {data}=await supabaseClient.from('orders').select('*').order('id',{ascending:false}); ordersCache=data||[]; renderOrders(ordersCache); updateMetrics(); renderDashboard(); renderOrderFilterOptions();}
+    function updateMetrics(){document.getElementById('metricProducts').textContent=products.length||0; document.getElementById('metricCoupons').textContent=coupons.length||0; document.getElementById('metricOrders').textContent=ordersCache.length||0;} 
+    function renderDashboard(){
+      const revenue=ordersCache.reduce((s,o)=>s+Number(o.total||0),0);
+      const now=new Date();
+      const monthRevenue=ordersCache.filter(o=>{const d=new Date(o.created_at||Date.now()); return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();}).reduce((s,o)=>s+Number(o.total||0),0);
+      const avg=ordersCache.length?revenue/ordersCache.length:0;
+      document.getElementById('metricRevenue').textContent=`R$ ${revenue.toFixed(2).replace('.',',')}`;
+      document.getElementById('metricMonthRevenue').textContent=`R$ ${monthRevenue.toFixed(2).replace('.',',')}`;
+      document.getElementById('metricAvgTicket').textContent=`R$ ${avg.toFixed(2).replace('.',',')}`;
+      const counts={}; ORDER_STATUSES.forEach(s=>counts[s]=0); ordersCache.forEach(o=>counts[o.status]=(counts[o.status]||0)+1);
+      const statusArea=document.getElementById('statusSummary'); if(statusArea) statusArea.innerHTML=ORDER_STATUSES.map(s=>`<div class="row between mt12"><span class="small">${s}</span><strong>${counts[s]||0}</strong></div>`).join('');
+      const salesMap={}; ordersCache.forEach(o=>{(o.product||'').split(' | ').forEach(line=>{const name=(line.split(' x')[0]||'').trim(); if(name) salesMap[name]=(salesMap[name]||0)+1;});});
+      const best=Object.entries(salesMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
+      const bestArea=document.getElementById('bestSellersAdmin'); if(bestArea) bestArea.innerHTML=best.length?best.map(([name,q])=>`<div class="row between mt12"><span class="small">${name}</span><strong>${q}</strong></div>`).join(''):'<div class="empty">Sem vendas ainda.</div>';
+    }
+    function renderOrderFilterOptions(){
+      const options=`<option value="">Todos os status</option>${ORDER_STATUSES.map(s=>`<option value="${s}">${s}</option>`).join('')}`;
+      const ids=['ordersStatusFilter','reportStatusFilter']; ids.forEach(id=>{const el=document.getElementById(id); if(el) el.innerHTML=options;});
+    }
+    function filterOrdersAdmin(){
+      const client=(document.getElementById('ordersClientFilter')?.value||document.getElementById('reportClientFilter')?.value||'').toLowerCase().trim();
+      const status=(document.getElementById('ordersStatusFilter')?.value||document.getElementById('reportStatusFilter')?.value||'').trim();
+      const month=(document.getElementById('ordersDateFilter')?.value||document.getElementById('reportDateFilter')?.value||'').trim();
+      let list=[...ordersCache];
+      if(client) list=list.filter(o=>`${o.customer_name||''} ${o.customer_phone||''}`.toLowerCase().includes(client));
+      if(status) list=list.filter(o=>(o.status||'')===status);
+      if(month) list=list.filter(o=>(o.created_at||'').slice(0,7)===month);
+      renderOrders(list);
+    }
 
     function applyFilters(search=''){let list=[...products]; if(selectedCategory) list=list.filter(p=>(p.category||'')===selectedCategory); if(search) list=list.filter(p=>(p.name||'').toLowerCase().includes(search)||(p.description||'').toLowerCase().includes(search)); return list}
     function renderProducts(list){const area=document.getElementById('productList'); if(!list.length){area.innerHTML='<div class="empty">Nenhum produto encontrado.</div>';return} area.innerHTML=''; list.forEach(p=>{area.innerHTML+=`<div class="card"><img src="${p.image||''}" alt="${p.name||''}" onerror="this.src='https://via.placeholder.com/500x500?text=Produto'"><h4>${p.name||''}</h4><p>${p.description||''}</p><div class="badge">${p.category||'Sem categoria'}</div><div class="row between"><div class="price">R$ ${Number(p.price||0).toFixed(2).replace('.',',')}</div><div class="qty-box"><button onclick="adjustCardQty(${p.id},-1)">-</button><span id="cardqty-${p.id}">1</span><button onclick="adjustCardQty(${p.id},1)">+</button></div></div><button class="primary" style="width:100%" onclick="addCart(${p.id})">Adicionar ao carrinho</button></div>`})}
@@ -188,8 +240,8 @@
     function renderAdminProducts(){const area=document.getElementById('adminProducts'); if(!area) return; if(!products.length){area.innerHTML='<div class="empty">Nenhum produto cadastrado.</div>'; return} area.innerHTML=''; products.forEach(p=>{const safe=JSON.stringify(p).replace(/'/g,'&#39;'); area.innerHTML+=`<div class="admin-list-item"><div><strong>${p.name}</strong><br><span class="small">R$ ${Number(p.price).toFixed(2).replace('.',',')}</span><br><span class="badge">${p.category||'Sem categoria'}</span><br><span class="small">${p.description||''}</span></div><div class="row wrap"><button class="secondary" onclick='fillForm(${safe})'>Editar</button><button class="secondary" onclick='deleteProduct(${p.id})'>Excluir</button></div></div>`})}
     async function deleteProduct(id){if(!confirm('Deseja excluir este produto?')) return; const {error}=await supabaseClient.from('products').delete().eq('id',id); if(error){console.log(error); alert('Erro ao excluir produto.'); return} loadProducts()}
 
-    function renderOrders(list){const area=document.getElementById('adminOrders'); if(!area) return; if(!list.length){area.innerHTML='<div class="empty">Nenhum pedido encontrado.</div>'; return} area.innerHTML=''; list.forEach(o=>{area.innerHTML+=`<div class="admin-list-item"><div style="flex:1"><strong>${o.code||''}</strong><br><span class="small">${o.customer_name||''} • ${o.customer_phone||''}</span><br><span class="small">${o.product||''}</span><br><span class="small">Total atual: R$ ${Number(o.total||0).toFixed(2).replace('.',',')}</span>${o.coupon_code?`<br><span class="small">Cupom: ${o.coupon_code}</span>`:''}<br><span id="order-msg-${o.id}" class="small"></span></div><div style="min-width:240px"><input id="order-total-${o.id}" value="${o.total||0}" class="mb8" placeholder="Novo valor total"><select id="order-status-${o.id}" class="mb8">${ORDER_STATUSES.map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${s}</option>`).join('')}</select><button class="primary" style="width:100%" onclick="saveOrderChanges(${o.id})">Salvar alterações</button></div></div>`})}
-    async function saveOrderChanges(id){const total=parseFloat(document.getElementById(`order-total-${id}`).value); const status=document.getElementById(`order-status-${id}`).value; const msg=document.getElementById(`order-msg-${id}`); if(isNaN(total)){msg.textContent='Informe um valor válido.'; msg.className='small error'; return} const {error}=await supabaseClient.from('orders').update({total,status}).eq('id',id); if(error){console.log(error); msg.textContent='Erro ao atualizar pedido. Verifique a policy de UPDATE da tabela orders.'; msg.className='small error'; return} msg.textContent='Pedido atualizado com sucesso.'; msg.className='small success'; await loadOrders()}
+    function renderOrders(list){const area=document.getElementById('adminOrders'); if(!area) return; if(!list.length){area.innerHTML='<div class="empty">Nenhum pedido encontrado.</div>'; return} area.innerHTML=''; list.forEach(o=>{area.innerHTML+=`<div class="admin-list-item"><div style="flex:1"><strong>${o.code||''}</strong><br><span class="small">${o.customer_name||''} • ${o.customer_phone||''}</span><br><span class="small">${o.product||''}</span><br><span class="small">Total atual: R$ ${Number(o.total||0).toFixed(2).replace('.',',')}</span>${o.coupon_code?`<br><span class="small">Cupom: ${o.coupon_code}</span>`:''}<br><span id="order-msg-${o.id}" class="small"></span></div><div style="min-width:260px"><input id="order-total-${o.id}" value="${o.total||0}" class="mb8" placeholder="Novo valor total"><select id="order-status-${o.id}" class="mb8">${ORDER_STATUSES.map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${s}</option>`).join('')}</select><button class="primary" style="width:100%" onclick="saveOrderChanges(${o.id})">Salvar alterações</button></div></div>`})}
+    async function saveOrderChanges(id){const total=parseFloat(document.getElementById(`order-total-${id}`).value); const status=document.getElementById(`order-status-${id}`).value; const msg=document.getElementById(`order-msg-${id}`); if(isNaN(total)){msg.textContent='Informe um valor válido.'; msg.className='small error'; return} const {error}=await supabaseClient.from('orders').update({total,status}).eq('id',id).select(); if(error){console.log(error); msg.textContent='Erro ao atualizar pedido. Verifique a policy de UPDATE da tabela orders.'; msg.className='small error'; return} msg.textContent='Pedido atualizado com sucesso.'; msg.className='small success'; await loadOrders()}
 
     async function saveCoupon(){const code=document.getElementById('couponName').value.trim().toUpperCase(); const discount_percent=parseFloat(document.getElementById('couponDiscount').value); const msg=document.getElementById('couponMsg'); if(!code||isNaN(discount_percent)){msg.textContent='Preencha cupom e desconto corretamente.'; return} const {error}=await supabaseClient.from('coupons').insert([{code,discount_percent}]); if(error){console.log(error); msg.textContent='Erro ao salvar cupom.'; return} msg.textContent='Cupom salvo com sucesso.'; document.getElementById('couponName').value=''; document.getElementById('couponDiscount').value=''; loadCoupons()}
     function renderCoupons(){const area=document.getElementById('adminCoupons'); if(!area) return; if(!coupons.length){area.innerHTML='<div class="empty">Nenhum cupom cadastrado.</div>'; return} area.innerHTML=''; coupons.forEach(c=>{area.innerHTML+=`<div class="admin-list-item"><div><strong>${c.code}</strong><br><span class="small">${c.discount_percent}% de desconto</span></div><div><button class="secondary" onclick="deleteCoupon(${c.id})">Excluir</button></div></div>`})}
