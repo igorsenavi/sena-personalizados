@@ -428,37 +428,38 @@ renderAdmin()
 
 async function addProduct(){
 
-const name=document.getElementById("pname").value
+const name = document.getElementById("pname").value
+const desc = document.getElementById("pdesc").value
+const price = parseFloat(document.getElementById("pprice").value)
+const image = document.getElementById("pimg").value
 
-const desc=document.getElementById("pdesc").value
-
-const price=document.getElementById("pprice").value
-
-const image=document.getElementById("pimg").value
-
-await supabaseClient.from("products").insert([
-
-{name,desc,price,image}
-
+const { error } = await supabaseClient.from("products").insert([
+{
+name:name,
+desc:desc,
+price:price,
+image:image
+}
 ])
+
+if(error){
+
+alert("❌ Erro ao cadastrar produto")
+
+console.log(error)
+
+}else{
+
+alert("✅ Cadastro concluído!")
+
+document.getElementById("pname").value=""
+document.getElementById("pdesc").value=""
+document.getElementById("pprice").value=""
+document.getElementById("pimg").value=""
 
 loadProducts()
 
 }
-
-async function renderAdmin(){
-
-const {data}=await supabaseClient.from("orders").select("*")
-
-ordersDB=data||[]
-
-let total=0
-
-ordersDB.forEach(o=>total+=Number(o.total))
-
-document.getElementById("totalSales").innerText=total
-
-document.getElementById("orders").innerText=ordersDB.length
 
 }
 
@@ -468,3 +469,4 @@ loadProducts()
 
 </body>
 </html>
+
