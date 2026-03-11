@@ -254,7 +254,7 @@
       document.getElementById('metricMonthRevenue').textContent=`R$ ${monthRevenue.toFixed(2).replace('.',',')}`;
       document.getElementById('metricAvgTicket').textContent=`R$ ${avg.toFixed(2).replace('.',',')}`;
 
-      const counts={}; ORDER_STATUSES.forEach(s=>counts[s]=0); filtered.forEach(o=>counts[o.status]=(counts[o.status]||0)+1);
+      const counts={}; ORDER_STATUSES.forEach(s=>counts[s]=0); ordersCache.forEach(o=>counts[o.status]=(counts[o.status]||0)+1);
       const statusArea=document.getElementById('statusSummary'); if(statusArea) statusArea.innerHTML=ORDER_STATUSES.map(s=>`<div class="row between mt12"><span class="small">${s}</span><strong>${counts[s]||0}</strong></div>`).join('');
 
       const best=Object.entries(salesMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
