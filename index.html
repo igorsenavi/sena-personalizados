@@ -8,15 +8,21 @@
 <style>
 
 :root{
---cor-principal:#FF6A00;
---cor-secundaria:#E95D00;
+--cor-principal:#830064;
+--cor-secundaria:#5e0047;
 --cor-fundo:#f5f5f7;
 }
 
-body{font-family:Arial;margin:0;background:var(--cor-fundo)}
+*{box-sizing:border-box}
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+margin:0;
+background:var(--cor-fundo)
+}
 
 header{
-background:#ffffff;
+background:#fff;
 padding:12px 20px;
 display:flex;
 align-items:center;
@@ -28,7 +34,7 @@ z-index:10
 }
 
 .logo img{
-height:40px
+height:42px
 }
 
 .search{flex:1}
@@ -41,37 +47,64 @@ border:1px solid #ddd
 }
 
 .cart{
-cursor:pointer;
-font-weight:bold
+font-weight:bold;
+cursor:pointer
 }
 
-.banner{
+.hero{
 background:linear-gradient(90deg,var(--cor-principal),var(--cor-secundaria));
 color:#fff;
-text-align:center;
-padding:25px;
-font-size:20px
+padding:60px 20px;
+text-align:center
 }
 
-.filters{
-display:flex;
-gap:10px;
-padding:15px 20px;
+.hero h1{
+margin:0;
+font-size:32px
+}
+
+.hero p{
+margin-top:10px;
+opacity:0.9
+}
+
+.hero button{
+margin-top:20px;
+padding:12px 22px;
+border:none;
+border-radius:10px;
 background:#fff;
-flex-wrap:wrap
+color:var(--cor-principal);
+font-weight:bold;
+cursor:pointer
 }
 
-.filters select{
-padding:8px;
-border-radius:6px;
-border:1px solid #ccc
+.categories{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:15px;
+padding:25px
+}
+
+.cat{
+background:#fff;
+padding:20px;
+text-align:center;
+border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+cursor:pointer;
+transition:0.2s
+}
+
+.cat:hover{
+transform:translateY(-4px)
 }
 
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
 gap:20px;
-padding:25px
+padding:20px
 }
 
 .card{
@@ -152,32 +185,6 @@ background:#25d366;
 margin-top:10px
 }
 
-.whatsapp:hover{
-background:#1ebe5d
-}
-
-.admin-panel{
-background:#fff;
-margin:20px;
-padding:20px;
-border-radius:12px;
-box-shadow:0 3px 10px rgba(0,0,0,0.08)
-}
-
-.admin-panel input,.admin-panel select{
-margin:6px 0;
-padding:8px;
-width:100%;
-border-radius:6px;
-border:1px solid #ccc
-}
-
-.admin-title{
-font-weight:bold;
-margin-bottom:10px;
-font-size:18px
-}
-
 .product-modal{
 position:fixed;
 top:0;
@@ -211,6 +218,22 @@ cursor:pointer;
 font-weight:bold
 }
 
+.admin-panel{
+background:#fff;
+margin:25px;
+padding:20px;
+border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08)
+}
+
+.admin-panel input,.admin-panel select{
+margin:6px 0;
+padding:8px;
+width:100%;
+border-radius:6px;
+border:1px solid #ccc
+}
+
 .footer{
 background:#111;
 color:#fff;
@@ -226,8 +249,17 @@ margin:0 10px;
 font-weight:bold
 }
 
-.footer a:hover{
-text-decoration:underline
+.whatsapp-float{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:#fff;
+padding:14px 16px;
+border-radius:50px;
+font-weight:bold;
+box-shadow:0 4px 12px rgba(0,0,0,0.25);
+text-decoration:none
 }
 
 </style>
@@ -237,26 +269,27 @@ text-decoration:underline
 
 <header>
 <div class="logo">
-<img src="logo.png" alt="Sena Personalizados">
+<img src="logo.png">
 </div>
 
 <div class="search">
-<input type="text" id="search" placeholder="Buscar produtos...">
+<input type="text" id="search" placeholder="Buscar personalizados...">
 </div>
 
 <div class="cart" onclick="toggleCart()">🛒 (<span id="cartCount">0</span>)</div>
 </header>
 
-<div class="banner">🎁 Personalizados criativos para momentos especiais</div>
+<section class="hero">
+<h1>Personalizados para momentos especiais</h1>
+<p>Kits, fotos, chaveiros e lembranças personalizadas</p>
+<button onclick="window.scrollTo({top:600,behavior:'smooth'})">Ver Produtos</button>
+</section>
 
-<div class="filters">
-<select id="filter">
-<option value="">Todas categorias</option>
-<option value="kit">Kits</option>
-<option value="foto">Fotos</option>
-<option value="chaveiro">Chaveiros</option>
-</select>
-</div>
+<section class="categories">
+<div class="cat" onclick="filterCategory('kit')">🎁 Kits</div>
+<div class="cat" onclick="filterCategory('foto')">🖼 Fotos</div>
+<div class="cat" onclick="filterCategory('chaveiro')">🔑 Chaveiros</div>
+</section>
 
 <div class="products" id="products"></div>
 
@@ -278,7 +311,7 @@ text-decoration:underline
 </div>
 
 <div class="admin-panel">
-<div class="admin-title">Adicionar Produto</div>
+<h3>Painel de Produtos</h3>
 <input id="pname" placeholder="Nome do produto">
 <input id="pprice" type="number" placeholder="Preço">
 <select id="pcat">
@@ -291,22 +324,19 @@ text-decoration:underline
 </div>
 
 <footer class="footer">
-
 <h3>Sena Personalizados</h3>
-
-<p>Personalizados criativos para momentos especiais</p>
-
+<p>Presentes personalizados feitos com carinho</p>
 <p>
 <a href="https://wa.me/5591984233046" target="_blank">WhatsApp</a>
 |
 <a href="https://instagram.com/sena_personalizados" target="_blank">Instagram</a>
 </p>
-
-<p style="margin-top:15px;font-size:14px;opacity:0.7">
-© 2026 Sena Personalizados
-</p>
-
+<p style="opacity:0.6;margin-top:15px">© 2026 Sena Personalizados</p>
 </footer>
+
+<a class="whatsapp-float" href="https://wa.me/5591984233046" target="_blank">
+WhatsApp
+</a>
 
 <script>
 
@@ -318,38 +348,50 @@ let products = JSON.parse(localStorage.getItem("products")) || [
 
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 
-function saveProducts(){
-localStorage.setItem("products",JSON.stringify(products))
-}
-
-function saveCart(){
-localStorage.setItem("cart",JSON.stringify(cart))
-}
-
 function renderProducts(){
 
 const container=document.getElementById("products")
-
 const search=document.getElementById("search").value.toLowerCase()
-const filter=document.getElementById("filter").value
 
 container.innerHTML=""
 
 products
-.filter(p=>(!filter||p.cat===filter)&&p.name.toLowerCase().includes(search))
+.filter(p=>p.name.toLowerCase().includes(search))
 .forEach(p=>{
 
 container.innerHTML+=`
-
 <div class="card" onclick="openProduct(${p.id})">
 <img src="${p.img}">
 <h4>${p.name}</h4>
 <div class="price">R$ ${p.price}</div>
 <button onclick="event.stopPropagation(); addToCart(${p.id})">Adicionar</button>
 </div>
-
 `
+
 })
+
+}
+
+function filterCategory(cat){
+
+const container=document.getElementById("products")
+container.innerHTML=""
+
+products
+.filter(p=>p.cat===cat)
+.forEach(p=>{
+
+container.innerHTML+=`
+<div class="card" onclick="openProduct(${p.id})">
+<img src="${p.img}">
+<h4>${p.name}</h4>
+<div class="price">R$ ${p.price}</div>
+<button onclick="event.stopPropagation(); addToCart(${p.id})">Adicionar</button>
+</div>
+`
+
+})
+
 }
 
 function openProduct(id){
@@ -382,21 +424,17 @@ return
 }
 
 products.push({
-id:Date.now(),
-name,
-price,
-cat,
-img
-})
+id:Date.now(),name,price,cat,img})
 
-saveProducts()
+localStorage.setItem("products",JSON.stringify(products))
+
 renderProducts()
 
 pname.value=""
 pprice.value=""
 pimg.value=""
 
-alert("Produto adicionado!")
+alert("Produto adicionado")
 }
 
 function addToCart(id){
@@ -411,7 +449,8 @@ item.qty++
 cart.push({...product,qty:1})
 }
 
-saveCart()
+localStorage.setItem("cart",JSON.stringify(cart))
+
 updateCart()
 }
 
@@ -427,12 +466,9 @@ let sum=0
 let q=0
 
 cart.forEach(i=>{
-
 items.innerHTML+=`<div class="cart-item">${i.name} x${i.qty}<span>R$ ${i.price*i.qty}</span></div>`
-
 sum+=i.price*i.qty
 q+=i.qty
-
 })
 
 count.innerText=q
@@ -445,48 +481,28 @@ function toggleCart(){
 cartModal.classList.toggle("open")
 }
 
-function generateOrderNumber(){
-
-let num=localStorage.getItem("orderNumber") || 1000
-num++
-localStorage.setItem("orderNumber",num)
-return num
-
-}
-
 function sendWhatsApp(){
 
 if(cart.length===0){
-alert("Seu carrinho está vazio")
+alert("Carrinho vazio")
 return
 }
 
-let order=generateOrderNumber()
-
-let text=`Olá, quero finalizar meu pedido.%0A%0APedido #${order}%0A`
-
+let text="Olá, quero fazer um pedido:%0A"
 let total=0
 
 cart.forEach(i=>{
 text+=`${i.qty}x ${i.name} - R$${i.price*i.qty}%0A`
-
 total+=i.price*i.qty
 })
 
 text+=`%0ATotal: R$${total}`
 
-const phone="5591984233046"
-
-window.open(`https://wa.me/${phone}?text=${text}`)
-
-cart=[]
-saveCart()
-updateCart()
+window.open(`https://wa.me/5591984233046?text=${text}`)
 
 }
 
-search.addEventListener("input",renderProducts)
-filter.addEventListener("change",renderProducts)
+document.getElementById("search").addEventListener("input",renderProducts)
 
 renderProducts()
 updateCart()
