@@ -1,465 +1,700 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Sena Personalizados</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-:root{--cor:#830064;--cor2:#a1007b;--bg:#f6f7fb;--txt:#23232b;--muted:#6b7280;--b:#e9e9ef}
-*{box-sizing:border-box}
-body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--txt)}
-
-.header{position:sticky;top:0;z-index:20;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
-.logo{height:46px}
-.actions{display:flex;gap:14px}
-
-.icon-btn{width:42px;height:42px;border-radius:12px;border:1px solid var(--b);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.icon{width:22px}
-
-.hero{margin:18px 22px 0;background:linear-gradient(90deg,var(--cor),var(--cor2));color:#fff;border-radius:22px;padding:20px;text-align:center}
-.hero h1{margin:0;font-size:26px}
-
-.topbar{padding:18px 22px}
-.search-wrap{background:#fff;border:1px solid var(--b);border-radius:16px;padding:12px;display:flex;gap:10px}
-.search-wrap input{border:none;outline:none;width:100%}
-
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;padding:20px}
-.card{background:#fff;border:1px solid var(--b);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:8px}
-.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;background:#eee}
-.price{font-size:20px;font-weight:700;color:var(--cor)}
-
-.qty-box{display:flex;align-items:center;gap:8px}
-.qty-box button{width:28px;height:28px;border:none;background:#eee;border-radius:6px}
-
-.primary{background:var(--cor);color:white;border:none;padding:10px;border-radius:10px;cursor:pointer}
-.secondary{background:white;border:1px solid var(--cor);color:var(--cor);padding:10px;border-radius:10px;cursor:pointer}
-
-.cart{position:fixed;right:0;top:0;width:350px;height:100%;background:white;box-shadow:-10px 0 20px rgba(0,0,0,.2);padding:20px;display:none;overflow:auto}
-
-.login,.admin{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
-.panel{background:white;border-radius:18px;padding:20px;width:90%;max-width:1000px;max-height:90vh;overflow:auto}
-
-.admin-grid{display:grid;grid-template-columns:320px 1fr;gap:20px}
-.admin input,.admin textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px}
-
-.footer{background:#111;color:white;text-align:center;padding:20px;margin-top:20px}
-.footer img{width:28px;margin:6px}
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sena Personalizados</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --cor: #830064;
+      --cor-2: #a1007b;
+      --bg: #f6f7fb;
+      --texto: #23232b;
+      --muted: #6b7280;
+      --borda: #e9e9ef;
+      --branco: #fff;
+      --sombra: 0 10px 24px rgba(0,0,0,.06);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--texto);
+    }
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--branco);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 22px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.05);
+    }
+    .logo { height: 48px; object-fit: contain; }
+    .actions { display: flex; gap: 12px; align-items: center; }
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--borda);
+      background: var(--branco);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .icon { width: 22px; height: 22px; }
+    .hero {
+      margin: 18px 22px 0;
+      background: linear-gradient(90deg, var(--cor), var(--cor-2));
+      color: #fff;
+      border-radius: 22px;
+      padding: 18px 22px;
+      text-align: center;
+      box-shadow: 0 16px 30px rgba(131,0,100,.18);
+    }
+    .hero h1 { margin: 0; font-size: 26px; }
+    .topbar { padding: 18px 22px 8px; }
+    .search-wrap {
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,.04);
+    }
+    .search-wrap input {
+      border: none;
+      outline: none;
+      width: 100%;
+      background: transparent;
+      font-size: 15px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      padding: 18px 22px 30px;
+    }
+    .card {
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: var(--sombra);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 16px;
+      background: #f0f0f5;
+    }
+    .card h4 { margin: 0; font-size: 17px; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
+    .price { font-size: 20px; font-weight: 700; color: var(--cor); }
+    .row { display: flex; gap: 10px; align-items: center; }
+    .between { justify-content: space-between; }
+    .qty-box, .cart-qty {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      padding: 6px 10px;
+      background: var(--branco);
+    }
+    .qty-box button, .cart-qty button {
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 8px;
+      background: #f3f4f8;
+      cursor: pointer;
+    }
+    .primary, .secondary {
+      border-radius: 12px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: inherit;
+    }
+    .primary { border: none; background: var(--cor); color: #fff; }
+    .secondary { border: 1px solid var(--cor); background: #fff; color: var(--cor); }
+    .cart {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 360px;
+      max-width: 100%;
+      height: 100%;
+      background: var(--branco);
+      box-shadow: -12px 0 30px rgba(0,0,0,.12);
+      padding: 18px;
+      display: none;
+      overflow: auto;
+      z-index: 30;
+    }
+    .cart-head, .admin-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .cart-item {
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #fbfbfe;
+    }
+    .cart-item textarea, .admin textarea, .admin input, .status-modal input, .login-box input {
+      width: 100%;
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-family: inherit;
+    }
+    .cart-item textarea { min-height: 64px; margin-top: 8px; }
+    .login, .admin, .status-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(16,18,27,.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 40;
+      padding: 16px;
+    }
+    .panel, .login-box {
+      background: var(--branco);
+      border-radius: 22px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.16);
+    }
+    .panel {
+      width: min(1100px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      padding: 22px;
+    }
+    .login-box {
+      width: min(360px, 100%);
+      padding: 24px;
+    }
+    .admin-grid { display: grid; grid-template-columns: 340px 1fr; gap: 24px; }
+    .admin-card {
+      background: #fafafe;
+      border: 1px solid var(--borda);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .admin-list-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      border-bottom: 1px solid var(--borda);
+    }
+    .admin-list-item:last-child { border-bottom: none; }
+    .small { font-size: 13px; color: var(--muted); }
+    .footer { background: #111; color: #fff; text-align: center; padding: 22px; margin-top: 20px; }
+    .footer a { display: inline-flex; margin: 0 8px; }
+    .footer img { width: 28px; height: 28px; }
+    .empty { padding: 28px; text-align: center; color: var(--muted); }
+    .success { color: #0f8a4b; }
+    .error { color: #b42318; }
+    .mb8 { margin-bottom: 8px; }
+    .mt12 { margin-top: 12px; }
+    @media (max-width: 860px) {
+      .admin-grid { grid-template-columns: 1fr; }
+      .header { padding: 12px 14px; }
+      .hero h1 { font-size: 22px; }
+      .hero, .topbar, .products { margin-left: 14px; margin-right: 14px; }
+      .products { padding: 18px 14px 30px; }
+    }
+  </style>
 </head>
 <body>
-
-<header class="header">
-<img src="logo.png" class="logo" alt="logo">
-<div class="actions">
-<button class="icon-btn" onclick="openStatus()">📦</button>
-<button class="icon-btn" onclick="openAdminLogin()">👤</button>
-<button class="icon-btn" onclick="toggleCart()">🛒</button>
-</div>
-</header>
-
-<section class="hero">
-<h1>Criando personalizados para momentos únicos</h1>
-</section>
-
-<div class="topbar">
-<div class="search-wrap">
-<input placeholder="Buscar produtos" onkeyup="searchProduct(this.value)">
-</div>
-</div>
-
-<section class="products" id="productList"></section>
-
-<div class="cart" id="cart"></div>
-
-<!-- LOGIN ADMIN -->
-<div class="login" id="loginModal">
-<div class="panel">
-<h3>Login Admin</h3>
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Senha">
-<button class="primary" onclick="loginAdmin()">Entrar</button>
-<button class="secondary" onclick="closeAdminLogin()">Cancelar</button>
-</div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="admin" id="adminModal">
-<div class="panel">
-<h2>Painel Administrativo</h2>
-<button class="secondary" onclick="closeAdmin()">Voltar</button>
-
-<div class="admin-grid">
-
-<div>
-<h3>Novo produto</h3>
-<input id="pname" placeholder="Nome">
-<textarea id="pdesc" placeholder="Descrição"></textarea>
-<input id="pprice" placeholder="Preço">
-
-<label>Imagem do produto</label>
-<input type="file" id="pimage">
-
-<button class="primary" onclick="addProduct()">Salvar</button>
-
-</div>
-
-<div>
-<h3>Produtos cadastrados</h3>
-<div id="adminProducts"></div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<footer class="footer">
-<a href="https://wa.me/5591984233046"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
-<a href="https://instagram.com/sena__personalizados"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
-</footer>
-
-<script>
-
-const SUPABASE_URL="https://bhvcxiiafdutoaloqflr.supabase.co"
-const SUPABASE_KEY="sb_publishable_3XViRAlVJHJ8C3R9moGhIw_TaBt-A4F"
-
-const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
-
-let products=[]
-let cart=[]
-
-/* ---------- LOAD PRODUCTS ---------- */
-
-async function loadProducts(){
-
-const {data}=await supabaseClient.from("products").select("*")
-products=data||[]
-
-renderProducts(products)
-renderAdminProducts()
-
-}
-
-/* ---------- RENDER PRODUCTS ---------- */
-
-function renderProducts(list){
-
-const area=document.getElementById("productList")
-area.innerHTML=""
-
-list.forEach(p=>{
-
-area.innerHTML+=`
-
-<div class="card">
-
-<img src="${p.image}">
-
-<h4>${p.name}</h4>
-
-<p>${p.desc}</p>
-
-<div class="price">R$ ${p.price}</div>
-
-<div class="qty-box">
-<button onclick="adjustQty(${p.id},-1)">-</button>
-<span id="q${p.id}">1</span>
-<button onclick="adjustQty(${p.id},1)">+</button>
-</div>
-
-<button class="primary" onclick="addCart(${p.id})">Adicionar</button>
-
-</div>
-
-`
-
-})
-
-}
-
-function adjustQty(id,v){
-
-const el=document.getElementById("q"+id)
-let n=parseInt(el.innerText)
-
-n+=v
-if(n<1)n=1
-
-el.innerText=n
-
-}
-
-/* ---------- SEARCH ---------- */
-
-function searchProduct(text){
-
-text=text.toLowerCase()
-
-const f=products.filter(p=>p.name.toLowerCase().includes(text))
-
-renderProducts(f)
-
-}
-
-/* ---------- CART ---------- */
-
-function addCart(id){
-
-const p=products.find(x=>x.id===id)
-
-const qty=parseInt(document.getElementById("q"+id).innerText)
-
-cart.push({product:p,qty:qty,obs:""})
-
-updateCart()
-
-toggleCart()
-
-}
-
-function toggleCart(){
-
-const c=document.getElementById("cart")
-
-c.style.display=c.style.display=="block"?"none":"block"
-
-}
-
-function updateCart(){
-
-const c=document.getElementById("cart")
-
-let html="<h3>Carrinho</h3>"
-
-let total=0
-
-cart.forEach((i,index)=>{
-
-const sub=i.product.price*i.qty
-
-total+=sub
-
-html+=`
-
-<div>
-
-<b>${i.product.name}</b>
-
-<br>
-
-<button onclick="changeQty(${index},-1)">-</button>
-${i.qty}
-<button onclick="changeQty(${index},1)">+</button>
-
-<br>
-
-<textarea placeholder="Observação" oninput="saveObs(${index},this.value)">${i.obs}</textarea>
-
-<br>
-
-<button onclick="removeItem(${index})">Remover</button>
-
-</div>
-
-<hr>
-
-`
-
-})
-
-html+=`<h4>Total R$ ${total}</h4>`
-
-html+=`<button onclick="finishOrder(${total})">Finalizar pedido</button>`
-
-c.innerHTML=html
-
-}
-
-function changeQty(i,v){
-
-cart[i].qty+=v
-
-if(cart[i].qty<1)cart[i].qty=1
-
-updateCart()
-
-}
-
-function removeItem(i){
-
-cart.splice(i,1)
-updateCart()
-
-}
-
-function saveObs(i,val){
-cart[i].obs=val
-}
-
-/* ---------- WHATSAPP ---------- */
-
-async function finishOrder(total){
-
-const code="PED"+Date.now().toString().slice(-6)
-
-let msg="Olá! Gostaria de fazer este pedido:%0A"
-
-cart.forEach(i=>{
-msg+=`${i.product.name} x${i.qty}%0A`
-})
-
-msg+=`%0ATotal: R$ ${total}`
-
-await supabaseClient.from("orders").insert([
-{
-code:code,
-product:msg,
-total:total,
-status:"Novo"
-}
-])
-
-window.open(`https://wa.me/5591984233046?text=${msg}`)
-
-cart=[]
-updateCart()
-
-}
-
-/* ---------- ADMIN LOGIN ---------- */
-
-function openAdminLogin(){
-
-const m=document.getElementById("loginModal")
-m.style.display="flex"
-
-}
-
-function closeAdminLogin(){
-
-const m=document.getElementById("loginModal")
-m.style.display="none"
-
-}
-
-async function loginAdmin(){
-
-const email=document.getElementById("email").value
-const password=document.getElementById("password").value
-
-const {error}=await supabaseClient.auth.signInWithPassword({email,password})
-
-if(error){alert("Erro no login");return}
-
-closeAdminLogin()
-
-document.getElementById("adminModal").style.display="flex"
-
-}
-
-function closeAdmin(){
-
-const a=document.getElementById("adminModal")
-a.style.display="none"
-
-}
-
-/* ---------- ADMIN PRODUCTS ---------- */
-
-function renderAdminProducts(){
-
-const area=document.getElementById("adminProducts")
-
-area.innerHTML=""
-
-products.forEach(p=>{
-
-area.innerHTML+=`
-
-<div>
-
-<b>${p.name}</b>
-
-<br>
-
-<button onclick="editProduct(${p.id})">Editar</button>
-<button onclick="deleteProduct(${p.id})">Excluir</button>
-
-<hr>
-
-</div>
-
-`
-
-})
-
-}
-
-async function deleteProduct(id){
-
-await supabaseClient.from("products").delete().eq("id",id)
-
-loadProducts()
-
-}
-
-function editProduct(id){
-
-const p=products.find(x=>x.id===id)
-
-const name=prompt("Nome",p.name)
-
-if(!name)return
-
-supabaseClient.from("products").update({name:name}).eq("id",id)
-
-loadProducts()
-
-}
-
-/* ---------- UPLOAD IMAGE TO SUPABASE STORAGE ---------- */
-
-async function addProduct(){
-
-const name=document.getElementById("pname").value
-const desc=document.getElementById("pdesc").value
-const price=parseFloat(document.getElementById("pprice").value)
-
-const file=document.getElementById("pimage").files[0]
-
-if(!file){alert("Selecione uma imagem");return}
-
-const fileName=Date.now()+"_"+file.name
-
-const {error:uploadError}=await supabaseClient.storage
-.from("produtos")
-.upload(fileName,file)
-
-if(uploadError){console.log(uploadError);alert("Erro upload imagem");return}
-
-const {data}=supabaseClient.storage
-.from("produtos")
-.getPublicUrl(fileName)
-
-const imageUrl=data.publicUrl
-
-await supabaseClient.from("products").insert([
-{name,desc,price,image:imageUrl}
-])
-
-alert("Produto cadastrado")
-
-loadProducts()
-
-}
-
-loadProducts()
-
-</script>
-
+  <header class="header">
+    <img src="logo.png" class="logo" alt="Sena Personalizados" onerror="this.style.display='none'">
+    <div class="actions">
+      <button class="icon-btn" onclick="openStatus()" title="Status do pedido">📦</button>
+      <button class="icon-btn" onclick="openAdminLogin()" title="Administração">👤</button>
+      <button class="icon-btn" onclick="toggleCart()" title="Carrinho">🛒</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Criando personalizados para momentos únicos</h1>
+  </section>
+
+  <div class="topbar">
+    <div class="search-wrap">
+      <span>🔎</span>
+      <input type="text" placeholder="Buscar produtos" onkeyup="searchProduct(this.value)">
+    </div>
+  </div>
+
+  <section class="products" id="productList"></section>
+
+  <div class="cart" id="cart"></div>
+
+  <div class="status-modal" id="statusModal">
+    <div class="login-box">
+      <div class="cart-head">
+        <h3 style="margin:0">Status do pedido</h3>
+        <button class="secondary" onclick="closeStatus()">Fechar</button>
+      </div>
+      <input id="statusCode" placeholder="Digite o código do pedido">
+      <button class="primary mt12" style="width:100%" onclick="checkStatus()">Pesquisar</button>
+      <p id="statusResult" class="small mt12"></p>
+    </div>
+  </div>
+
+  <div class="login" id="loginModal">
+    <div class="login-box">
+      <h3 style="margin-top:0">Login Admin</h3>
+      <input id="email" placeholder="Email">
+      <input id="password" type="password" placeholder="Senha">
+      <div class="row mt12">
+        <button class="primary" onclick="loginAdmin()">Entrar</button>
+        <button class="secondary" onclick="closeAdminLogin()">Cancelar</button>
+      </div>
+      <p id="loginMsg" class="small mt12"></p>
+    </div>
+  </div>
+
+  <div class="admin" id="adminModal">
+    <div class="panel">
+      <div class="admin-head">
+        <h2 style="margin:0">Painel Administrativo</h2>
+        <div class="row">
+          <button class="secondary" onclick="closeAdmin()">Voltar</button>
+          <button class="secondary" onclick="logoutAdmin()">Sair</button>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <div class="admin-card">
+          <h3 style="margin-top:0">Novo produto</h3>
+          <input id="pname" placeholder="Nome do produto">
+          <textarea id="pdescription" placeholder="Descrição"></textarea>
+          <input id="pprice" placeholder="Preço">
+          <label class="small">Imagem do produto</label>
+          <input type="file" id="pimage" accept="image/*">
+          <p class="small mb8">A imagem agora sobe direto no Supabase Storage.</p>
+          <button class="primary" style="width:100%" onclick="addOrUpdateProduct()">Salvar</button>
+          <input type="hidden" id="editingId">
+          <p id="adminMsg" class="small mt12"></p>
+
+          <hr style="border:none;border-top:1px solid var(--borda);margin:18px 0">
+          <button class="secondary" style="width:100%;margin-bottom:8px" onclick="exportProducts()">Exportar produtos</button>
+          <button class="secondary" style="width:100%" onclick="exportSales()">Exportar vendas</button>
+        </div>
+
+        <div class="admin-card">
+          <h3 style="margin-top:0">Produtos cadastrados</h3>
+          <div id="adminProducts"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="https://wa.me/5591984233046" target="_blank" rel="noreferrer"><img alt="WhatsApp" src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
+    <a href="https://instagram.com/sena__personalizados" target="_blank" rel="noreferrer"><img alt="Instagram" src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = "https://bhvcxiiafdutoaloqflr.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_3XViRAlVJHJ8C3R9moGhIw_TaBt-A4F";
+    const BUCKET_NAME = "produtos";
+
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let products = [];
+    let cart = [];
+
+    async function loadProducts() {
+      const { data, error } = await supabaseClient
+        .from('products')
+        .select('*')
+        .order('id', { ascending: false });
+
+      if (error) {
+        console.log(error);
+        document.getElementById('productList').innerHTML = '<div class="empty">Erro ao carregar produtos.</div>';
+        return;
+      }
+
+      products = data || [];
+      renderProducts(products);
+      renderAdminProducts();
+    }
+
+    function renderProducts(list) {
+      const area = document.getElementById('productList');
+      if (!list.length) {
+        area.innerHTML = '<div class="empty">Nenhum produto encontrado.</div>';
+        return;
+      }
+      area.innerHTML = '';
+
+      list.forEach((p) => {
+        area.innerHTML += `
+          <div class="card">
+            <img src="${p.image || ''}" alt="${p.name || ''}" onerror="this.src='https://via.placeholder.com/500x500?text=Produto'">
+            <h4>${p.name || ''}</h4>
+            <p>${p.description || ''}</p>
+            <div class="row between">
+              <div class="price">R$ ${Number(p.price || 0).toFixed(2).replace('.', ',')}</div>
+              <div class="qty-box">
+                <button onclick="adjustCardQty(${p.id},-1)">-</button>
+                <span id="cardqty-${p.id}">1</span>
+                <button onclick="adjustCardQty(${p.id},1)">+</button>
+              </div>
+            </div>
+            <button class="primary" style="width:100%" onclick="addCart(${p.id})">Adicionar ao carrinho</button>
+          </div>
+        `;
+      });
+    }
+
+    function searchProduct(text) {
+      const t = text.toLowerCase().trim();
+      renderProducts(
+        products.filter((p) =>
+          (p.name || '').toLowerCase().includes(t) ||
+          (p.description || '').toLowerCase().includes(t)
+        )
+      );
+    }
+
+    function adjustCardQty(id, delta) {
+      const el = document.getElementById(`cardqty-${id}`);
+      let n = parseInt(el.textContent || '1', 10);
+      n += delta;
+      if (n < 1) n = 1;
+      el.textContent = n;
+    }
+
+    function getCardQty(id) {
+      const el = document.getElementById(`cardqty-${id}`);
+      return el ? parseInt(el.textContent || '1', 10) : 1;
+    }
+
+    function addCart(id) {
+      const p = products.find((x) => x.id === id);
+      if (!p) return;
+      const qty = getCardQty(id);
+      cart.push({ product: p, qty, obs: '' });
+      updateCart();
+      toggleCart(true);
+    }
+
+    function toggleCart(forceOpen = false) {
+      const c = document.getElementById('cart');
+      c.style.display = forceOpen ? 'block' : (c.style.display === 'block' ? 'none' : 'block');
+    }
+
+    function updateCart() {
+      const c = document.getElementById('cart');
+      let html = `<div class="cart-head"><h3 style="margin:0">Carrinho</h3><button class="secondary" onclick="toggleCart()">Fechar</button></div>`;
+
+      if (!cart.length) {
+        c.innerHTML = html + '<div class="empty">Seu carrinho está vazio.</div>';
+        return;
+      }
+
+      let total = 0;
+      cart.forEach((item, i) => {
+        const sub = Number(item.product.price) * item.qty;
+        total += sub;
+        html += `
+          <div class="cart-item">
+            <b>${item.product.name}</b>
+            <div class="cart-qty mt12">
+              <button onclick="changeQty(${i},-1)">-</button>
+              <span>${item.qty}</span>
+              <button onclick="changeQty(${i},1)">+</button>
+            </div>
+            <textarea placeholder="Observação do item" oninput="saveObs(${i},this.value)">${item.obs || ''}</textarea>
+            <div class="row between mt12">
+              <span class="small">Subtotal</span>
+              <strong>R$ ${sub.toFixed(2).replace('.', ',')}</strong>
+            </div>
+            <button class="secondary mt12" style="width:100%" onclick="removeItem(${i})">Remover</button>
+          </div>
+        `;
+      });
+
+      html += `<div class="row between" style="margin:16px 0"><strong>Total</strong><strong style="color:var(--cor)">R$ ${total.toFixed(2).replace('.', ',')}</strong></div>`;
+      html += `<button class="primary" style="width:100%" onclick="finishOrder(${total})">Finalizar pedido</button>`;
+      c.innerHTML = html;
+    }
+
+    function changeQty(i, v) {
+      cart[i].qty = Math.max(1, cart[i].qty + v);
+      updateCart();
+    }
+
+    function saveObs(i, val) {
+      cart[i].obs = val;
+    }
+
+    function removeItem(i) {
+      cart.splice(i, 1);
+      updateCart();
+    }
+
+    async function finishOrder(total) {
+      if (!cart.length) return;
+      const code = 'PED' + Date.now().toString().slice(-6);
+      let msg = `Olá! Gostaria de fazer este pedido:%0A%0ACódigo: ${code}%0A`;
+      const items = cart.map((i) => `${i.product.name} x${i.qty}${i.obs ? ` | Obs: ${i.obs}` : ''}`);
+      items.forEach((line) => msg += `${line}%0A`);
+      msg += `%0ATotal: R$ ${Number(total).toFixed(2).replace('.', ',')}`;
+
+      const { error } = await supabaseClient.from('orders').insert([
+        {
+          code,
+          product: items.join(' | '),
+          total,
+          status: 'Novo'
+        }
+      ]);
+
+      if (error) {
+        console.log(error);
+        alert('Erro ao salvar pedido.');
+        return;
+      }
+
+      window.open(`https://wa.me/5591984233046?text=${msg}`, '_blank');
+      cart = [];
+      updateCart();
+      toggleCart();
+    }
+
+    function openStatus() {
+      document.getElementById('statusModal').style.display = 'flex';
+    }
+
+    function closeStatus() {
+      document.getElementById('statusModal').style.display = 'none';
+    }
+
+    async function checkStatus() {
+      const code = document.getElementById('statusCode').value.trim();
+      const res = document.getElementById('statusResult');
+      if (!code) return;
+
+      const { data, error } = await supabaseClient.rpc('lookup_order_status', { p_code: code });
+      if (error || !data || !data.length) {
+        res.textContent = 'Pedido não encontrado.';
+        return;
+      }
+      res.textContent = `Código ${data[0].code} • Status: ${data[0].status}`;
+    }
+
+    function openAdminLogin() {
+      document.getElementById('loginModal').style.display = 'flex';
+      document.getElementById('loginMsg').textContent = '';
+    }
+
+    function closeAdminLogin() {
+      document.getElementById('loginModal').style.display = 'none';
+    }
+
+    async function loginAdmin() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+      if (error) {
+        document.getElementById('loginMsg').textContent = 'Email ou senha inválidos.';
+        return;
+      }
+      closeAdminLogin();
+      document.getElementById('adminModal').style.display = 'flex';
+      loadProducts();
+    }
+
+    async function logoutAdmin() {
+      await supabaseClient.auth.signOut();
+      closeAdmin();
+    }
+
+    function closeAdmin() {
+      document.getElementById('adminModal').style.display = 'none';
+    }
+
+    function fillForm(p) {
+      document.getElementById('editingId').value = p.id || '';
+      document.getElementById('pname').value = p.name || '';
+      document.getElementById('pdescription').value = p.description || '';
+      document.getElementById('pprice').value = p.price || '';
+      document.getElementById('adminMsg').textContent = 'Editando produto selecionado.';
+    }
+
+    function resetForm() {
+      document.getElementById('editingId').value = '';
+      document.getElementById('pname').value = '';
+      document.getElementById('pdescription').value = '';
+      document.getElementById('pprice').value = '';
+      document.getElementById('pimage').value = '';
+    }
+
+    async function uploadProductImage(file) {
+      const { data: userData } = await supabaseClient.auth.getUser();
+      if (!userData?.user) {
+        throw new Error('Você precisa estar logado para enviar imagem.');
+      }
+      if (!file) {
+        throw new Error('Selecione uma imagem.');
+      }
+
+      const safeName = file.name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9._-]/g, '');
+      const fileName = `${Date.now()}_${safeName}`;
+
+      const { error: uploadError } = await supabaseClient.storage
+        .from(BUCKET_NAME)
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false,
+          contentType: file.type || 'image/*'
+        });
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      const { data } = supabaseClient.storage.from(BUCKET_NAME).getPublicUrl(fileName);
+      return data.publicUrl;
+    }
+
+    async function addOrUpdateProduct() {
+      const id = document.getElementById('editingId').value;
+      const name = document.getElementById('pname').value.trim();
+      const description = document.getElementById('pdescription').value.trim();
+      const price = parseFloat(document.getElementById('pprice').value);
+      const file = document.getElementById('pimage').files[0];
+      const msg = document.getElementById('adminMsg');
+      msg.className = 'small';
+
+      if (!name || !description || isNaN(price)) {
+        msg.textContent = 'Preencha nome, descrição e preço corretamente.';
+        msg.classList.add('error');
+        return;
+      }
+
+      try {
+        let image = null;
+        if (file) {
+          image = await uploadProductImage(file);
+        }
+
+        if (id) {
+          const payload = { name, description, price };
+          if (image) payload.image = image;
+          const { error } = await supabaseClient.from('products').update(payload).eq('id', id);
+          if (error) throw error;
+          msg.textContent = 'Produto atualizado com sucesso.';
+        } else {
+          if (!image) {
+            msg.textContent = 'Selecione uma imagem para o novo produto.';
+            msg.classList.add('error');
+            return;
+          }
+          const { error } = await supabaseClient.from('products').insert([{ name, description, price, image }]);
+          if (error) throw error;
+          msg.textContent = 'Cadastro concluído.';
+        }
+
+        msg.classList.add('success');
+        resetForm();
+        await loadProducts();
+      } catch (error) {
+        console.log(error);
+        msg.textContent = `Erro no upload/salvamento: ${error.message || 'verifique bucket, policies e login admin.'}`;
+        msg.classList.add('error');
+      }
+    }
+
+    function renderAdminProducts() {
+      const area = document.getElementById('adminProducts');
+      if (!area) return;
+      if (!products.length) {
+        area.innerHTML = '<div class="empty">Nenhum produto cadastrado.</div>';
+        return;
+      }
+      area.innerHTML = '';
+      products.forEach((p) => {
+        const safe = JSON.stringify(p).replace(/'/g, '&#39;');
+        area.innerHTML += `
+          <div class="admin-list-item">
+            <div>
+              <strong>${p.name}</strong><br>
+              <span class="small">R$ ${Number(p.price).toFixed(2).replace('.', ',')}</span><br>
+              <span class="small">${p.description || ''}</span>
+            </div>
+            <div class="row">
+              <button class="secondary" onclick='fillForm(${safe})'>Editar</button>
+              <button class="secondary" onclick='deleteProduct(${p.id})'>Excluir</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    async function deleteProduct(id) {
+      if (!confirm('Deseja excluir este produto?')) return;
+      const { error } = await supabaseClient.from('products').delete().eq('id', id);
+      if (error) {
+        console.log(error);
+        alert('Erro ao excluir produto.');
+        return;
+      }
+      loadProducts();
+    }
+
+    function downloadFile(data, file) {
+      const blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = file;
+      a.click();
+    }
+
+    function exportProducts() {
+      let csv = 'Nome,Descricao,Preco,Imagem\n';
+      products.forEach((p) => {
+        csv += `"${p.name}","${(p.description || '').replace(/"/g, '""')}","${p.price}","${p.image || ''}"\n`;
+      });
+      downloadFile(csv, 'produtos.csv');
+    }
+
+    async function exportSales() {
+      const { data, error } = await supabaseClient.from('orders').select('*').order('id', { ascending: false });
+      if (error) {
+        console.log(error);
+        alert('Erro ao exportar vendas.');
+        return;
+      }
+      let csv = 'Codigo,Produtos,Total,Status\n';
+      (data || []).forEach((o) => {
+        csv += `"${o.code || ''}","${(o.product || '').replace(/"/g, '""')}","${o.total || 0}","${o.status || ''}"\n`;
+      });
+      downloadFile(csv, 'vendas.csv');
+    }
+
+    loadProducts();
+  </script>
 </body>
 </html>
