@@ -24,6 +24,11 @@ button{margin-top:auto;padding:8px;border:none;border-radius:6px;background:#ff7
 .cart-item{display:flex;justify-content:space-between;margin-bottom:10px}
 .total{margin-top:auto;font-weight:bold}
 .whatsapp{background:#25d366;margin-top:10px}
+
+/* painel admin */
+.admin-panel{background:#fff;margin:20px;padding:20px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
+.admin-panel input,.admin-panel select{margin:5px 0;padding:6px;width:100%}
+.admin-title{font-weight:bold;margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -48,6 +53,7 @@ button{margin-top:auto;padding:8px;border:none;border-radius:6px;background:#ff7
 
 <div class="products" id="products"></div>
 
+<!-- carrinho -->
 <div id="cartModal">
 <h3>Carrinho</h3>
 <div id="cartItems"></div>
@@ -55,17 +61,32 @@ button{margin-top:auto;padding:8px;border:none;border-radius:6px;background:#ff7
 <button class="whatsapp" onclick="sendWhatsApp()">Finalizar no WhatsApp</button>
 </div>
 
+<!-- painel para adicionar produtos -->
+<div class="admin-panel">
+<div class="admin-title">Adicionar Produto</div>
+<input id="pname" placeholder="Nome do produto">
+<input id="pprice" type="number" placeholder="Preço">
+<select id="pcat">
+<option value="kit">Kit</option>
+<option value="foto">Foto</option>
+<option value="chaveiro">Chaveiro</option>
+</select>
+<input id="pimg" placeholder="Link da imagem">
+<button onclick="addProduct()">Adicionar Produto</button>
+</div>
+
 <script>
-const products=[
+let products=JSON.parse(localStorage.getItem("products"))||[
 {id:1,name:"Kit Personalizado",price:15,cat:"kit",img:"https://via.placeholder.com/300"},
 {id:2,name:"Foto Impressa",price:5,cat:"foto",img:"https://via.placeholder.com/300"},
-{id:3,name:"Chaveiro Personalizado",price:8,cat:"chaveiro",img:"https://via.placeholder.com/300"},
-{id:4,name:"Kit Festa",price:25,cat:"kit",img:"https://via.placeholder.com/300"},
-{id:5,name:"Foto Polaroid",price:7,cat:"foto",img:"https://via.placeholder.com/300"},
-{id:6,name:"Chaveiro com Foto",price:10,cat:"chaveiro",img:"https://via.placeholder.com/300"}
+{id:3,name:"Chaveiro Personalizado",price:8,cat:"chaveiro",img:"https://via.placeholder.com/300"}
 ]
 
 let cart=[]
+
+function saveProducts(){
+localStorage.setItem("products",JSON.stringify(products))
+}
 
 function renderProducts(){
 const container=document.getElementById("products")
@@ -86,6 +107,28 @@ container.innerHTML+=`
 })
 }
 
+function addProduct(){
+const name=document.getElementById("pname").value
+const price=parseFloat(document.getElementById("pprice").value)
+const cat=document.getElementById("pcat").value
+const img=document.getElementById("pimg").value
+
+if(!name||!price||!img){alert("Preencha todos os campos");return}
+
+products.push({
+ id:Date.now(),
+ name,
+ price,
+ cat,
+ img
+})
+
+saveProducts()
+renderProducts()
+
+alert("Produto adicionado!")
+}
+
 function addToCart(id){
 const product=products.find(p=>p.id===id)
 const item=cart.find(i=>i.id===id)
@@ -103,12 +146,12 @@ let q=0
 
 cart.forEach(i=>{
 items.innerHTML+=`<div class="cart-item">${i.name} x${i.qty} <span>R$ ${i.price*i.qty}</span></div>`
-
 sum+=i.price*i.qty
 q+=i.qty
 })
 
 count.innerText=q
+
 total.innerText=sum
 }
 
@@ -130,7 +173,6 @@ text+=`Total: R$${total}`
 const phone="5591984233046"
 window.open(`https://wa.me/${phone}?text=${text}`)
 }
-
 
 
 document.getElementById("search").addEventListener("input",renderProducts)
