@@ -25,8 +25,7 @@ header{background:var(--cor-principal);color:white;padding:15px;display:flex;ali
 
 .hero{background:linear-gradient(90deg,var(--cor-principal),var(--cor-secundaria));color:white;padding:60px 20px;text-align:center}
 .hero h1{font-size:32px;margin-bottom:10px}
-.hero p{margin-bottom:20px}
-.hero button{padding:12px 25px;border:none;border-radius:6px;background:white;color:var(--cor-principal);font-weight:bold;cursor:pointer}
+.hero button{padding:12px 25px;border:none;border-radius:6px;background:white;color:var(--cor-principal);font-weight:bold;cursor:pointer;margin-top:15px}
 
 .section{padding:40px 20px;max-width:1200px;margin:auto}
 .section h2{margin-bottom:20px}
@@ -40,7 +39,9 @@ header{background:var(--cor-principal);color:white;padding:15px;display:flex;ali
 
 .desc{font-size:13px;color:#555;margin:6px 0}
 
-.price{color:var(--cor-principal);font-weight:bold}
+.sales{font-size:12px;color:#888}
+
+.price{color:var(--cor-principal);font-weight:bold;margin-top:4px}
 
 .add{margin-top:10px;background:var(--cor-principal);color:white;padding:8px;border:none;width:100%;border-radius:6px;cursor:pointer}
 
@@ -50,28 +51,31 @@ header{background:var(--cor-principal);color:white;padding:15px;display:flex;ali
 .carousel{display:flex;overflow:auto;gap:15px}
 .carousel .card{min-width:200px}
 
+.reviews{margin-top:10px;color:#ffaa00;font-size:14px}
+
 .footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-top:40px}
 .footer a{color:#25D366;margin:0 10px;text-decoration:none}
 
-.whatsapp-float{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:15px 18px;border-radius:50px;font-weight:bold;text-decoration:none;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
+.whatsapp-float{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:15px 18px;border-radius:50px;font-weight:bold;text-decoration:none}
 
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px}
 
-.modal-content{background:white;padding:20px;border-radius:10px;max-width:500px;width:100%}
+.modal-content{background:white;padding:20px;border-radius:10px;max-width:520px;width:100%}
 
-.modal-content textarea{width:100%;margin-top:10px;padding:8px}
-.modal-content input{margin-top:10px;padding:8px;width:100%}
+.modal-gallery{display:flex;gap:6px;margin-bottom:10px}
+.modal-gallery img{width:70px;height:70px;object-fit:cover;border-radius:6px;cursor:pointer}
 
-.admin{margin-top:30px;padding:20px;background:white;border-radius:10px}
-.admin input{margin:5px;padding:8px}
+.modal-main{width:100%;margin-bottom:10px}
 
-.cart-panel{position:fixed;right:0;top:0;width:300px;height:100%;background:white;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;overflow:auto;display:none}
+.modal textarea,.modal input{width:100%;padding:8px;margin-top:8px}
+
+.cart-panel{position:fixed;right:0;top:0;width:320px;height:100%;background:white;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;overflow:auto;display:none}
 
 .cart-item{border-bottom:1px solid #eee;padding:10px 0}
 
-@media(max-width:600px){
-.hero h1{font-size:24px}
-}
+.instagram{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.instagram img{width:100%;border-radius:6px}
+
 </style>
 </head>
 
@@ -89,7 +93,7 @@ header{background:var(--cor-principal);color:white;padding:15px;display:flex;ali
 
 <section class="hero">
 <h1>Personalizados para momentos especiais</h1>
-<p>Kits, fotos e lembranças personalizadas</p>
+<p>Kits, fotos e lembranças criativas</p>
 <button onclick="scrollToProducts()">Ver produtos</button>
 </section>
 
@@ -111,19 +115,13 @@ header{background:var(--cor-principal);color:white;padding:15px;display:flex;ali
 <div class="products" id="productList"></div>
 </section>
 
-<section class="section admin" id="adminPanel">
-<h2>Painel administrativo</h2>
-<input type="password" id="adminPass" placeholder="Senha">
-<button onclick="loginAdmin()">Entrar</button>
-
-<div id="adminArea" style="display:none">
-<h3>Adicionar produto</h3>
-<input id="name" placeholder="Nome">
-<input id="desc" placeholder="Descrição">
-<input id="price" placeholder="Preço">
-<input id="image" placeholder="URL da imagem">
-<input id="category" placeholder="Categoria">
-<button onclick="addProduct()">Adicionar</button>
+<section class="section">
+<h2>Nosso Instagram</h2>
+<div class="instagram">
+<img src="https://picsum.photos/300?1">
+<img src="https://picsum.photos/300?2">
+<img src="https://picsum.photos/300?3">
+<img src="https://picsum.photos/300?4">
 </div>
 </section>
 
@@ -143,21 +141,51 @@ header{background:var(--cor-principal);color:white;padding:15px;display:flex;ali
 
 <div class="cart-panel" id="cartPanel">
 <h3>Seu carrinho</h3>
+<button onclick="toggleCart()" style="margin-bottom:10px;padding:6px 10px">Fechar</button>
+
 <div id="cartItems"></div>
 
 <h4 id="cartTotal"></h4>
 
-<textarea id="orderNote" placeholder="Observação do pedido (ex: nome para personalizar, data do evento...)"></textarea>
+<textarea id="orderNote" placeholder="Observação do pedido"></textarea>
 
+<button class="add" onclick="finishOrder()">Finalizar no WhatsApp</button>
+</div>
+<h4 id="cartTotal"></h4>
+<textarea id="orderNote" placeholder="Observação do pedido"></textarea>
 <button class="add" onclick="finishOrder()">Finalizar no WhatsApp</button>
 </div>
 
 <script>
 
+let orderNumber=1000
+
 let products=[
-{id:1,name:"Kit Dia das Mulheres",desc:"1 foto + chaveiro personalizado",price:15,cat:"kit",img:"https://via.placeholder.com/300",sales:12},
-{id:2,name:"Foto Personalizada",desc:"Foto impressa em papel fotográfico",price:10,cat:"foto",img:"https://via.placeholder.com/300",sales:5},
-{id:3,name:"Chaveiro Foto",desc:"Chaveiro acrílico com foto",price:8,cat:"chaveiro",img:"https://via.placeholder.com/300",sales:9}
+{
+id:1,
+name:"Kit Dia das Mulheres",
+desc:"1 foto + chaveiro personalizado",
+price:15,
+cat:"kit",
+sales:18,
+images:[
+"https://picsum.photos/400?1",
+"https://picsum.photos/400?2",
+"https://picsum.photos/400?3"
+]
+},
+{
+id:2,
+name:"Foto Personalizada",
+desc:"Foto em papel fotográfico",
+price:10,
+cat:"foto",
+sales:7,
+images:[
+"https://picsum.photos/400?4",
+"https://picsum.photos/400?5"
+]
+}
 ]
 
 let cart=[]
@@ -169,9 +197,11 @@ container.innerHTML=""
 list.forEach(p=>{
 container.innerHTML+=`
 <div class="card" onclick="openProduct(${p.id})">
-<img src="${p.img}">
+<img src="${p.images[0]}">
 <h4>${p.name}</h4>
 <p class="desc">${p.desc}</p>
+<div class="reviews">⭐⭐⭐⭐⭐</div>
+<div class="sales">${p.sales} vendidos</div>
 <p class="price">R$ ${p.price}</p>
 <button class="add" onclick="event.stopPropagation();openProduct(${p.id})">Comprar</button>
 </div>`
@@ -180,14 +210,16 @@ container.innerHTML+=`
 
 function renderBest(){
 const best=[...products].sort((a,b)=>b.sales-a.sales).slice(0,5)
+
 const container=document.getElementById("bestSellers")
 container.innerHTML=""
 
 best.forEach(p=>{
 container.innerHTML+=`
 <div class="card" onclick="openProduct(${p.id})">
-<img src="${p.img}">
+<img src="${p.images[0]}">
 <h4>${p.name}</h4>
+<div class="sales">${p.sales} vendidos</div>
 <p class="price">R$ ${p.price}</p>
 </div>`
 })
@@ -196,35 +228,42 @@ container.innerHTML+=`
 function openProduct(id){
 const p=products.find(x=>x.id===id)
 
+let thumbs=""
+p.images.forEach(img=>{
+thumbs+=`<img src="${img}" onclick="changeImage('${img}')">`
+})
+
 const content=document.getElementById("modalContent")
 
 content.innerHTML=`
-<img src="${p.img}" style="width:100%;margin-bottom:10px">
+<img id="mainImage" class="modal-main" src="${p.images[0]}">
+
+<div class="modal-gallery">${thumbs}</div>
+
 <h3>${p.name}</h3>
 <p>${p.desc}</p>
+
 <p class="price">R$ ${p.price}</p>
 
 <label>Quantidade</label>
 <input type="number" id="qty" value="1" min="1">
 
 <label>Observação</label>
-<textarea id="note" placeholder="Ex: nome para colocar no produto"></textarea>
+<textarea id="note"></textarea>
 
 <button class="add" onclick="addCart(${p.id})">Adicionar ao carrinho</button>
 `
 
+
 document.getElementById("modal").style.display="flex"
 }
 
-document.getElementById("modal").onclick=e=>{
-if(e.target.id=="modal"){
-document.getElementById("modal").style.display="none"
-}
+function changeImage(src){
+document.getElementById("mainImage").src=src
 }
 
 function addCart(id){
 const p=products.find(x=>x.id===id)
-
 const qty=parseInt(document.getElementById("qty").value)
 const note=document.getElementById("note").value
 
@@ -241,7 +280,7 @@ items.innerHTML=""
 
 let total=0
 
-cart.forEach((item,i)=>{
+cart.forEach((item,index)=>{
 const sub=item.qty*item.product.price
 
 total+=sub
@@ -249,16 +288,34 @@ total+=sub
 items.innerHTML+=`
 <div class="cart-item">
 <b>${item.product.name}</b><br>
-Qtd: ${item.qty}<br>
-Obs: ${item.note || '-'}<br>
-R$ ${sub}
+Qtd: 
+<button onclick="changeQty(${index},-1)">-</button>
+${item.qty}
+<button onclick="changeQty(${index},1)">+</button><br>
+Obs:${item.note||'-'}<br>
+R$ ${sub}<br>
+<button onclick="removeItem(${index})" style="margin-top:5px">Remover</button>
 </div>`
 })
-
 
 document.getElementById("cartTotal").innerText="Total: R$ "+total
 
 document.getElementById("cartCount").innerText=cart.length
+}
+
+function changeQty(index,delta){
+cart[index].qty+=delta
+
+if(cart[index].qty<=0){
+cart.splice(index,1)
+}
+
+updateCart()
+}
+
+function removeItem(index){
+cart.splice(index,1)
+updateCart()
 }
 
 function toggleCart(){
@@ -267,7 +324,9 @@ panel.style.display=panel.style.display==='block'?'none':'block'
 }
 
 function finishOrder(){
-let text="Pedido:%0A"
+orderNumber++
+
+let text=`Pedido #${orderNumber}%0A`
 
 cart.forEach(item=>{
 text+=`- ${item.product.name} | Qtd:${item.qty} | Obs:${item.note}%0A`
@@ -290,28 +349,6 @@ renderProducts(products.filter(p=>p.name.toLowerCase().includes(text)))
 
 function scrollToProducts(){
 document.getElementById("products").scrollIntoView({behavior:'smooth'})
-}
-
-function loginAdmin(){
-if(document.getElementById("adminPass").value==='1234'){
-document.getElementById("adminArea").style.display="block"
-}
-}
-
-function addProduct(){
-const p={
-id:Date.now(),
-name:document.getElementById("name").value,
-desc:document.getElementById("desc").value,
-price:document.getElementById("price").value,
-img:document.getElementById("image").value,
-cat:document.getElementById("category").value,
-sales:0
-}
-
-products.push(p)
-renderProducts()
-renderBest()
 }
 
 renderProducts()
