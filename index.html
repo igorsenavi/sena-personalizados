@@ -13,193 +13,61 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
-
 body{background:var(--cor-fundo)}
 
-header{
-background:var(--cor-principal);
-color:white;
-padding:15px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-flex-wrap:wrap
-}
-
+header{background:var(--cor-principal);color:white;padding:15px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .logo img{height:45px}
 
-.search{
-flex:1;
-margin:10px
-}
+.search{flex:1;margin:10px}
+.search input{width:100%;padding:10px;border-radius:6px;border:none}
 
-.search input{
-width:100%;
-padding:10px;
-border-radius:6px;
-border:none
-}
+.cart-btn{background:white;color:var(--cor-principal);padding:10px 15px;border-radius:6px;font-weight:bold;cursor:pointer}
 
-.cart-btn{
-background:white;
-color:var(--cor-principal);
-padding:10px 15px;
-border-radius:6px;
-font-weight:bold;
-cursor:pointer
-}
-
-.hero{
-background:linear-gradient(90deg,var(--cor-principal),var(--cor-secundaria));
-color:white;
-padding:60px 20px;
-text-align:center
-}
-
+.hero{background:linear-gradient(90deg,var(--cor-principal),var(--cor-secundaria));color:white;padding:60px 20px;text-align:center}
 .hero h1{font-size:32px;margin-bottom:10px}
-
 .hero p{margin-bottom:20px}
+.hero button{padding:12px 25px;border:none;border-radius:6px;background:white;color:var(--cor-principal);font-weight:bold;cursor:pointer}
 
-.hero button{
-padding:12px 25px;
-border:none;
-border-radius:6px;
-background:white;
-color:var(--cor-principal);
-font-weight:bold;
-cursor:pointer
-}
-
-.section{
-padding:40px 20px;
-max-width:1200px;
-margin:auto
-}
-
+.section{padding:40px 20px;max-width:1200px;margin:auto}
 .section h2{margin-bottom:20px}
 
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px
-}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
 
-.card{
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-cursor:pointer;
-transition:.2s
-}
-
+.card{background:white;padding:15px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);cursor:pointer;transition:.2s}
 .card:hover{transform:scale(1.03)}
 
-.card img{
-width:100%;
-border-radius:6px;
-margin-bottom:10px
-}
+.card img{width:100%;border-radius:6px;margin-bottom:10px}
 
-.price{
-color:var(--cor-principal);
-font-weight:bold
-}
+.desc{font-size:13px;color:#555;margin:6px 0}
 
-.add{
-margin-top:10px;
-background:var(--cor-principal);
-color:white;
-padding:8px;
-border:none;
-width:100%;
-border-radius:6px;
-cursor:pointer
-}
+.price{color:var(--cor-principal);font-weight:bold}
 
-.categories{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-bottom:20px
-}
+.add{margin-top:10px;background:var(--cor-principal);color:white;padding:8px;border:none;width:100%;border-radius:6px;cursor:pointer}
 
-.categories button{
-padding:8px 14px;
-border:none;
-border-radius:20px;
-background:var(--cor-principal);
-color:white;
-cursor:pointer
-}
+.categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.categories button{padding:8px 14px;border:none;border-radius:20px;background:var(--cor-principal);color:white;cursor:pointer}
 
-.carousel{
-display:flex;
-overflow:auto;
-gap:15px
-}
-
+.carousel{display:flex;overflow:auto;gap:15px}
 .carousel .card{min-width:200px}
 
-.footer{
-background:#111;
-color:white;
-padding:40px 20px;
-text-align:center;
-margin-top:40px
-}
+.footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-top:40px}
+.footer a{color:#25D366;margin:0 10px;text-decoration:none}
 
-.footer a{
-color:#25D366;
-margin:0 10px;
-text-decoration:none
-}
+.whatsapp-float{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:15px 18px;border-radius:50px;font-weight:bold;text-decoration:none;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
 
-.whatsapp-float{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-color:white;
-padding:15px 18px;
-border-radius:50px;
-font-weight:bold;
-text-decoration:none;
-box-shadow:0 4px 10px rgba(0,0,0,0.2)
-}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px}
 
-.modal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-display:none;
-align-items:center;
-justify-content:center;
-padding:20px
-}
+.modal-content{background:white;padding:20px;border-radius:10px;max-width:500px;width:100%}
 
-.modal-content{
-background:white;
-padding:20px;
-border-radius:10px;
-max-width:500px;
-width:100%
-}
+.modal-content textarea{width:100%;margin-top:10px;padding:8px}
+.modal-content input{margin-top:10px;padding:8px;width:100%}
 
-.admin{
-margin-top:30px;
-padding:20px;
-background:white;
-border-radius:10px
-}
+.admin{margin-top:30px;padding:20px;background:white;border-radius:10px}
+.admin input{margin:5px;padding:8px}
 
-.admin input{
-margin:5px;
-padding:8px
-}
+.cart-panel{position:fixed;right:0;top:0;width:300px;height:100%;background:white;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;overflow:auto;display:none}
+
+.cart-item{border-bottom:1px solid #eee;padding:10px 0}
 
 @media(max-width:600px){
 .hero h1{font-size:24px}
@@ -210,9 +78,7 @@ padding:8px
 <body>
 
 <header>
-<div class="logo">
-<img src="logo.png">
-</div>
+<div class="logo"><img src="logo.png"></div>
 
 <div class="search">
 <input type="text" placeholder="Buscar produtos..." onkeyup="searchProduct(this.value)">
@@ -247,13 +113,13 @@ padding:8px
 
 <section class="section admin" id="adminPanel">
 <h2>Painel administrativo</h2>
-<p>Senha para acessar</p>
 <input type="password" id="adminPass" placeholder="Senha">
 <button onclick="loginAdmin()">Entrar</button>
 
 <div id="adminArea" style="display:none">
 <h3>Adicionar produto</h3>
 <input id="name" placeholder="Nome">
+<input id="desc" placeholder="Descrição">
 <input id="price" placeholder="Preço">
 <input id="image" placeholder="URL da imagem">
 <input id="category" placeholder="Categoria">
@@ -275,16 +141,26 @@ padding:8px
 <div class="modal-content" id="modalContent"></div>
 </div>
 
+<div class="cart-panel" id="cartPanel">
+<h3>Seu carrinho</h3>
+<div id="cartItems"></div>
+
+<h4 id="cartTotal"></h4>
+
+<textarea id="orderNote" placeholder="Observação do pedido (ex: nome para personalizar, data do evento...)"></textarea>
+
+<button class="add" onclick="finishOrder()">Finalizar no WhatsApp</button>
+</div>
+
 <script>
 
 let products=[
-{id:1,name:"Kit Dia das Mulheres",price:15,cat:"kit",img:"https://via.placeholder.com/300",sales:12},
-{id:2,name:"Foto Personalizada",price:10,cat:"foto",img:"https://via.placeholder.com/300",sales:5},
-{id:3,name:"Chaveiro Foto",price:8,cat:"chaveiro",img:"https://via.placeholder.com/300",sales:9}
+{id:1,name:"Kit Dia das Mulheres",desc:"1 foto + chaveiro personalizado",price:15,cat:"kit",img:"https://via.placeholder.com/300",sales:12},
+{id:2,name:"Foto Personalizada",desc:"Foto impressa em papel fotográfico",price:10,cat:"foto",img:"https://via.placeholder.com/300",sales:5},
+{id:3,name:"Chaveiro Foto",desc:"Chaveiro acrílico com foto",price:8,cat:"chaveiro",img:"https://via.placeholder.com/300",sales:9}
 ]
 
 let cart=[]
-let orderCount=1000
 
 function renderProducts(list=products){
 const container=document.getElementById("productList")
@@ -295,8 +171,9 @@ container.innerHTML+=`
 <div class="card" onclick="openProduct(${p.id})">
 <img src="${p.img}">
 <h4>${p.name}</h4>
+<p class="desc">${p.desc}</p>
 <p class="price">R$ ${p.price}</p>
-<button class="add" onclick="event.stopPropagation();addCart(${p.id})">Adicionar</button>
+<button class="add" onclick="event.stopPropagation();openProduct(${p.id})">Comprar</button>
 </div>`
 })
 }
@@ -316,25 +193,27 @@ container.innerHTML+=`
 })
 }
 
-function addCart(id){
-cart.push(id)
-document.getElementById("cartCount").innerText=cart.length
-}
-
 function openProduct(id){
 const p=products.find(x=>x.id===id)
 
-const modal=document.getElementById("modal")
 const content=document.getElementById("modalContent")
 
 content.innerHTML=`
 <img src="${p.img}" style="width:100%;margin-bottom:10px">
 <h3>${p.name}</h3>
+<p>${p.desc}</p>
 <p class="price">R$ ${p.price}</p>
+
+<label>Quantidade</label>
+<input type="number" id="qty" value="1" min="1">
+
+<label>Observação</label>
+<textarea id="note" placeholder="Ex: nome para colocar no produto"></textarea>
+
 <button class="add" onclick="addCart(${p.id})">Adicionar ao carrinho</button>
 `
 
-modal.style.display="flex"
+document.getElementById("modal").style.display="flex"
 }
 
 document.getElementById("modal").onclick=e=>{
@@ -343,15 +222,69 @@ document.getElementById("modal").style.display="none"
 }
 }
 
+function addCart(id){
+const p=products.find(x=>x.id===id)
+
+const qty=parseInt(document.getElementById("qty").value)
+const note=document.getElementById("note").value
+
+cart.push({product:p,qty,note})
+
+updateCart()
+
+document.getElementById("modal").style.display="none"
+}
+
+function updateCart(){
+const items=document.getElementById("cartItems")
+items.innerHTML=""
+
+let total=0
+
+cart.forEach((item,i)=>{
+const sub=item.qty*item.product.price
+
+total+=sub
+
+items.innerHTML+=`
+<div class="cart-item">
+<b>${item.product.name}</b><br>
+Qtd: ${item.qty}<br>
+Obs: ${item.note || '-'}<br>
+R$ ${sub}
+</div>`
+})
+
+
+document.getElementById("cartTotal").innerText="Total: R$ "+total
+
+document.getElementById("cartCount").innerText=cart.length
+}
+
+function toggleCart(){
+const panel=document.getElementById("cartPanel")
+panel.style.display=panel.style.display==='block'?'none':'block'
+}
+
+function finishOrder(){
+let text="Pedido:%0A"
+
+cart.forEach(item=>{
+text+=`- ${item.product.name} | Qtd:${item.qty} | Obs:${item.note}%0A`
+})
+
+text+="Observação geral: "+document.getElementById("orderNote").value
+
+window.open("https://wa.me/5591984233046?text="+text)
+}
+
 function filterCategory(cat){
 if(cat==='all')return renderProducts()
-
 renderProducts(products.filter(p=>p.cat===cat))
 }
 
 function searchProduct(text){
 text=text.toLowerCase()
-
 renderProducts(products.filter(p=>p.name.toLowerCase().includes(text)))
 }
 
@@ -369,6 +302,7 @@ function addProduct(){
 const p={
 id:Date.now(),
 name:document.getElementById("name").value,
+desc:document.getElementById("desc").value,
 price:document.getElementById("price").value,
 img:document.getElementById("image").value,
 cat:document.getElementById("category").value,
