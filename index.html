@@ -6,340 +6,460 @@
 <title>Sena Personalizados</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 :root{--cor:#830064;--cor2:#a1007b;--bg:#f6f7fb;--txt:#23232b;--muted:#6b7280;--b:#e9e9ef}
 *{box-sizing:border-box}
 body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--txt)}
+
 .header{position:sticky;top:0;z-index:20;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
-.logo{height:46px;width:auto;object-fit:contain}
-.actions{display:flex;gap:14px;align-items:center}
-.icon-btn{width:42px;height:42px;border-radius:12px;border:1px solid var(--b);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s}
-.icon-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.08)}
-.icon{width:22px;height:22px}
-.hero{margin:18px 22px 0;background:linear-gradient(90deg,var(--cor),var(--cor2));color:#fff;border-radius:22px;padding:20px 24px;text-align:center;box-shadow:0 16px 30px rgba(131,0,100,.18)}
-.hero h1{margin:0;font-size:28px;font-weight:700}
-.topbar{padding:18px 22px 8px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
-.search-wrap{background:#fff;border:1px solid var(--b);border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 4px 14px rgba(0,0,0,.04)}
-.search-wrap input{border:none;outline:none;width:100%;font-size:15px;background:transparent}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;padding:18px 22px 30px}
-.card{background:#fff;border:1px solid var(--b);border-radius:20px;padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.04);display:flex;flex-direction:column;gap:10px}
-.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;background:#f0f0f5}
-.card h4{margin:0;font-size:17px}
-.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
+.logo{height:46px}
+.actions{display:flex;gap:14px}
+
+.icon-btn{width:42px;height:42px;border-radius:12px;border:1px solid var(--b);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.icon{width:22px}
+
+.hero{margin:18px 22px 0;background:linear-gradient(90deg,var(--cor),var(--cor2));color:#fff;border-radius:22px;padding:20px;text-align:center}
+.hero h1{margin:0;font-size:26px}
+
+.topbar{padding:18px 22px}
+.search-wrap{background:#fff;border:1px solid var(--b);border-radius:16px;padding:12px;display:flex;gap:10px}
+.search-wrap input{border:none;outline:none;width:100%}
+
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;padding:20px}
+.card{background:#fff;border:1px solid var(--b);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;background:#eee}
 .price{font-size:20px;font-weight:700;color:var(--cor)}
-.row{display:flex;gap:10px;align-items:center}
-.qty-box{display:flex;align-items:center;gap:10px;border:1px solid var(--b);border-radius:12px;padding:6px 10px;background:#fff}
-.qty-box button,.cart-qty button{background:#f3f4f8;color:#111;border:none;width:28px;height:28px;border-radius:8px;cursor:pointer}
-.primary{background:var(--cor);color:#fff;border:none;padding:12px 14px;border-radius:12px;font-weight:600;cursor:pointer}
-.primary:hover{background:#6d0053}
-.secondary{background:#fff;color:var(--cor);border:1px solid var(--cor);padding:11px 14px;border-radius:12px;font-weight:600;cursor:pointer}
-.cart{position:fixed;right:0;top:0;width:360px;max-width:100%;height:100%;background:#fff;box-shadow:-12px 0 30px rgba(0,0,0,.12);padding:18px;display:none;overflow:auto;z-index:30}
-.cart-head,.admin-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.cart-item{border:1px solid var(--b);border-radius:16px;padding:12px;margin-bottom:12px;background:#fbfbfe}
-.cart-item textarea{width:100%;min-height:64px;margin-top:8px;border:1px solid var(--b);border-radius:10px;padding:10px;font-family:inherit}
-.cart-qty{display:flex;align-items:center;gap:8px;margin:8px 0}
-.login,.admin,.status-modal{position:fixed;inset:0;background:rgba(16,18,27,.55);display:none;align-items:center;justify-content:center;z-index:40;padding:16px}
-.panel{background:#fff;border-radius:22px;width:min(1100px,100%);max-height:92vh;overflow:auto;padding:22px;box-shadow:0 20px 50px rgba(0,0,0,.16)}
-.login-box{background:#fff;border-radius:22px;width:min(360px,100%);padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.16)}
-.login-box input,.admin input,.admin textarea,.status-modal input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--b);margin:8px 0 12px;font-family:inherit}
-.admin-grid{display:grid;grid-template-columns:340px 1fr;gap:24px}
-.admin-card{background:#fafafe;border:1px solid var(--b);border-radius:18px;padding:18px}
-.admin-list-item{display:flex;justify-content:space-between;gap:12px;align-items:start;padding:12px;border-bottom:1px solid var(--b)}
-.admin-list-item:last-child{border-bottom:none}
-.small{font-size:13px;color:var(--muted)}
-.footer{background:#111;color:#fff;text-align:center;padding:22px;margin-top:20px}
-.footer a{display:inline-flex;margin:0 8px}
-.footer img{width:28px;height:28px}
-.empty{padding:28px;text-align:center;color:var(--muted)}
-@media(max-width:860px){.admin-grid{grid-template-columns:1fr}.topbar{grid-template-columns:1fr}.hero h1{font-size:22px}.header{padding:12px 14px}.hero,.topbar,.products{margin-left:14px;margin-right:14px;padding-left:14px;padding-right:14px}.products{padding:18px 14px 30px}}
+
+.qty-box{display:flex;align-items:center;gap:8px}
+.qty-box button{width:28px;height:28px;border:none;background:#eee;border-radius:6px}
+
+.primary{background:var(--cor);color:white;border:none;padding:10px;border-radius:10px;cursor:pointer}
+.secondary{background:white;border:1px solid var(--cor);color:var(--cor);padding:10px;border-radius:10px;cursor:pointer}
+
+.cart{position:fixed;right:0;top:0;width:350px;height:100%;background:white;box-shadow:-10px 0 20px rgba(0,0,0,.2);padding:20px;display:none;overflow:auto}
+
+.login,.admin{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+.panel{background:white;border-radius:18px;padding:20px;width:90%;max-width:1000px;max-height:90vh;overflow:auto}
+
+.admin-grid{display:grid;grid-template-columns:320px 1fr;gap:20px}
+.admin input,.admin textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px}
+
+.footer{background:#111;color:white;text-align:center;padding:20px;margin-top:20px}
+.footer img{width:28px;margin:6px}
+
 </style>
 </head>
 <body>
+
 <header class="header">
-<img src="logo.png" class="logo" alt="Sena Personalizados" onerror="this.style.display='none'">
+<img src="logo.png" class="logo" alt="logo">
 <div class="actions">
-<button class="icon-btn" onclick="openStatus()" title="Status do pedido">
-<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#333" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m0 16H5V5h14z"/></svg>
-</button>
-<button class="icon-btn" onclick="openAdminLogin()" title="Administração">
-<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#333" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5m0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5"/></svg>
-</button>
-<button class="icon-btn" onclick="toggleCart()" title="Carrinho">
-<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#333" d="M7 18a2 2 0 1 0 2 2 2 2 0 0 0-2-2m10 0a2 2 0 1 0 2 2 2 2 0 0 0-2-2M7.16 14h9.45a2 2 0 0 0 1.92-1.45L21 6H6.21l-.94-2H2v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 8 19h12v-2H8.42a.25.25 0 0 1-.23-.37z"/></svg>
-</button>
+<button class="icon-btn" onclick="openStatus()">📦</button>
+<button class="icon-btn" onclick="openAdminLogin()">👤</button>
+<button class="icon-btn" onclick="toggleCart()">🛒</button>
 </div>
 </header>
-<section class="hero"><h1>Criando personalizados para momentos únicos</h1></section>
+
+<section class="hero">
+<h1>Criando personalizados para momentos únicos</h1>
+</section>
+
 <div class="topbar">
 <div class="search-wrap">
-<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#666" d="M9.5 3a6.5 6.5 0 0 1 5.2 10.4l5 5-1.4 1.4-5-5A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9"/></svg>
-<input type="text" placeholder="Buscar produtos" onkeyup="searchProduct(this.value)">
+<input placeholder="Buscar produtos" onkeyup="searchProduct(this.value)">
 </div>
 </div>
+
 <section class="products" id="productList"></section>
+
 <div class="cart" id="cart"></div>
-<div class="status-modal" id="statusModal">
-<div class="login-box">
-<div class="cart-head"><h3 style="margin:0">Status do pedido</h3><button class="secondary" onclick="closeStatus()">Fechar</button></div>
-<input id="statusCode" placeholder="Digite o código do pedido">
-<button class="primary" style="width:100%" onclick="checkStatus()">Pesquisar</button>
-<p id="statusResult" class="small" style="margin-top:12px"></p>
-</div>
-</div>
+
+<!-- LOGIN ADMIN -->
 <div class="login" id="loginModal">
-<div class="login-box">
-<h3 style="margin-top:0">Login Admin</h3>
+<div class="panel">
+<h3>Login Admin</h3>
 <input id="email" placeholder="Email">
 <input id="password" type="password" placeholder="Senha">
-<div class="row">
 <button class="primary" onclick="loginAdmin()">Entrar</button>
 <button class="secondary" onclick="closeAdminLogin()">Cancelar</button>
 </div>
-<p id="loginMsg" class="small"></p>
 </div>
-</div>
+
+<!-- ADMIN PANEL -->
 <div class="admin" id="adminModal">
 <div class="panel">
-<div class="admin-head">
-<h2 style="margin:0">Painel Administrativo</h2>
-<div class="row">
+<h2>Painel Administrativo</h2>
 <button class="secondary" onclick="closeAdmin()">Voltar</button>
-<button class="secondary" onclick="logoutAdmin()">Sair</button>
-</div>
-</div>
+
 <div class="admin-grid">
-<div class="admin-card">
-<h3 style="margin-top:0">Novo produto</h3>
+
+<div>
+<h3>Novo produto</h3>
 <input id="pname" placeholder="Nome">
 <textarea id="pdesc" placeholder="Descrição"></textarea>
 <input id="pprice" placeholder="Preço">
-<input id="pimg" placeholder="URL da imagem (não use link de visualização do Google Drive)">
-<p class="small">Para imagens do Google Drive, use link direto de arquivo ou prefira Imgur/Cloudinary/Supabase Storage.</p>
-<button class="primary" style="width:100%" onclick="addOrUpdateProduct()">Salvar</button>
-<p id="adminMsg" class="small"></p>
-<hr style="border:none;border-top:1px solid var(--b);margin:18px 0">
-<button class="secondary" style="width:100%;margin-bottom:8px" onclick="exportProducts()">Exportar produtos</button>
-<button class="secondary" style="width:100%" onclick="exportSales()">Exportar vendas</button>
-<input type="hidden" id="editingId">
+
+<label>Imagem do produto</label>
+<input type="file" id="pimage">
+
+<button class="primary" onclick="addProduct()">Salvar</button>
+
 </div>
-<div class="admin-card">
-<h3 style="margin-top:0">Produtos cadastrados</h3>
+
+<div>
+<h3>Produtos cadastrados</h3>
 <div id="adminProducts"></div>
 </div>
+
+</div>
+
 </div>
 </div>
-</div>
+
 <footer class="footer">
-<a href="https://wa.me/5591984233046" target="_blank" rel="noreferrer"><img alt="WhatsApp" src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
-<a href="https://instagram.com/sena__personalizados" target="_blank" rel="noreferrer"><img alt="Instagram" src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
+<a href="https://wa.me/5591984233046"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
+<a href="https://instagram.com/sena__personalizados"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
 </footer>
+
 <script>
+
 const SUPABASE_URL="https://bhvcxiiafdutoaloqflr.supabase.co"
 const SUPABASE_KEY="sb_publishable_3XViRAlVJHJ8C3R9moGhIw_TaBt-A4F"
+
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
+
 let products=[]
 let cart=[]
-function normalizeImageUrl(url){
- if(!url) return ""
- if(url.includes('drive.google.com/file/d/')){
-   const m=url.match(/\/d\/([^/]+)/)
-   if(m&&m[1]) return `https://drive.google.com/uc?export=view&id=${m[1]}`
- }
- if(url.includes('drive.google.com/open?id=')){
-   const m=url.match(/id=([^&]+)/)
-   if(m&&m[1]) return `https://drive.google.com/uc?export=view&id=${m[1]}`
- }
- return url
-}
+
+/* ---------- LOAD PRODUCTS ---------- */
+
 async function loadProducts(){
- const {data,error}=await supabaseClient.from('products').select('*').order('id',{ascending:false})
- if(error){console.log(error);document.getElementById('productList').innerHTML='<div class="empty">Erro ao carregar produtos.</div>';return}
- products=(data||[]).map(p=>({...p,image:normalizeImageUrl(p.image)}))
- renderProducts(products)
- renderAdminProducts()
+
+const {data}=await supabaseClient.from("products").select("*")
+products=data||[]
+
+renderProducts(products)
+renderAdminProducts()
+
 }
+
+/* ---------- RENDER PRODUCTS ---------- */
+
 function renderProducts(list){
- const area=document.getElementById('productList')
- if(!list.length){area.innerHTML='<div class="empty">Nenhum produto encontrado.</div>';return}
- area.innerHTML=''
- list.forEach(p=>{
-   area.innerHTML+=`<div class="card">
-   <img src="${p.image||''}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/500x500?text=Produto'">
-   <h4>${p.name||''}</h4>
-   <p>${p.desc||''}</p>
-   <div class="row" style="justify-content:space-between;align-items:end">
-     <div class="price">R$ ${Number(p.price||0).toFixed(2).replace('.',',')}</div>
-     <div class="qty-box">
-      <button onclick="adjustCardQty(${p.id},-1)">-</button>
-      <span id="cardqty-${p.id}">1</span>
-      <button onclick="adjustCardQty(${p.id},1)">+</button>
-     </div>
-   </div>
-   <button class="primary" style="width:100%;margin-top:10px" onclick="addCart(${p.id})">Adicionar ao carrinho</button>
-   </div>`
- })
+
+const area=document.getElementById("productList")
+area.innerHTML=""
+
+list.forEach(p=>{
+
+area.innerHTML+=`
+
+<div class="card">
+
+<img src="${p.image}">
+
+<h4>${p.name}</h4>
+
+<p>${p.desc}</p>
+
+<div class="price">R$ ${p.price}</div>
+
+<div class="qty-box">
+<button onclick="adjustQty(${p.id},-1)">-</button>
+<span id="q${p.id}">1</span>
+<button onclick="adjustQty(${p.id},1)">+</button>
+</div>
+
+<button class="primary" onclick="addCart(${p.id})">Adicionar</button>
+
+</div>
+
+`
+
+})
+
 }
+
+function adjustQty(id,v){
+
+const el=document.getElementById("q"+id)
+let n=parseInt(el.innerText)
+
+n+=v
+if(n<1)n=1
+
+el.innerText=n
+
+}
+
+/* ---------- SEARCH ---------- */
+
 function searchProduct(text){
- const t=text.toLowerCase().trim()
- renderProducts(products.filter(p=>(p.name||'').toLowerCase().includes(t)||(p.desc||'').toLowerCase().includes(t)))
+
+text=text.toLowerCase()
+
+const f=products.filter(p=>p.name.toLowerCase().includes(text))
+
+renderProducts(f)
+
 }
-function getCardQty(id){
- const el=document.getElementById(`cardqty-${id}`)
- return el?parseInt(el.textContent)||1:1
-}
-function adjustCardQty(id,delta){
- const el=document.getElementById(`cardqty-${id}`)
- if(!el) return
- let v=parseInt(el.textContent)||1
- v+=delta
- if(v<1) v=1
- el.textContent=v
-}
+
+/* ---------- CART ---------- */
+
 function addCart(id){
- const p=products.find(x=>x.id===id)
- if(!p) return
- const qty=getCardQty(id)
- const existing=cart.find(i=>i.product.id===id&&i.obs==='')
- if(existing){existing.qty+=qty}else{cart.push({product:p,qty,obs:''})}
- updateCart(); toggleCart(true)
+
+const p=products.find(x=>x.id===id)
+
+const qty=parseInt(document.getElementById("q"+id).innerText)
+
+cart.push({product:p,qty:qty,obs:""})
+
+updateCart()
+
+toggleCart()
+
 }
-function toggleCart(forceOpen=false){
- const c=document.getElementById('cart')
- c.style.display=forceOpen?'block':(c.style.display==='block'?'none':'block')
+
+function toggleCart(){
+
+const c=document.getElementById("cart")
+
+c.style.display=c.style.display=="block"?"none":"block"
+
 }
+
 function updateCart(){
- const c=document.getElementById('cart')
- let html=`<div class="cart-head"><h3 style="margin:0">Carrinho</h3><button class="secondary" onclick="toggleCart()">Fechar</button></div>`
- if(!cart.length){c.innerHTML=html+'<div class="empty">Seu carrinho está vazio.</div>';return}
- let total=0
- cart.forEach((item,i)=>{
-   const sub=Number(item.product.price)*item.qty
-   total+=sub
-   html+=`<div class="cart-item">
-   <b>${item.product.name}</b>
-   <div class="cart-qty">
-    <button onclick="changeQty(${i},-1)">-</button>
-    <span>${item.qty}</span>
-    <button onclick="changeQty(${i},1)">+</button>
-   </div>
-   <textarea placeholder="Observação do item" oninput="saveObs(${i},this.value)">${item.obs||''}</textarea>
-   <div class="row" style="justify-content:space-between;margin-top:8px">
-    <span class="small">Subtotal</span>
-    <strong>R$ ${sub.toFixed(2).replace('.',',')}</strong>
-   </div>
-   <button class="secondary" style="width:100%;margin-top:8px" onclick="removeItem(${i})">Remover</button>
-   </div>`
- })
- html+=`<div class="row" style="justify-content:space-between;margin:16px 0"><strong>Total</strong><strong style="color:var(--cor)">R$ ${total.toFixed(2).replace('.',',')}</strong></div>`
- html+=`<button class="primary" style="width:100%" onclick="finishOrder(${total})">Finalizar pedido</button>`
- c.innerHTML=html
- document.querySelector('[title="Carrinho"]').setAttribute('data-count',cart.length)
+
+const c=document.getElementById("cart")
+
+let html="<h3>Carrinho</h3>"
+
+let total=0
+
+cart.forEach((i,index)=>{
+
+const sub=i.product.price*i.qty
+
+total+=sub
+
+html+=`
+
+<div>
+
+<b>${i.product.name}</b>
+
+<br>
+
+<button onclick="changeQty(${index},-1)">-</button>
+${i.qty}
+<button onclick="changeQty(${index},1)">+</button>
+
+<br>
+
+<textarea placeholder="Observação" oninput="saveObs(${index},this.value)">${i.obs}</textarea>
+
+<br>
+
+<button onclick="removeItem(${index})">Remover</button>
+
+</div>
+
+<hr>
+
+`
+
+})
+
+html+=`<h4>Total R$ ${total}</h4>`
+
+html+=`<button onclick="finishOrder(${total})">Finalizar pedido</button>`
+
+c.innerHTML=html
+
 }
-function changeQty(i,v){cart[i].qty=Math.max(1,cart[i].qty+v);updateCart()}
-function saveObs(i,val){cart[i].obs=val}
-function removeItem(i){cart.splice(i,1);updateCart()}
+
+function changeQty(i,v){
+
+cart[i].qty+=v
+
+if(cart[i].qty<1)cart[i].qty=1
+
+updateCart()
+
+}
+
+function removeItem(i){
+
+cart.splice(i,1)
+updateCart()
+
+}
+
+function saveObs(i,val){
+cart[i].obs=val
+}
+
+/* ---------- WHATSAPP ---------- */
+
 async function finishOrder(total){
- if(!cart.length) return
- const code='PED'+Date.now().toString().slice(-6)
- let msg=`Olá! Gostaria de fazer este pedido:%0A%0ACódigo: ${code}%0A`
- const items=cart.map(i=>`${i.product.name} x${i.qty}${i.obs?` | Obs: ${i.obs}`:''}`)
- items.forEach(line=>msg+=`${line}%0A`)
- msg+=`%0ATotal: R$ ${Number(total).toFixed(2).replace('.',',')}`
- const {error}=await supabaseClient.from('orders').insert([{product:items.join(' | '),total:total,status:'Novo',code}])
- if(error){alert('Erro ao salvar pedido');console.log(error);return}
- window.open(`https://wa.me/5591984233046?text=${msg}`,'_blank')
- cart=[];updateCart();toggleCart()
+
+const code="PED"+Date.now().toString().slice(-6)
+
+let msg="Olá! Gostaria de fazer este pedido:%0A"
+
+cart.forEach(i=>{
+msg+=`${i.product.name} x${i.qty}%0A`
+})
+
+msg+=`%0ATotal: R$ ${total}`
+
+await supabaseClient.from("orders").insert([
+{
+code:code,
+product:msg,
+total:total,
+status:"Novo"
 }
-function openStatus(){document.getElementById('statusModal').style.display='flex'}
-function closeStatus(){document.getElementById('statusModal').style.display='none'}
-async function checkStatus(){
- const code=document.getElementById('statusCode').value.trim()
- if(!code) return
- const {data,error}=await supabaseClient.from('orders').select('*').eq('code',code).single()
- const res=document.getElementById('statusResult')
- if(error||!data){res.textContent='Pedido não encontrado.';return}
- res.textContent=`Código ${data.code} • Status: ${data.status}`
+])
+
+window.open(`https://wa.me/5591984233046?text=${msg}`)
+
+cart=[]
+updateCart()
+
 }
-function openAdminLogin(){document.getElementById('loginModal').style.display='flex';document.getElementById('loginMsg').textContent=''}
-function closeAdminLogin(){document.getElementById('loginModal').style.display='none'}
+
+/* ---------- ADMIN LOGIN ---------- */
+
+function openAdminLogin(){
+
+const m=document.getElementById("loginModal")
+m.style.display="flex"
+
+}
+
+function closeAdminLogin(){
+
+const m=document.getElementById("loginModal")
+m.style.display="none"
+
+}
+
 async function loginAdmin(){
- const email=document.getElementById('email').value.trim()
- const password=document.getElementById('password').value
- const {error}=await supabaseClient.auth.signInWithPassword({email,password})
- if(error){document.getElementById('loginMsg').textContent='Email ou senha inválidos.';return}
- closeAdminLogin();document.getElementById('adminModal').style.display='flex';loadProducts()
+
+const email=document.getElementById("email").value
+const password=document.getElementById("password").value
+
+const {error}=await supabaseClient.auth.signInWithPassword({email,password})
+
+if(error){alert("Erro no login");return}
+
+closeAdminLogin()
+
+document.getElementById("adminModal").style.display="flex"
+
 }
-async function logoutAdmin(){await supabaseClient.auth.signOut();closeAdmin()}
-function closeAdmin(){document.getElementById('adminModal').style.display='none'}
-function fillForm(p){
- document.getElementById('editingId').value=p.id||''
- document.getElementById('pname').value=p.name||''
- document.getElementById('pdesc').value=p.desc||''
- document.getElementById('pprice').value=p.price||''
- document.getElementById('pimg').value=p.image||''
- window.scrollTo({top:0,behavior:'smooth'})
+
+function closeAdmin(){
+
+const a=document.getElementById("adminModal")
+a.style.display="none"
+
 }
-function resetForm(){
- document.getElementById('editingId').value=''
- document.getElementById('pname').value=''
- document.getElementById('pdesc').value=''
- document.getElementById('pprice').value=''
- document.getElementById('pimg').value=''
-}
-async function addOrUpdateProduct(){
- const id=document.getElementById('editingId').value
- const name=document.getElementById('pname').value.trim()
- const desc=document.getElementById('pdesc').value.trim()
- const price=parseFloat(document.getElementById('pprice').value)
- const image=normalizeImageUrl(document.getElementById('pimg').value.trim())
- const msg=document.getElementById('adminMsg')
- if(!name||!desc||isNaN(price)||!image){msg.textContent='Preencha todos os campos corretamente.';return}
- let error
- if(id){({error}=await supabaseClient.from('products').update({name,desc,price,image}).eq('id',id))}
- else {({error}=await supabaseClient.from('products').insert([{name,desc,price,image}]))}
- if(error){msg.textContent='Erro ao salvar produto.';console.log(error);return}
- msg.textContent=id?'Produto atualizado com sucesso.':'Cadastro concluído.'
- resetForm();loadProducts()
-}
+
+/* ---------- ADMIN PRODUCTS ---------- */
+
 function renderAdminProducts(){
- const area=document.getElementById('adminProducts')
- if(!area) return
- if(!products.length){area.innerHTML='<div class="empty">Nenhum produto cadastrado.</div>';return}
- area.innerHTML=''
- products.forEach(p=>{
-   area.innerHTML+=`<div class="admin-list-item">
-   <div>
-    <strong>${p.name}</strong><br>
-    <span class="small">R$ ${Number(p.price).toFixed(2).replace('.',',')}</span><br>
-    <span class="small">${p.desc||''}</span>
-   </div>
-   <div class="row">
-    <button class="secondary" onclick='fillForm(${JSON.stringify(p).replace(/'/g,"&#39;")})'>Editar</button>
-    <button class="secondary" onclick='deleteProduct(${p.id})'>Excluir</button>
-   </div>
-   </div>`
- })
+
+const area=document.getElementById("adminProducts")
+
+area.innerHTML=""
+
+products.forEach(p=>{
+
+area.innerHTML+=`
+
+<div>
+
+<b>${p.name}</b>
+
+<br>
+
+<button onclick="editProduct(${p.id})">Editar</button>
+<button onclick="deleteProduct(${p.id})">Excluir</button>
+
+<hr>
+
+</div>
+
+`
+
+})
+
 }
+
 async function deleteProduct(id){
- if(!confirm('Deseja excluir este produto?')) return
- const {error}=await supabaseClient.from('products').delete().eq('id',id)
- if(error){console.log(error);return}
- loadProducts()
-}
-function downloadFile(data,file){const blob=new Blob([data],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=file;a.click()}
-function exportProducts(){
- let csv='Nome,Descrição,Preço,Imagem\n'
- products.forEach(p=>{csv+=`"${p.name}","${(p.desc||'').replace(/"/g,'""')}","${p.price}","${p.image||''}"\n`})
- downloadFile(csv,'produtos.csv')
-}
-async function exportSales(){
- const {data,error}=await supabaseClient.from('orders').select('*').order('id',{ascending:false})
- if(error){console.log(error);alert('Erro ao exportar vendas');return}
- let csv='Codigo,Produtos,Total,Status\n'
- ;(data||[]).forEach(o=>{csv+=`"${o.code||''}","${(o.product||'').replace(/"/g,'""')}","${o.total||0}","${o.status||''}"\n`})
- downloadFile(csv,'vendas.csv')
-}
+
+await supabaseClient.from("products").delete().eq("id",id)
+
 loadProducts()
+
+}
+
+function editProduct(id){
+
+const p=products.find(x=>x.id===id)
+
+const name=prompt("Nome",p.name)
+
+if(!name)return
+
+supabaseClient.from("products").update({name:name}).eq("id",id)
+
+loadProducts()
+
+}
+
+/* ---------- UPLOAD IMAGE TO SUPABASE STORAGE ---------- */
+
+async function addProduct(){
+
+const name=document.getElementById("pname").value
+const desc=document.getElementById("pdesc").value
+const price=parseFloat(document.getElementById("pprice").value)
+
+const file=document.getElementById("pimage").files[0]
+
+if(!file){alert("Selecione uma imagem");return}
+
+const fileName=Date.now()+"_"+file.name
+
+const {error:uploadError}=await supabaseClient.storage
+.from("produtos")
+.upload(fileName,file)
+
+if(uploadError){console.log(uploadError);alert("Erro upload imagem");return}
+
+const {data}=supabaseClient.storage
+.from("produtos")
+.getPublicUrl(fileName)
+
+const imageUrl=data.publicUrl
+
+await supabaseClient.from("products").insert([
+{name,desc,price,image:imageUrl}
+])
+
+alert("Produto cadastrado")
+
+loadProducts()
+
+}
+
+loadProducts()
+
 </script>
+
 </body>
 </html>
