@@ -11,14 +11,16 @@
     *{box-sizing:border-box} body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--txt)}
     .header{position:sticky;top:0;z-index:20;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
     .logo{height:48px}.actions{display:flex;gap:12px}.icon-btn{width:42px;height:42px;border-radius:12px;border:1px solid var(--b);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
-    .hero{margin:18px 22px 0;background:linear-gradient(90deg,var(--cor),var(--cor2));color:#fff;border-radius:26px;padding:20px 24px;text-align:center;position:relative;overflow:hidden;min-height:120px;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center}.hero::after{content:'';position:absolute;inset:0;background:rgba(76,0,58,.35)}
-    .hero h1{margin:0;font-size:26px;position:relative;z-index:1}.hero-sub{position:relative;z-index:1;font-size:13px;opacity:.9;margin-top:8px}
+    .hero{margin:18px 22px 0;background:linear-gradient(90deg,var(--cor),var(--cor2));color:#fff;border-radius:26px;padding:20px 24px;text-align:center;position:relative;overflow:hidden;min-height:120px;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center}
+    .hero::after{content:'';position:absolute;inset:0;background:rgba(76,0,58,.35)}
+    .hero-inner{position:relative;z-index:1}
+    .hero h1{margin:0;font-size:26px;position:relative;z-index:1}.hero-sub{position:relative;z-index:1;font-size:13px;opacity:.95;margin-top:8px}
     .topbar{padding:18px 22px 8px;display:grid;grid-template-columns:1fr 260px;gap:12px}.search-wrap,.filter-wrap{background:#fff;border:1px solid var(--b);border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 4px 14px rgba(0,0,0,.04)}
     .search-wrap input,.filter-wrap select,.admin-card input,.admin-card textarea,.admin-card select,.login-box input,.panel input{border:none;outline:none;width:100%;background:transparent;font-size:15px;font-family:inherit}
     .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;padding:18px 22px 30px}.card{background:#fff;border:1px solid var(--b);border-radius:20px;padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.04);display:flex;flex-direction:column;gap:10px}.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;background:#f0f0f5}.card h4{margin:0;font-size:17px}.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
     .small{font-size:13px;color:var(--muted)} .price{font-size:20px;font-weight:700;color:var(--cor)} .row{display:flex;gap:10px;align-items:center}.between{justify-content:space-between}.wrap{flex-wrap:wrap}
     .qty-box,.cart-qty,.field{display:flex;align-items:center;gap:8px;border:1px solid var(--b);border-radius:12px;padding:10px 12px;background:#fff}.qty-box{padding:6px 10px}.qty-box button,.cart-qty button{width:28px;height:28px;border:none;border-radius:8px;background:#f3f4f8;cursor:pointer}
-    .primary,.secondary,.ghost{border-radius:12px;padding:11px 14px;cursor:pointer;font-weight:600;font-family:inherit}.primary{border:none;background:var(--cor);color:#fff}.secondary{border:1px solid var(--cor);background:#fff;color:var(--cor)}.ghost{border:1px solid var(--b);background:#fff;color:#111}
+    .primary,.secondary,.ghost,.danger{border-radius:12px;padding:11px 14px;cursor:pointer;font-weight:600;font-family:inherit}.primary{border:none;background:var(--cor);color:#fff}.secondary{border:1px solid var(--cor);background:#fff;color:var(--cor)}.ghost{border:1px solid var(--b);background:#fff;color:#111}.danger{border:1px solid #dc2626;background:#fff;color:#dc2626}
     .cart{position:fixed;right:0;top:0;width:380px;max-width:100%;height:100%;background:#fff;box-shadow:-12px 0 30px rgba(0,0,0,.12);padding:18px;display:none;overflow:auto;z-index:30}.cart-head,.admin-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.cart-item{border:1px solid var(--b);border-radius:16px;padding:12px;margin-bottom:12px;background:#fbfbfe}
     .cart-item textarea,.admin textarea,.admin input,.admin select,.status-modal input,.login-box input,.checkout-modal input{width:100%;border:1px solid var(--b);border-radius:10px;padding:10px 12px;font-family:inherit}.cart-item textarea{min-height:64px;margin-top:8px}
     .login,.admin,.status-modal,.checkout-modal,.product-modal{position:fixed;inset:0;background:rgba(16,18,27,.55);display:none;align-items:center;justify-content:center;z-index:40;padding:16px}
@@ -27,9 +29,9 @@
     .admin-layout{display:grid;grid-template-columns:260px 1fr;gap:22px}.admin-sidebar{background:linear-gradient(180deg,#5b0044,#830064);color:#fff;border-radius:24px;padding:18px;box-shadow:var(--shadow)}.admin-sidebar h3{margin:0 0 14px}.admin-nav{display:grid;gap:8px}.admin-nav button{border:none;background:rgba(255,255,255,.12);color:#fff;padding:12px 14px;border-radius:14px;text-align:left;cursor:pointer}.admin-nav button.active{background:#fff;color:var(--cor)}
     .admin-main{display:grid;gap:18px}.admin-topcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.metric{background:#fff;border:1px solid var(--b);border-radius:20px;padding:16px;box-shadow:0 8px 20px rgba(0,0,0,.04)}.metric .n{font-size:28px;font-weight:700;color:var(--cor)}
     .admin-card{background:#fff;border:1px solid var(--b);border-radius:22px;padding:18px;box-shadow:0 8px 22px rgba(0,0,0,.04)}.admin-grid{display:grid;grid-template-columns:380px 1fr;gap:18px}.admin-list-item{display:flex;justify-content:space-between;gap:12px;align-items:start;padding:12px;border-bottom:1px solid var(--b)} .admin-list-item:last-child{border-bottom:none}
-    .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;background:#f3e8ff;color:#6b21a8}.preview-banner{width:100%;min-height:120px;border-radius:18px;background:linear-gradient(90deg,var(--cor),var(--cor2));display:flex;align-items:center;justify-content:center;color:#fff;background-size:cover;background-position:center;position:relative;overflow:hidden}.preview-banner::after{content:'';position:absolute;inset:0;background:rgba(76,0,58,.32)}.preview-banner span{position:relative;z-index:1;font-weight:600}
-    .footer{background:#111;color:#fff;text-align:center;padding:22px;margin-top:20px}.footer a{display:inline-flex;margin:0 8px}.footer img{width:28px;height:28px}.empty{padding:28px;text-align:center;color:var(--muted)} .success{color:#0f8a4b}.error{color:#b42318}.mt12{margin-top:12px}.mb8{margin-bottom:8px}
-    @media(max-width:1020px){.admin-layout,.product-layout{grid-template-columns:1fr}.admin-topcards{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr}.topbar{grid-template-columns:1fr}}
+    .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;background:#f3e8ff;color:#6b21a8}.preview-banner{width:100%;min-height:180px;border-radius:18px;background:linear-gradient(90deg,var(--cor),var(--cor2));display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;position:relative;overflow:hidden;padding:18px}.preview-banner::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.22)}.preview-banner-inner{position:relative;z-index:1;text-align:center}.preview-banner h2,.preview-banner p{margin:0}
+    .footer{background:#111;color:#fff;text-align:center;padding:22px;margin-top:20px}.footer a{display:inline-flex;margin:0 8px}.footer img{width:28px;height:28px}.empty{padding:28px;text-align:center;color:var(--muted)} .success{color:#0f8a4b}.error{color:#b42318}.mt12{margin-top:12px}.mb8{margin-bottom:8px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:1020px){.admin-layout,.product-layout,.grid2{grid-template-columns:1fr}.admin-topcards{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr}.topbar{grid-template-columns:1fr}}
     @media(max-width:860px){.header{padding:12px 14px}.hero h1{font-size:22px}.hero,.topbar,.products{margin-left:14px;margin-right:14px}.products{padding:18px 14px 30px}}
   </style>
 </head>
@@ -43,7 +45,7 @@
     </div>
   </header>
 
-  <section class="hero" id="heroBanner"><div><h1 id="heroTitle">Criando personalizados para momentos únicos</h1><div class="hero-sub" id="heroSubtitle">Soluções criativas para festas, brindes e impressões</div></div></section>
+  <section class="hero" id="heroBanner"><div class="hero-inner"><h1 id="heroTitle">Criando personalizados para momentos únicos</h1><div class="hero-sub" id="heroSubtitle">Soluções criativas para festas, brindes e impressões</div></div></section>
 
   <div class="topbar">
     <div class="search-wrap"><span>🔎</span><input type="text" placeholder="Buscar produtos" onkeyup="searchProduct(this.value)"></div>
@@ -72,7 +74,7 @@
 
         <section id="couponsSection" style="display:none"><div class="admin-grid"><div class="admin-card"><h3 style="margin-top:0">Novo cupom</h3><input id="couponName" placeholder="Código do cupom (ex: MAE10)"><input id="couponDiscount" placeholder="Desconto em % (ex: 10)"><button class="primary mt12" style="width:100%" onclick="saveCoupon()">Salvar cupom</button><p id="couponMsg" class="small mt12"></p></div><div class="admin-card"><h3 style="margin-top:0">Cupons cadastrados</h3><div id="adminCoupons"></div></div></div></section>
 
-        <section id="bannerSection" style="display:none"><div class="admin-grid"><div class="admin-card"><h3 style="margin-top:0">Banner principal</h3><input id="bannerTitleInput" placeholder="Título do banner"><input id="bannerSubtitleInput" placeholder="Subtítulo do banner"><label class="small">Imagem do banner</label><input type="file" id="bannerImageInput" accept="image/*"><button class="primary mt12" style="width:100%" onclick="saveBanner()">Salvar banner</button><p id="bannerMsg" class="small mt12"></p></div><div class="admin-card"><h3 style="margin-top:0">Prévia</h3><div class="preview-banner" id="bannerPreview"><span id="bannerPreviewText">Criando personalizados para momentos únicos</span></div></div></div></section>
+        <section id="bannerSection" style="display:none"><div class="admin-grid"><div class="admin-card"><h3 style="margin-top:0">Banner principal</h3><input id="bannerTitleInput" placeholder="Título do banner"><input id="bannerSubtitleInput" placeholder="Subtítulo do banner"><div class="grid2"><div class="field"><label class="small">Cor de fundo</label><input id="bannerBgColorInput" type="color" value="#830064"></div><div class="field"><label class="small">Cor do título</label><input id="bannerTitleColorInput" type="color" value="#ffffff"></div><div class="field"><label class="small">Cor do subtítulo</label><input id="bannerSubtitleColorInput" type="color" value="#ffffff"></div><div class="field"><label class="small">Tamanho do título</label><input id="bannerTitleSizeInput" type="number" value="26"></div><div class="field"><label class="small">Tamanho do subtítulo</label><input id="bannerSubtitleSizeInput" type="number" value="13"></div><div class="field"><label class="small">Escurecimento da imagem (0 a 0.8)</label><input id="bannerOverlayInput" type="number" step="0.05" min="0" max="0.8" value="0.35"></div></div><label class="small mt12">Imagem do banner</label><input type="file" id="bannerImageInput" accept="image/*"><div class="row mt12 wrap"><button class="primary" onclick="saveBanner()">Salvar banner</button><button class="secondary" onclick="previewBannerFromFields()">Pré-visualizar</button><button class="danger" onclick="removeBannerImage()">Remover imagem</button><button class="danger" onclick="resetBannerSettings()">Resetar banner</button></div><p id="bannerMsg" class="small mt12"></p></div><div class="admin-card"><h3 style="margin-top:0">Prévia</h3><div class="preview-banner" id="bannerPreview"><div class="preview-banner-inner"><h2 id="bannerPreviewTitle">Criando personalizados para momentos únicos</h2><p id="bannerPreviewSubtitle">Soluções criativas para festas, brindes e impressões</p></div></div></div></div></section>
 
         <section id="categoriesSection" style="display:none"><div class="admin-grid"><div class="admin-card"><h3 style="margin-top:0">Nova categoria</h3><input id="newCategoryName" placeholder="Nome da categoria"><button class="primary mt12" style="width:100%" onclick="saveCategory()">Salvar categoria</button><p id="categoryMsg" class="small mt12"></p></div><div class="admin-card"><h3 style="margin-top:0">Categorias cadastradas</h3><div id="adminCategories"></div></div></div></section>
       </main>
@@ -92,8 +94,71 @@
     async function loadAllProductImages(){const {data}=await supabaseClient.from('product_images').select('*').order('sort_order',{ascending:true}); productImages=data||[];}
     function getImagesForProduct(productId, fallbackImage=''){const imgs=productImages.filter(i=>i.product_id===productId).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0)).map(i=>i.image_url); if(fallbackImage && !imgs.length) return [fallbackImage]; if(fallbackImage && imgs[0]!==fallbackImage) return [fallbackImage,...imgs]; return imgs;}
 
-    async function loadSettings(){const {data}=await supabaseClient.from('store_settings').select('*'); settingsData={}; (data||[]).forEach(s=>settingsData[s.key]=s.value); applyBanner()}
-    function applyBanner(){const hero=document.getElementById('heroBanner'); const title=settingsData.banner_title||'Criando personalizados para momentos únicos'; const subtitle=settingsData.banner_subtitle||'Soluções criativas para festas, brindes e impressões'; const image=settingsData.banner_image||''; document.getElementById('heroTitle').textContent=title; document.getElementById('heroSubtitle').textContent=subtitle; hero.style.backgroundImage=image?`url(${image})`:'linear-gradient(90deg, var(--cor), var(--cor2))'; const preview=document.getElementById('bannerPreview'); if(preview){preview.style.backgroundImage=image?`url(${image})`:'linear-gradient(90deg, var(--cor), var(--cor2))'; document.getElementById('bannerPreviewText').textContent=title}}
+    async function loadSettings(){const {data}=await supabaseClient.from('store_settings').select('*'); settingsData={}; (data||[]).forEach(s=>settingsData[s.key]=s.value); applyBanner(); fillBannerFields();}
+    function getBannerSetting(key, fallback){return settingsData[key] ?? fallback}
+    function applyBanner(){
+      const hero=document.getElementById('heroBanner');
+      const title=getBannerSetting('banner_title','Criando personalizados para momentos únicos');
+      const subtitle=getBannerSetting('banner_subtitle','Soluções criativas para festas, brindes e impressões');
+      const image=getBannerSetting('banner_image','');
+      const bgColor=getBannerSetting('banner_bg_color','#830064');
+      const titleColor=getBannerSetting('banner_title_color','#ffffff');
+      const subtitleColor=getBannerSetting('banner_subtitle_color','#ffffff');
+      const titleSize=getBannerSetting('banner_title_size','26');
+      const subtitleSize=getBannerSetting('banner_subtitle_size','13');
+      const overlay=Number(getBannerSetting('banner_overlay','0.35'));
+      document.getElementById('heroTitle').textContent=title;
+      document.getElementById('heroSubtitle').textContent=subtitle;
+      hero.style.backgroundImage=image?`linear-gradient(rgba(0,0,0,${overlay}), rgba(0,0,0,${overlay})), url(${image})`:`linear-gradient(90deg, ${bgColor}, ${bgColor})`;
+      hero.style.backgroundColor=bgColor;
+      document.getElementById('heroTitle').style.color=titleColor;
+      document.getElementById('heroSubtitle').style.color=subtitleColor;
+      document.getElementById('heroTitle').style.fontSize=`${titleSize}px`;
+      document.getElementById('heroSubtitle').style.fontSize=`${subtitleSize}px`;
+      previewBannerFromSettings();
+    }
+    function fillBannerFields(){
+      const set=(id,val)=>{const el=document.getElementById(id); if(el) el.value=val};
+      set('bannerTitleInput',getBannerSetting('banner_title','Criando personalizados para momentos únicos'));
+      set('bannerSubtitleInput',getBannerSetting('banner_subtitle','Soluções criativas para festas, brindes e impressões'));
+      set('bannerBgColorInput',getBannerSetting('banner_bg_color','#830064'));
+      set('bannerTitleColorInput',getBannerSetting('banner_title_color','#ffffff'));
+      set('bannerSubtitleColorInput',getBannerSetting('banner_subtitle_color','#ffffff'));
+      set('bannerTitleSizeInput',getBannerSetting('banner_title_size','26'));
+      set('bannerSubtitleSizeInput',getBannerSetting('banner_subtitle_size','13'));
+      set('bannerOverlayInput',getBannerSetting('banner_overlay','0.35'));
+    }
+    function previewBannerFromSettings(){
+      const image=getBannerSetting('banner_image','');
+      const bgColor=getBannerSetting('banner_bg_color','#830064');
+      const title=getBannerSetting('banner_title','Criando personalizados para momentos únicos');
+      const subtitle=getBannerSetting('banner_subtitle','Soluções criativas para festas, brindes e impressões');
+      const titleColor=getBannerSetting('banner_title_color','#ffffff');
+      const subtitleColor=getBannerSetting('banner_subtitle_color','#ffffff');
+      const titleSize=getBannerSetting('banner_title_size','26');
+      const subtitleSize=getBannerSetting('banner_subtitle_size','13');
+      const overlay=Number(getBannerSetting('banner_overlay','0.35'));
+      const box=document.getElementById('bannerPreview'); if(!box) return;
+      box.style.backgroundImage=image?`linear-gradient(rgba(0,0,0,${overlay}), rgba(0,0,0,${overlay})), url(${image})`:`linear-gradient(90deg, ${bgColor}, ${bgColor})`;
+      box.style.backgroundColor=bgColor;
+      document.getElementById('bannerPreviewTitle').textContent=title;
+      document.getElementById('bannerPreviewSubtitle').textContent=subtitle;
+      document.getElementById('bannerPreviewTitle').style.color=titleColor;
+      document.getElementById('bannerPreviewSubtitle').style.color=subtitleColor;
+      document.getElementById('bannerPreviewTitle').style.fontSize=`${titleSize}px`;
+      document.getElementById('bannerPreviewSubtitle').style.fontSize=`${subtitleSize}px`;
+    }
+    function previewBannerFromFields(){
+      settingsData.banner_title=document.getElementById('bannerTitleInput').value || 'Criando personalizados para momentos únicos';
+      settingsData.banner_subtitle=document.getElementById('bannerSubtitleInput').value || 'Soluções criativas para festas, brindes e impressões';
+      settingsData.banner_bg_color=document.getElementById('bannerBgColorInput').value || '#830064';
+      settingsData.banner_title_color=document.getElementById('bannerTitleColorInput').value || '#ffffff';
+      settingsData.banner_subtitle_color=document.getElementById('bannerSubtitleColorInput').value || '#ffffff';
+      settingsData.banner_title_size=document.getElementById('bannerTitleSizeInput').value || '26';
+      settingsData.banner_subtitle_size=document.getElementById('bannerSubtitleSizeInput').value || '13';
+      settingsData.banner_overlay=document.getElementById('bannerOverlayInput').value || '0.35';
+      previewBannerFromSettings();
+    }
 
     async function loadCategories(){const {data,error}=await supabaseClient.from('categories').select('*').order('name'); const area=document.getElementById('adminCategories'); const msg=document.getElementById('categoryMsg'); if(error){console.log(error); if(area) area.innerHTML='<div class="empty">Erro ao carregar categorias.</div>'; if(msg) msg.textContent='Erro ao carregar categorias. Verifique a tabela e policies.'; return} categories=data||[]; renderCategoryOptions(); renderAdminCategories();}
     function renderCategoryOptions(){const filter=document.getElementById('categoryFilter'); const pcat=document.getElementById('pcategory'); const opts=categories.map(c=>`<option value="${c.name}">${c.name}</option>`).join(''); if(filter) filter.innerHTML=`<option value="">Todas categorias</option>${opts}`; if(pcat) pcat.innerHTML=`<option value="">Selecione a categoria</option>${opts}`}
@@ -158,7 +223,9 @@
     function renderCoupons(){const area=document.getElementById('adminCoupons'); if(!area) return; if(!coupons.length){area.innerHTML='<div class="empty">Nenhum cupom cadastrado.</div>'; return} area.innerHTML=''; coupons.forEach(c=>{area.innerHTML+=`<div class="admin-list-item"><div><strong>${c.code}</strong><br><span class="small">${c.discount_percent}% de desconto</span></div><div><button class="secondary" onclick="deleteCoupon(${c.id})">Excluir</button></div></div>`})}
     async function deleteCoupon(id){const {error}=await supabaseClient.from('coupons').delete().eq('id',id); if(error){console.log(error); alert('Erro ao excluir cupom'); return} loadCoupons()}
 
-    async function saveBanner(){const title=document.getElementById('bannerTitleInput').value.trim(); const subtitle=document.getElementById('bannerSubtitleInput').value.trim(); const file=document.getElementById('bannerImageInput').files[0]; const msg=document.getElementById('bannerMsg'); try{if(title) await upsertSetting('banner_title',title); if(subtitle) await upsertSetting('banner_subtitle',subtitle); if(file){const image=await uploadFileToBucket(file,BUCKET_NAME); await upsertSetting('banner_image',image)} msg.textContent='Banner atualizado com sucesso.'; await loadSettings()}catch(error){console.log(error); msg.textContent='Erro ao salvar banner.'}}
+    async function saveBanner(){const msg=document.getElementById('bannerMsg'); try{const title=document.getElementById('bannerTitleInput').value.trim(); const subtitle=document.getElementById('bannerSubtitleInput').value.trim(); const bgColor=document.getElementById('bannerBgColorInput').value; const titleColor=document.getElementById('bannerTitleColorInput').value; const subtitleColor=document.getElementById('bannerSubtitleColorInput').value; const titleSize=document.getElementById('bannerTitleSizeInput').value||'26'; const subtitleSize=document.getElementById('bannerSubtitleSizeInput').value||'13'; const overlay=document.getElementById('bannerOverlayInput').value||'0.35'; const file=document.getElementById('bannerImageInput').files[0]; await upsertSetting('banner_title',title||'Criando personalizados para momentos únicos'); await upsertSetting('banner_subtitle',subtitle||'Soluções criativas para festas, brindes e impressões'); await upsertSetting('banner_bg_color',bgColor); await upsertSetting('banner_title_color',titleColor); await upsertSetting('banner_subtitle_color',subtitleColor); await upsertSetting('banner_title_size',String(titleSize)); await upsertSetting('banner_subtitle_size',String(subtitleSize)); await upsertSetting('banner_overlay',String(overlay)); if(file){const image=await uploadFileToBucket(file,BUCKET_NAME); await upsertSetting('banner_image',image)} msg.textContent='Banner atualizado com sucesso.'; await loadSettings()}catch(error){console.log(error); msg.textContent='Erro ao salvar banner.'}}
+    async function removeBannerImage(){await upsertSetting('banner_image',''); await loadSettings(); document.getElementById('bannerMsg').textContent='Imagem removida.';}
+    async function resetBannerSettings(){const defaults={banner_title:'Criando personalizados para momentos únicos',banner_subtitle:'Soluções criativas para festas, brindes e impressões',banner_bg_color:'#830064',banner_title_color:'#ffffff',banner_subtitle_color:'#ffffff',banner_title_size:'26',banner_subtitle_size:'13',banner_overlay:'0.35',banner_image:''}; for(const [k,v] of Object.entries(defaults)){await upsertSetting(k,v)} await loadSettings(); document.getElementById('bannerMsg').textContent='Banner resetado com sucesso.';}
     async function upsertSetting(key,value){const {error}=await supabaseClient.from('store_settings').upsert([{key,value}],{onConflict:'key'}); if(error) throw error}
 
     function downloadFile(data,file){const blob=new Blob([data],{type:'text/csv;charset=utf-8;'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=file; a.click()}
