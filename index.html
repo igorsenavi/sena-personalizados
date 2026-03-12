@@ -11,31 +11,25 @@
     *{box-sizing:border-box} body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--txt)}
     .header{position:sticky;top:0;z-index:20;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
     .logo{height:48px}.actions{display:flex;gap:12px}.icon-btn{width:42px;height:42px;border-radius:12px;border:1px solid var(--b);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
-    .hero{margin:18px 22px 0;background:linear-gradient(90deg,var(--cor),var(--cor2));color:#fff;border-radius:26px;padding:20px 24px;text-align:center;position:relative;overflow:hidden;min-height:120px;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center}
-    .hero::after{content:'';position:absolute;inset:0;background:rgba(76,0,58,.35)}
+    .hero{margin:18px 22px 0;background:linear-gradient(90deg,var(--cor),var(--cor2));color:#fff;border-radius:26px;padding:20px 24px;text-align:center;position:relative;overflow:hidden;min-height:120px;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center}.hero::after{content:'';position:absolute;inset:0;background:rgba(76,0,58,.35)}
     .hero h1{margin:0;font-size:26px;position:relative;z-index:1}.hero-sub{position:relative;z-index:1;font-size:13px;opacity:.9;margin-top:8px}
     .topbar{padding:18px 22px 8px;display:grid;grid-template-columns:1fr 260px;gap:12px}.search-wrap,.filter-wrap{background:#fff;border:1px solid var(--b);border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 4px 14px rgba(0,0,0,.04)}
     .search-wrap input,.filter-wrap select,.admin-card input,.admin-card textarea,.admin-card select,.login-box input,.panel input{border:none;outline:none;width:100%;background:transparent;font-size:15px;font-family:inherit}
-    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;padding:18px 22px 30px}
-    .card{background:#fff;border:1px solid var(--b);border-radius:20px;padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.04);display:flex;flex-direction:column;gap:10px}
-    .card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;background:#f0f0f5}.card h4{margin:0;font-size:17px}.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
+    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;padding:18px 22px 30px}.card{background:#fff;border:1px solid var(--b);border-radius:20px;padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.04);display:flex;flex-direction:column;gap:10px}.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;background:#f0f0f5}.card h4{margin:0;font-size:17px}.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
     .small{font-size:13px;color:var(--muted)} .price{font-size:20px;font-weight:700;color:var(--cor)} .row{display:flex;gap:10px;align-items:center}.between{justify-content:space-between}.wrap{flex-wrap:wrap}
     .qty-box,.cart-qty,.field{display:flex;align-items:center;gap:8px;border:1px solid var(--b);border-radius:12px;padding:10px 12px;background:#fff}.qty-box{padding:6px 10px}.qty-box button,.cart-qty button{width:28px;height:28px;border:none;border-radius:8px;background:#f3f4f8;cursor:pointer}
     .primary,.secondary,.ghost{border-radius:12px;padding:11px 14px;cursor:pointer;font-weight:600;font-family:inherit}.primary{border:none;background:var(--cor);color:#fff}.secondary{border:1px solid var(--cor);background:#fff;color:var(--cor)}.ghost{border:1px solid var(--b);background:#fff;color:#111}
-    .cart{position:fixed;right:0;top:0;width:380px;max-width:100%;height:100%;background:#fff;box-shadow:-12px 0 30px rgba(0,0,0,.12);padding:18px;display:none;overflow:auto;z-index:30}
-    .cart-head,.admin-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.cart-item{border:1px solid var(--b);border-radius:16px;padding:12px;margin-bottom:12px;background:#fbfbfe}
-    .cart-item textarea,.admin textarea,.admin input,.admin select,.status-modal input,.login-box input,.checkout-modal input{width:100%;border:1px solid var(--b);border-radius:10px;padding:10px 12px;font-family:inherit}
-    .cart-item textarea{min-height:64px;margin-top:8px}
-    .login,.admin,.status-modal,.checkout-modal{position:fixed;inset:0;background:rgba(16,18,27,.55);display:none;align-items:center;justify-content:center;z-index:40;padding:16px}
-    .panel,.login-box{background:#fff;border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,.16)} .panel{width:min(1240px,100%);max-height:92vh;overflow:auto;padding:22px}.login-box{width:min(420px,100%);padding:24px}
+    .cart{position:fixed;right:0;top:0;width:380px;max-width:100%;height:100%;background:#fff;box-shadow:-12px 0 30px rgba(0,0,0,.12);padding:18px;display:none;overflow:auto;z-index:30}.cart-head,.admin-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.cart-item{border:1px solid var(--b);border-radius:16px;padding:12px;margin-bottom:12px;background:#fbfbfe}
+    .cart-item textarea,.admin textarea,.admin input,.admin select,.status-modal input,.login-box input,.checkout-modal input{width:100%;border:1px solid var(--b);border-radius:10px;padding:10px 12px;font-family:inherit}.cart-item textarea{min-height:64px;margin-top:8px}
+    .login,.admin,.status-modal,.checkout-modal,.product-modal{position:fixed;inset:0;background:rgba(16,18,27,.55);display:none;align-items:center;justify-content:center;z-index:40;padding:16px}
+    .panel,.login-box,.product-box{background:#fff;border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,.16)} .panel{width:min(1240px,100%);max-height:92vh;overflow:auto;padding:22px}.login-box{width:min(420px,100%);padding:24px}.product-box{width:min(980px,100%);max-height:92vh;overflow:auto;padding:20px}
+    .product-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}.main-photo{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;background:#f0f0f5}.thumbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.thumbs img{width:84px;height:84px;object-fit:cover;border-radius:12px;border:2px solid transparent;cursor:pointer}.thumbs img.active{border-color:var(--cor)}
     .admin-layout{display:grid;grid-template-columns:260px 1fr;gap:22px}.admin-sidebar{background:linear-gradient(180deg,#5b0044,#830064);color:#fff;border-radius:24px;padding:18px;box-shadow:var(--shadow)}.admin-sidebar h3{margin:0 0 14px}.admin-nav{display:grid;gap:8px}.admin-nav button{border:none;background:rgba(255,255,255,.12);color:#fff;padding:12px 14px;border-radius:14px;text-align:left;cursor:pointer}.admin-nav button.active{background:#fff;color:var(--cor)}
     .admin-main{display:grid;gap:18px}.admin-topcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.metric{background:#fff;border:1px solid var(--b);border-radius:20px;padding:16px;box-shadow:0 8px 20px rgba(0,0,0,.04)}.metric .n{font-size:28px;font-weight:700;color:var(--cor)}
-    .admin-card{background:#fff;border:1px solid var(--b);border-radius:22px;padding:18px;box-shadow:0 8px 22px rgba(0,0,0,.04)}
-    .admin-grid{display:grid;grid-template-columns:380px 1fr;gap:18px}.admin-list-item{display:flex;justify-content:space-between;gap:12px;align-items:start;padding:12px;border-bottom:1px solid var(--b)} .admin-list-item:last-child{border-bottom:none}
+    .admin-card{background:#fff;border:1px solid var(--b);border-radius:22px;padding:18px;box-shadow:0 8px 22px rgba(0,0,0,.04)}.admin-grid{display:grid;grid-template-columns:380px 1fr;gap:18px}.admin-list-item{display:flex;justify-content:space-between;gap:12px;align-items:start;padding:12px;border-bottom:1px solid var(--b)} .admin-list-item:last-child{border-bottom:none}
     .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;background:#f3e8ff;color:#6b21a8}.preview-banner{width:100%;min-height:120px;border-radius:18px;background:linear-gradient(90deg,var(--cor),var(--cor2));display:flex;align-items:center;justify-content:center;color:#fff;background-size:cover;background-position:center;position:relative;overflow:hidden}.preview-banner::after{content:'';position:absolute;inset:0;background:rgba(76,0,58,.32)}.preview-banner span{position:relative;z-index:1;font-weight:600}
-    .footer{background:#111;color:#fff;text-align:center;padding:22px;margin-top:20px}.footer a{display:inline-flex;margin:0 8px}.footer img{width:28px;height:28px}
-    .empty{padding:28px;text-align:center;color:var(--muted)} .success{color:#0f8a4b}.error{color:#b42318}.mt12{margin-top:12px}.mb8{margin-bottom:8px}
-    @media(max-width:1020px){.admin-layout{grid-template-columns:1fr}.admin-topcards{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr}.topbar{grid-template-columns:1fr}}
+    .footer{background:#111;color:#fff;text-align:center;padding:22px;margin-top:20px}.footer a{display:inline-flex;margin:0 8px}.footer img{width:28px;height:28px}.empty{padding:28px;text-align:center;color:var(--muted)} .success{color:#0f8a4b}.error{color:#b42318}.mt12{margin-top:12px}.mb8{margin-bottom:8px}
+    @media(max-width:1020px){.admin-layout,.product-layout{grid-template-columns:1fr}.admin-topcards{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr}.topbar{grid-template-columns:1fr}}
     @media(max-width:860px){.header{padding:12px 14px}.hero h1{font-size:22px}.hero,.topbar,.products{margin-left:14px;margin-right:14px}.products{padding:18px 14px 30px}}
   </style>
 </head>
@@ -59,6 +53,8 @@
   <section id="productSections"></section>
   <div class="cart" id="cart"></div>
 
+  <div class="product-modal" id="productModal"><div class="product-box"><div class="cart-head"><h3 style="margin:0">Detalhes do produto</h3><button class="secondary" onclick="closeProductModal()">Fechar</button></div><div class="product-layout"><div><img id="productMainPhoto" class="main-photo" src="" alt=""><div class="thumbs" id="productThumbs"></div></div><div><div class="badge" id="productModalCategory"></div><h2 id="productModalName" style="margin:12px 0 8px"></h2><p id="productModalDescription" class="small"></p><div class="price mt12" id="productModalPrice"></div><div class="row mt12"><div class="qty-box"><button onclick="changeModalQty(-1)">-</button><span id="productModalQty">1</span><button onclick="changeModalQty(1)">+</button></div><button class="primary" onclick="addModalProductToCart()">Adicionar ao carrinho</button></div></div></div></div></div>
+
   <div class="checkout-modal" id="checkoutModal"><div class="login-box"><h3 style="margin-top:0">Finalizar pedido</h3><input id="customerName" placeholder="Nome do cliente"><input id="customerPhone" placeholder="Telefone / WhatsApp"><input id="couponCode" placeholder="Cupom de desconto (opcional)"><button class="primary mt12" style="width:100%" onclick="confirmCheckout()">Continuar para o WhatsApp</button><button class="secondary mt12" style="width:100%" onclick="closeCheckout()">Cancelar</button><p id="checkoutMsg" class="small mt12"></p></div></div>
   <div class="status-modal" id="statusModal"><div class="login-box"><div class="cart-head"><h3 style="margin:0">Status do pedido</h3><button class="secondary" onclick="closeStatus()">Fechar</button></div><input id="statusCode" placeholder="Digite o código do pedido"><button class="primary mt12" style="width:100%" onclick="checkStatus()">Pesquisar</button><p id="statusResult" class="small mt12"></p></div></div>
   <div class="login" id="loginModal"><div class="login-box"><h3 style="margin-top:0">Login Admin</h3><input id="email" placeholder="Email"><input id="password" type="password" placeholder="Senha"><div class="row mt12"><button class="primary" onclick="loginAdmin()">Entrar</button><button class="secondary" onclick="closeAdminLogin()">Cancelar</button></div><p id="loginMsg" class="small mt12"></p></div></div>
@@ -66,114 +62,19 @@
   <div class="admin" id="adminModal"><div class="panel">
     <div class="admin-head"><h2 style="margin:0">Painel Administrativo</h2><div class="row"><button class="secondary" onclick="closeAdmin()">Voltar</button><button class="secondary" onclick="logoutAdmin()">Sair</button></div></div>
     <div class="admin-layout">
-      <aside class="admin-sidebar">
-        <h3>Gestão da Loja</h3>
-        <div class="admin-nav">
-          <button class="active" onclick="showAdminSection('dashboardSection',this)">Dashboard</button>
-          <button onclick="showAdminSection('productsSection',this)">Produtos</button>
-          <button onclick="showAdminSection('ordersSection',this)">Pedidos</button>
-          <button onclick="showAdminSection('couponsSection',this)">Cupons</button>
-          <button onclick="showAdminSection('bannerSection',this)">Banner principal</button>
-          <button onclick="showAdminSection('categoriesSection',this)">Categorias</button>
-        </div>
-      </aside>
+      <aside class="admin-sidebar"><h3>Gestão da Loja</h3><div class="admin-nav"><button class="active" onclick="showAdminSection('dashboardSection',this)">Dashboard</button><button onclick="showAdminSection('productsSection',this)">Produtos</button><button onclick="showAdminSection('ordersSection',this)">Pedidos</button><button onclick="showAdminSection('couponsSection',this)">Cupons</button><button onclick="showAdminSection('bannerSection',this)">Banner principal</button><button onclick="showAdminSection('categoriesSection',this)">Categorias</button></div></aside>
       <main class="admin-main">
-        <section id="dashboardSection">
-          <div class="admin-topcards">
-            <div class="metric"><div class="small">Produtos cadastrados</div><div class="n" id="metricProducts">0</div></div>
-            <div class="metric"><div class="small">Pedidos recebidos</div><div class="n" id="metricOrders">0</div></div>
-            <div class="metric"><div class="small">Cupons ativos</div><div class="n" id="metricCoupons">0</div></div>
-          </div>
-          <div class="row mt12"><button class="primary" onclick="showAdminSection('productsSection', document.querySelectorAll('.admin-nav button')[1])">Cadastrar produto</button></div>
-          <div class="admin-grid mt12">
-            <div class="admin-card">
-              <h3 style="margin-top:0">Resumo financeiro</h3>
-              <div class="row between"><span class="small">Faturamento total</span><strong id="metricRevenue">R$ 0,00</strong></div>
-              <div class="row between mt12"><span class="small">Custo total</span><strong id="metricCost">R$ 0,00</strong></div>
-              <div class="row between mt12"><span class="small">Lucro total</span><strong id="metricProfit">R$ 0,00</strong></div>
-              <div class="row between mt12"><span class="small">Margem de lucro</span><strong id="metricMargin">0%</strong></div>
-              <div class="row between mt12"><span class="small">Faturamento do mês</span><strong id="metricMonthRevenue">R$ 0,00</strong></div>
-              <div class="row between mt12"><span class="small">Ticket médio</span><strong id="metricAvgTicket">R$ 0,00</strong></div>
-            </div>
-            <div class="admin-card">
-              <h3 style="margin-top:0">Pedidos por status</h3>
-              <div id="statusSummary"></div>
-            </div>
-          </div>
-          <div class="admin-grid mt12">
-            <div class="admin-card">
-              <h3 style="margin-top:0">Produtos mais vendidos</h3>
-              <div id="bestSellersAdmin"></div>
-            </div>
-            <div class="admin-card">
-              <h3 style="margin-top:0">Filtros rápidos</h3>
-              <div class="field mb8"><input id="reportClientFilter" placeholder="Filtrar por cliente"></div>
-              <div class="field mb8"><select id="reportStatusFilter"><option value="">Todos os status</option></select></div>
-              <div class="field mb8"><input id="reportDateFilter" type="month"></div>
-              <button class="primary" style="width:100%" onclick="refreshDashboard()">Atualizar dashboard</button>
-            </div>
-          </div>
-          <div class="admin-grid mt12">
-            <div class="admin-card">
-              <h3 style="margin-top:0">Produto mais lucrativo</h3>
-              <div id="mostProfitableProduct"></div>
-            </div>
-            <div class="admin-card">
-              <h3 style="margin-top:0">Resumo mensal de lucro</h3>
-              <div id="monthlyProfitSummary"></div>
-            </div>
-          </div>
-          <div class="admin-card mt12">
-            <h3 style="margin-top:0">Resultados por categoria de pedido</h3>
-            <p class="small">Esses valores seguem os filtros de cliente e mês do dashboard.</p>
-            <div id="categoryDashboardSummary"></div>
-          </div>
-        </section>
+        <section id="dashboardSection"><div class="admin-topcards"><div class="metric"><div class="small">Produtos cadastrados</div><div class="n" id="metricProducts">0</div></div><div class="metric"><div class="small">Pedidos recebidos</div><div class="n" id="metricOrders">0</div></div><div class="metric"><div class="small">Cupons ativos</div><div class="n" id="metricCoupons">0</div></div></div><div class="row mt12"><button class="primary" onclick="showAdminSection('productsSection', document.querySelectorAll('.admin-nav button')[1])">Cadastrar produto</button></div><div class="admin-grid mt12"><div class="admin-card"><h3 style="margin-top:0">Resumo financeiro</h3><div class="row between"><span class="small">Faturamento total</span><strong id="metricRevenue">R$ 0,00</strong></div><div class="row between mt12"><span class="small">Custo total</span><strong id="metricCost">R$ 0,00</strong></div><div class="row between mt12"><span class="small">Lucro total</span><strong id="metricProfit">R$ 0,00</strong></div><div class="row between mt12"><span class="small">Margem de lucro</span><strong id="metricMargin">0%</strong></div><div class="row between mt12"><span class="small">Faturamento do mês</span><strong id="metricMonthRevenue">R$ 0,00</strong></div><div class="row between mt12"><span class="small">Ticket médio</span><strong id="metricAvgTicket">R$ 0,00</strong></div></div><div class="admin-card"><h3 style="margin-top:0">Pedidos por status</h3><div id="statusSummary"></div></div></div><div class="admin-grid mt12"><div class="admin-card"><h3 style="margin-top:0">Produtos mais vendidos</h3><div id="bestSellersAdmin"></div></div><div class="admin-card"><h3 style="margin-top:0">Filtros rápidos</h3><div class="field mb8"><input id="reportClientFilter" placeholder="Filtrar por cliente"></div><div class="field mb8"><select id="reportStatusFilter"><option value="">Todos os status</option></select></div><div class="field mb8"><input id="reportDateFilter" type="month"></div><button class="primary" style="width:100%" onclick="refreshDashboard()">Atualizar dashboard</button></div></div><div class="admin-grid mt12"><div class="admin-card"><h3 style="margin-top:0">Produto mais lucrativo</h3><div id="mostProfitableProduct"></div></div><div class="admin-card"><h3 style="margin-top:0">Resumo mensal de lucro</h3><div id="monthlyProfitSummary"></div></div></div><div class="admin-card mt12"><h3 style="margin-top:0">Resultados por categoria de pedido</h3><p class="small">Esses valores seguem os filtros de cliente e mês do dashboard.</p><div id="categoryDashboardSummary"></div></div></section>
 
-        <section id="productsSection" style="display:none">
-          <div class="admin-grid">
-            <div class="admin-card">
-              <h3 style="margin-top:0">Novo produto</h3>
-              <input id="pname" placeholder="Nome do produto">
-              <textarea id="pdescription" placeholder="Descrição"></textarea>
-              <input id="pprice" placeholder="Preço">
-              <input id="pcost" placeholder="Custo do produto">
-              <select id="pcategory"></select>
-              <label class="small">Imagem do produto</label>
-              <input type="file" id="pimage" accept="image/*">
-              <button class="primary mt12" style="width:100%" onclick="addOrUpdateProduct()">Salvar</button>
-              <input type="hidden" id="editingId">
-              <p id="adminMsg" class="small mt12"></p>
-              <hr style="border:none;border-top:1px solid var(--b);margin:18px 0">
-              <button class="secondary" style="width:100%;margin-bottom:8px" onclick="exportProducts()">Exportar produtos</button>
-              <button class="secondary" style="width:100%" onclick="exportSales()">Exportar vendas</button>
-            </div>
-            <div class="admin-card"><h3 style="margin-top:0">Produtos cadastrados</h3><div id="adminProducts"></div></div>
-          </div>
-        </section>
+        <section id="productsSection" style="display:none"><div class="admin-grid"><div class="admin-card"><h3 style="margin-top:0">Novo produto</h3><input id="pname" placeholder="Nome do produto"><textarea id="pdescription" placeholder="Descrição"></textarea><input id="pprice" placeholder="Preço"><input id="pcost" placeholder="Custo do produto"><select id="pcategory"></select><label class="small">Imagem principal</label><input type="file" id="pimage" accept="image/*"><label class="small mt12">Galeria de fotos</label><input type="file" id="pgallery" accept="image/*" multiple><button class="primary mt12" style="width:100%" onclick="addOrUpdateProduct()">Salvar</button><input type="hidden" id="editingId"><p id="adminMsg" class="small mt12"></p><hr style="border:none;border-top:1px solid var(--b);margin:18px 0"><button class="secondary" style="width:100%;margin-bottom:8px" onclick="exportProducts()">Exportar produtos</button><button class="secondary" style="width:100%" onclick="exportSales()">Exportar vendas</button></div><div class="admin-card"><h3 style="margin-top:0">Produtos cadastrados</h3><div id="adminProducts"></div></div></div></section>
 
         <section id="ordersSection" style="display:none"><div class="admin-card"><div class="row between wrap"><h3 style="margin-top:0">Pedidos</h3><div class="row wrap"><div class="field"><input id="ordersClientFilter" placeholder="Buscar cliente"></div><div class="field"><select id="ordersStatusFilter"><option value="">Todos os status</option></select></div><div class="field"><input id="ordersDateFilter" type="month"></div><button class="primary" onclick="filterOrdersAdmin()">Atualizar pedidos</button></div></div><div id="adminOrders"></div></div></section>
 
-        <section id="couponsSection" style="display:none">
-          <div class="admin-grid">
-            <div class="admin-card"><h3 style="margin-top:0">Novo cupom</h3><input id="couponName" placeholder="Código do cupom (ex: MAE10)"><input id="couponDiscount" placeholder="Desconto em % (ex: 10)"><button class="primary mt12" style="width:100%" onclick="saveCoupon()">Salvar cupom</button><p id="couponMsg" class="small mt12"></p></div>
-            <div class="admin-card"><h3 style="margin-top:0">Cupons cadastrados</h3><div id="adminCoupons"></div></div>
-          </div>
-        </section>
+        <section id="couponsSection" style="display:none"><div class="admin-grid"><div class="admin-card"><h3 style="margin-top:0">Novo cupom</h3><input id="couponName" placeholder="Código do cupom (ex: MAE10)"><input id="couponDiscount" placeholder="Desconto em % (ex: 10)"><button class="primary mt12" style="width:100%" onclick="saveCoupon()">Salvar cupom</button><p id="couponMsg" class="small mt12"></p></div><div class="admin-card"><h3 style="margin-top:0">Cupons cadastrados</h3><div id="adminCoupons"></div></div></div></section>
 
-        <section id="bannerSection" style="display:none">
-          <div class="admin-grid">
-            <div class="admin-card"><h3 style="margin-top:0">Banner principal</h3><input id="bannerTitleInput" placeholder="Título do banner"><input id="bannerSubtitleInput" placeholder="Subtítulo do banner"><label class="small">Imagem do banner</label><input type="file" id="bannerImageInput" accept="image/*"><button class="primary mt12" style="width:100%" onclick="saveBanner()">Salvar banner</button><p id="bannerMsg" class="small mt12"></p></div>
-            <div class="admin-card"><h3 style="margin-top:0">Prévia</h3><div class="preview-banner" id="bannerPreview"><span id="bannerPreviewText">Criando personalizados para momentos únicos</span></div></div>
-          </div>
-        </section>
+        <section id="bannerSection" style="display:none"><div class="admin-grid"><div class="admin-card"><h3 style="margin-top:0">Banner principal</h3><input id="bannerTitleInput" placeholder="Título do banner"><input id="bannerSubtitleInput" placeholder="Subtítulo do banner"><label class="small">Imagem do banner</label><input type="file" id="bannerImageInput" accept="image/*"><button class="primary mt12" style="width:100%" onclick="saveBanner()">Salvar banner</button><p id="bannerMsg" class="small mt12"></p></div><div class="admin-card"><h3 style="margin-top:0">Prévia</h3><div class="preview-banner" id="bannerPreview"><span id="bannerPreviewText">Criando personalizados para momentos únicos</span></div></div></div></section>
 
-        <section id="categoriesSection" style="display:none">
-          <div class="admin-grid">
-            <div class="admin-card"><h3 style="margin-top:0">Nova categoria</h3><input id="newCategoryName" placeholder="Nome da categoria"><button class="primary mt12" style="width:100%" onclick="saveCategory()">Salvar categoria</button><p id="categoryMsg" class="small mt12"></p></div>
-            <div class="admin-card"><h3 style="margin-top:0">Categorias cadastradas</h3><div id="adminCategories"></div></div>
-          </div>
-        </section>
+        <section id="categoriesSection" style="display:none"><div class="admin-grid"><div class="admin-card"><h3 style="margin-top:0">Nova categoria</h3><input id="newCategoryName" placeholder="Nome da categoria"><button class="primary mt12" style="width:100%" onclick="saveCategory()">Salvar categoria</button><p id="categoryMsg" class="small mt12"></p></div><div class="admin-card"><h3 style="margin-top:0">Categorias cadastradas</h3><div id="adminCategories"></div></div></div></section>
       </main>
     </div>
   </div></div>
@@ -186,7 +87,10 @@
     const BUCKET_NAME = "produtos";
     const ORDER_STATUSES = ['Novo','Enviado','Em produção','Pendente pagamento','Concluído','Excluído'];
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    let products=[], cart=[], coupons=[], categories=[], selectedCategory='', pendingTotal=0, settingsData={}, ordersCache=[];
+    let products=[], productImages=[], cart=[], coupons=[], categories=[], selectedCategory='', pendingTotal=0, settingsData={}, ordersCache=[], currentModalProduct=null;
+
+    async function loadAllProductImages(){const {data}=await supabaseClient.from('product_images').select('*').order('sort_order',{ascending:true}); productImages=data||[];}
+    function getImagesForProduct(productId, fallbackImage=''){const imgs=productImages.filter(i=>i.product_id===productId).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0)).map(i=>i.image_url); if(fallbackImage && !imgs.length) return [fallbackImage]; if(fallbackImage && imgs[0]!==fallbackImage) return [fallbackImage,...imgs]; return imgs;}
 
     async function loadSettings(){const {data}=await supabaseClient.from('store_settings').select('*'); settingsData={}; (data||[]).forEach(s=>settingsData[s.key]=s.value); applyBanner()}
     function applyBanner(){const hero=document.getElementById('heroBanner'); const title=settingsData.banner_title||'Criando personalizados para momentos únicos'; const subtitle=settingsData.banner_subtitle||'Soluções criativas para festas, brindes e impressões'; const image=settingsData.banner_image||''; document.getElementById('heroTitle').textContent=title; document.getElementById('heroSubtitle').textContent=subtitle; hero.style.backgroundImage=image?`url(${image})`:'linear-gradient(90deg, var(--cor), var(--cor2))'; const preview=document.getElementById('bannerPreview'); if(preview){preview.style.backgroundImage=image?`url(${image})`:'linear-gradient(90deg, var(--cor), var(--cor2))'; document.getElementById('bannerPreviewText').textContent=title}}
@@ -197,149 +101,29 @@
     async function saveCategory(){const name=document.getElementById('newCategoryName').value.trim(); const msg=document.getElementById('categoryMsg'); if(!name){msg.textContent='Informe o nome da categoria.'; return} const {error}=await supabaseClient.from('categories').insert([{name}]); if(error){console.log(error); msg.textContent='Erro ao salvar categoria. Verifique se a tabela categories e as policies foram criadas.'; return} msg.textContent='Categoria salva com sucesso.'; document.getElementById('newCategoryName').value=''; loadCategories()}
     async function deleteCategory(id){const {error}=await supabaseClient.from('categories').delete().eq('id',id); if(error){console.log(error); alert('Erro ao excluir categoria'); return} loadCategories()}
 
-    async function loadProducts(){const {data,error}=await supabaseClient.from('products').select('*').order('id',{ascending:false}); if(error){console.log(error);document.getElementById('productList').innerHTML='<div class="empty">Erro ao carregar produtos.</div>';return} products=data||[]; renderProducts(applyFilters()); renderAdminProducts(); updateMetrics(); renderDashboard()}
+    async function loadProducts(){await loadAllProductImages(); const {data,error}=await supabaseClient.from('products').select('*').order('id',{ascending:false}); if(error){console.log(error);document.getElementById('productSections').innerHTML='<div class="empty">Erro ao carregar produtos.</div>';return} products=data||[]; renderProducts(applyFilters()); renderAdminProducts(); updateMetrics(); renderDashboard()}
     async function loadCoupons(){const {data}=await supabaseClient.from('coupons').select('*').order('id',{ascending:false}); coupons=data||[]; renderCoupons(); updateMetrics()}
     async function loadOrders(){const {data}=await supabaseClient.from('orders').select('*').order('id',{ascending:false}); ordersCache=data||[]; renderOrders(ordersCache); updateMetrics(); renderDashboard(); renderOrderFilterOptions();}
     function updateMetrics(){document.getElementById('metricProducts').textContent=products.length||0; document.getElementById('metricCoupons').textContent=coupons.length||0; document.getElementById('metricOrders').textContent=ordersCache.length||0}
 
-    function getFilteredOrders(){
-      const client=(document.getElementById('reportClientFilter')?.value||'').toLowerCase().trim();
-      const status=(document.getElementById('reportStatusFilter')?.value||'').trim();
-      const month=(document.getElementById('reportDateFilter')?.value||'').trim();
-      let list=[...ordersCache].filter(o=>(o.status||'')!=='Excluído');
-      if(client) list=list.filter(o=>`${o.customer_name||''} ${o.customer_phone||''}`.toLowerCase().includes(client));
-      if(status) list=list.filter(o=>(o.status||'')===status);
-      if(month) list=list.filter(o=>(o.created_at||'').slice(0,7)===month);
-      return list;
-    }
-
-    function parseOrderItems(productText){
-      if(!productText) return [];
-      return productText.split(' | ').map(part=>{
-        const trimmed=part.trim();
-        const match=trimmed.match(/^(.*?)\s+x(\d+)/i);
-        if(match) return { name: match[1].trim(), qty: parseInt(match[2],10)||1 };
-        return { name: trimmed, qty: 1 };
-      }).filter(i=>i.name);
-    }
-
-    function renderDashboard(){
-      const filtered=getFilteredOrders();
-      const revenue=filtered.reduce((s,o)=>s+Number(o.total||0),0);
-      const now=new Date();
-      const monthRevenue=filtered.filter(o=>{const d=new Date(o.created_at||Date.now()); return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();}).reduce((s,o)=>s+Number(o.total||0),0);
-      const avg=filtered.length?revenue/filtered.length:0;
-      const salesMap={};
-      const profitMap={};
-      let costTotal=0;
-
-      filtered.forEach(o=>{
-        const items=parseOrderItems(o.product||'');
-        items.forEach(item=>{
-          salesMap[item.name]=(salesMap[item.name]||0)+item.qty;
-          const prod=products.find(p=>p.name===item.name);
-          const itemCost=Number(prod?.cost||0)*item.qty;
-          const itemRevenue=Number(prod?.price||0)*item.qty;
-          costTotal += itemCost;
-          profitMap[item.name]=(profitMap[item.name]||0)+(itemRevenue-itemCost);
-        });
-      });
-
-      const profit=revenue-costTotal;
-      const margin=revenue>0?(profit/revenue)*100:0;
-      document.getElementById('metricRevenue').textContent=`R$ ${revenue.toFixed(2).replace('.',',')}`;
-      document.getElementById('metricCost').textContent=`R$ ${costTotal.toFixed(2).replace('.',',')}`;
-      document.getElementById('metricProfit').textContent=`R$ ${profit.toFixed(2).replace('.',',')}`;
-      document.getElementById('metricMargin').textContent=`${margin.toFixed(1).replace('.',',')}%`;
-      document.getElementById('metricMonthRevenue').textContent=`R$ ${monthRevenue.toFixed(2).replace('.',',')}`;
-      document.getElementById('metricAvgTicket').textContent=`R$ ${avg.toFixed(2).replace('.',',')}`;
-
-      const counts={}; ORDER_STATUSES.forEach(s=>counts[s]=0); ordersCache.forEach(o=>counts[o.status]=(counts[o.status]||0)+1);
-      const statusArea=document.getElementById('statusSummary'); if(statusArea) statusArea.innerHTML=ORDER_STATUSES.map(s=>`<div class="row between mt12"><span class="small">${s}</span><strong>${counts[s]||0}</strong></div>`).join('');
-
-      const best=Object.entries(salesMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
-      const bestArea=document.getElementById('bestSellersAdmin'); if(bestArea) bestArea.innerHTML=best.length?best.map(([name,q])=>`<div class="row between mt12"><span class="small">${name}</span><strong>${q}</strong></div>`).join(''):'<div class="empty">Sem vendas ainda.</div>';
-
-      const profitableEntries=Object.entries(profitMap).sort((a,b)=>b[1]-a[1]);
-      const profitableArea=document.getElementById('mostProfitableProduct'); if(profitableArea) profitableArea.innerHTML=profitableEntries.length?`<div class="row between"><span class="small">${profitableEntries[0][0]}</span><strong>R$ ${profitableEntries[0][1].toFixed(2).replace('.',',')}</strong></div>`:'<div class="empty">Sem dados suficientes.</div>';
-
-      const monthly={};
-      filtered.forEach(o=>{
-        const key=(o.created_at||'').slice(0,7)||'Sem data';
-        if(!monthly[key]) monthly[key]={rev:0,cost:0};
-        monthly[key].rev += Number(o.total||0);
-        parseOrderItems(o.product||'').forEach(item=>{
-          const prod=products.find(p=>p.name===item.name);
-          monthly[key].cost += Number(prod?.cost||0)*item.qty;
-        });
-      });
-      const monthlyArea=document.getElementById('monthlyProfitSummary');
-      if(monthlyArea){
-        const entries=Object.entries(monthly).sort((a,b)=>a[0].localeCompare(b[0])).slice(-6);
-        monthlyArea.innerHTML=entries.length?entries.map(([m,v])=>`<div class="row between mt12"><span class="small">${m}</span><strong>R$ ${(v.rev-v.cost).toFixed(2).replace('.',',')}</strong></div>`).join(''):'<div class="empty">Sem dados mensais.</div>';
-      }
-
-      const catMap={};
-      filtered.forEach(o=>{
-        const items=parseOrderItems(o.product||'');
-        items.forEach(item=>{
-          const prod=products.find(p=>p.name===item.name);
-          const cat=prod?.category || 'Sem categoria';
-          if(!catMap[cat]) catMap[cat]={qty:0,revenue:0,cost:0};
-          catMap[cat].qty += item.qty;
-          catMap[cat].revenue += Number(prod?.price||0)*item.qty;
-          catMap[cat].cost += Number(prod?.cost||0)*item.qty;
-        });
-      });
-      const catArea=document.getElementById('categoryDashboardSummary');
-      if(catArea){
-        const catEntries=Object.entries(catMap).sort((a,b)=>b[1].revenue-a[1].revenue);
-        catArea.innerHTML=catEntries.length?catEntries.map(([cat,v])=>`<div class="admin-list-item"><div><strong>${cat}</strong><br><span class="small">Itens: ${v.qty}</span></div><div><div class="small">Venda: R$ ${v.revenue.toFixed(2).replace('.',',')}</div><div class="small">Custo: R$ ${v.cost.toFixed(2).replace('.',',')}</div><div><strong>Lucro: R$ ${(v.revenue-v.cost).toFixed(2).replace('.',',')}</strong></div></div></div>`).join(''):'<div class="empty">Sem dados por categoria.</div>';
-      }
-    }
-
-    function refreshDashboard(){ renderDashboard(); }
-
-    function renderOrderFilterOptions(){
-      const options=`<option value="">Todos os status</option>${ORDER_STATUSES.map(s=>`<option value="${s}">${s}</option>`).join('')}`;
-      ['ordersStatusFilter','reportStatusFilter'].forEach(id=>{const el=document.getElementById(id); if(el) el.innerHTML=options;});
-    }
-
-    function filterOrdersAdmin(){
-      const client=(document.getElementById('ordersClientFilter')?.value||'').toLowerCase().trim();
-      const status=(document.getElementById('ordersStatusFilter')?.value||'').trim();
-      const month=(document.getElementById('ordersDateFilter')?.value||'').trim();
-      let list=[...ordersCache];
-      if(client) list=list.filter(o=>`${o.customer_name||''} ${o.customer_phone||''}`.toLowerCase().includes(client));
-      if(status) list=list.filter(o=>(o.status||'')===status);
-      if(month) list=list.filter(o=>(o.created_at||'').slice(0,7)===month);
-      renderOrders(list);
-    }
+    function getFilteredOrders(){const client=(document.getElementById('reportClientFilter')?.value||'').toLowerCase().trim(); const status=(document.getElementById('reportStatusFilter')?.value||'').trim(); const month=(document.getElementById('reportDateFilter')?.value||'').trim(); let list=[...ordersCache].filter(o=>(o.status||'')!=='Excluído'); if(client) list=list.filter(o=>`${o.customer_name||''} ${o.customer_phone||''}`.toLowerCase().includes(client)); if(status) list=list.filter(o=>(o.status||'')===status); if(month) list=list.filter(o=>(o.created_at||'').slice(0,7)===month); return list}
+    function parseOrderItems(productText){if(!productText) return []; return productText.split(' | ').map(part=>{const trimmed=part.trim(); const match=trimmed.match(/^(.*?)\s+x(\d+)/i); if(match) return { name: match[1].trim(), qty: parseInt(match[2],10)||1 }; return { name: trimmed, qty: 1 };}).filter(i=>i.name)}
+    function renderDashboard(){const filtered=getFilteredOrders(); const revenue=filtered.reduce((s,o)=>s+Number(o.total||0),0); const now=new Date(); const monthRevenue=filtered.filter(o=>{const d=new Date(o.created_at||Date.now()); return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();}).reduce((s,o)=>s+Number(o.total||0),0); const avg=filtered.length?revenue/filtered.length:0; const salesMap={}, profitMap={}; let costTotal=0; filtered.forEach(o=>{const items=parseOrderItems(o.product||''); items.forEach(item=>{salesMap[item.name]=(salesMap[item.name]||0)+item.qty; const prod=products.find(p=>p.name===item.name); const itemCost=Number(prod?.cost||0)*item.qty; const itemRevenue=Number(prod?.price||0)*item.qty; costTotal += itemCost; profitMap[item.name]=(profitMap[item.name]||0)+(itemRevenue-itemCost);});}); const profit=revenue-costTotal; const margin=revenue>0?(profit/revenue)*100:0; document.getElementById('metricRevenue').textContent=`R$ ${revenue.toFixed(2).replace('.',',')}`; document.getElementById('metricCost').textContent=`R$ ${costTotal.toFixed(2).replace('.',',')}`; document.getElementById('metricProfit').textContent=`R$ ${profit.toFixed(2).replace('.',',')}`; document.getElementById('metricMargin').textContent=`${margin.toFixed(1).replace('.',',')}%`; document.getElementById('metricMonthRevenue').textContent=`R$ ${monthRevenue.toFixed(2).replace('.',',')}`; document.getElementById('metricAvgTicket').textContent=`R$ ${avg.toFixed(2).replace('.',',')}`; const counts={}; ORDER_STATUSES.forEach(s=>counts[s]=0); ordersCache.forEach(o=>counts[o.status]=(counts[o.status]||0)+1); const statusArea=document.getElementById('statusSummary'); if(statusArea) statusArea.innerHTML=ORDER_STATUSES.map(s=>`<div class="row between mt12"><span class="small">${s}</span><strong>${counts[s]||0}</strong></div>`).join(''); const best=Object.entries(salesMap).sort((a,b)=>b[1]-a[1]).slice(0,8); const bestArea=document.getElementById('bestSellersAdmin'); if(bestArea) bestArea.innerHTML=best.length?best.map(([name,q])=>`<div class="row between mt12"><span class="small">${name}</span><strong>${q}</strong></div>`).join(''):'<div class="empty">Sem vendas ainda.</div>'; const profitableEntries=Object.entries(profitMap).sort((a,b)=>b[1]-a[1]); const profitableArea=document.getElementById('mostProfitableProduct'); if(profitableArea) profitableArea.innerHTML=profitableEntries.length?`<div class="row between"><span class="small">${profitableEntries[0][0]}</span><strong>R$ ${profitableEntries[0][1].toFixed(2).replace('.',',')}</strong></div>`:'<div class="empty">Sem dados suficientes.</div>'; const monthly={}; filtered.forEach(o=>{const key=(o.created_at||'').slice(0,7)||'Sem data'; if(!monthly[key]) monthly[key]={rev:0,cost:0}; monthly[key].rev += Number(o.total||0); parseOrderItems(o.product||'').forEach(item=>{const prod=products.find(p=>p.name===item.name); monthly[key].cost += Number(prod?.cost||0)*item.qty;});}); const monthlyArea=document.getElementById('monthlyProfitSummary'); if(monthlyArea){const entries=Object.entries(monthly).sort((a,b)=>a[0].localeCompare(b[0])).slice(-6); monthlyArea.innerHTML=entries.length?entries.map(([m,v])=>`<div class="row between mt12"><span class="small">${m}</span><strong>R$ ${(v.rev-v.cost).toFixed(2).replace('.',',')}</strong></div>`).join(''):'<div class="empty">Sem dados mensais.</div>';} const catMap={}; filtered.forEach(o=>{const items=parseOrderItems(o.product||''); items.forEach(item=>{const prod=products.find(p=>p.name===item.name); const cat=prod?.category || 'Sem categoria'; if(!catMap[cat]) catMap[cat]={qty:0,revenue:0,cost:0}; catMap[cat].qty += item.qty; catMap[cat].revenue += Number(prod?.price||0)*item.qty; catMap[cat].cost += Number(prod?.cost||0)*item.qty;});}); const catArea=document.getElementById('categoryDashboardSummary'); if(catArea){const catEntries=Object.entries(catMap).sort((a,b)=>b[1].revenue-a[1].revenue); catArea.innerHTML=catEntries.length?catEntries.map(([cat,v])=>`<div class="admin-list-item"><div><strong>${cat}</strong><br><span class="small">Itens: ${v.qty}</span></div><div><div class="small">Venda: R$ ${v.revenue.toFixed(2).replace('.',',')}</div><div class="small">Custo: R$ ${v.cost.toFixed(2).replace('.',',')}</div><div><strong>Lucro: R$ ${(v.revenue-v.cost).toFixed(2).replace('.',',')}</strong></div></div></div>`).join(''):'<div class="empty">Sem dados por categoria.</div>';}}
+    function refreshDashboard(){renderDashboard()}
+    function renderOrderFilterOptions(){const options=`<option value="">Todos os status</option>${ORDER_STATUSES.map(s=>`<option value="${s}">${s}</option>`).join('')}`; ['ordersStatusFilter','reportStatusFilter'].forEach(id=>{const el=document.getElementById(id); if(el) el.innerHTML=options;});}
+    function filterOrdersAdmin(){const client=(document.getElementById('ordersClientFilter')?.value||'').toLowerCase().trim(); const status=(document.getElementById('ordersStatusFilter')?.value||'').trim(); const month=(document.getElementById('ordersDateFilter')?.value||'').trim(); let list=[...ordersCache]; if(client) list=list.filter(o=>`${o.customer_name||''} ${o.customer_phone||''}`.toLowerCase().includes(client)); if(status) list=list.filter(o=>(o.status||'')===status); if(month) list=list.filter(o=>(o.created_at||'').slice(0,7)===month); renderOrders(list)}
 
     function applyFilters(search=''){let list=[...products]; if(selectedCategory) list=list.filter(p=>(p.category||'')===selectedCategory); if(search) list=list.filter(p=>(p.name||'').toLowerCase().includes(search)||(p.description||'').toLowerCase().includes(search)); return list}
-    function renderProducts(list){
-      const area=document.getElementById('productSections');
-      if(!list.length){area.innerHTML='<div class="empty">Nenhum produto encontrado.</div>';return}
-      area.innerHTML='';
-      const grouped={};
-      list.forEach(p=>{
-        const cat=p.category||'Sem categoria';
-        if(!grouped[cat]) grouped[cat]=[];
-        grouped[cat].push(p);
-      });
-      Object.entries(grouped).forEach(([cat,items])=>{
-        let html=`<section style="padding:0 22px 12px"><div class="row between" style="margin:8px 0 14px"><h3 style="margin:0">${cat}</h3><span class="small">${items.length} produto(s)</span></div><div class="products" style="padding:0">`;
-        items.forEach(p=>{
-          html+=`<div class="card"><img src="${p.image||''}" alt="${p.name||''}" onerror="this.src='https://via.placeholder.com/500x500?text=Produto'"><h4>${p.name||''}</h4><p>${p.description||''}</p><div class="badge">${p.category||'Sem categoria'}</div><div class="row between"><div class="price">R$ ${Number(p.price||0).toFixed(2).replace('.',',')}</div><div class="qty-box"><button onclick="adjustCardQty(${p.id},-1)">-</button><span id="cardqty-${p.id}">1</span><button onclick="adjustCardQty(${p.id},1)">+</button></div></div><button class="primary" style="width:100%" onclick="addCart(${p.id})">Adicionar ao carrinho</button></div>`;
-        });
-        html+='</div></section>';
-        area.innerHTML+=html;
-      });
-    }
+    function renderProducts(list){const area=document.getElementById('productSections'); if(!list.length){area.innerHTML='<div class="empty">Nenhum produto encontrado.</div>';return} area.innerHTML=''; const grouped={}; list.forEach(p=>{const cat=p.category||'Sem categoria'; if(!grouped[cat]) grouped[cat]=[]; grouped[cat].push(p);}); Object.entries(grouped).forEach(([cat,items])=>{let html=`<section style="padding:0 22px 12px"><div class="row between" style="margin:8px 0 14px"><h3 style="margin:0">${cat}</h3><span class="small">${items.length} produto(s)</span></div><div class="products" style="padding:0">`; items.forEach(p=>{const imgs=getImagesForProduct(p.id,p.image); html+=`<div class="card"><img src="${imgs[0]||p.image||''}" alt="${p.name||''}" onerror="this.src='https://via.placeholder.com/500x500?text=Produto'" onclick="openProductModal(${p.id})" style="cursor:pointer"><h4>${p.name||''}</h4><p>${p.description||''}</p><div class="badge">${p.category||'Sem categoria'}</div><div class="small">${imgs.length} foto(s)</div><div class="row between"><div class="price">R$ ${Number(p.price||0).toFixed(2).replace('.',',')}</div><div class="qty-box"><button onclick="adjustCardQty(${p.id},-1)">-</button><span id="cardqty-${p.id}">1</span><button onclick="adjustCardQty(${p.id},1)">+</button></div></div><div class="row"><button class="ghost" style="flex:1" onclick="openProductModal(${p.id})">Ver fotos</button><button class="primary" style="flex:1" onclick="addCart(${p.id})">Adicionar</button></div></div>`;}); html+='</div></section>'; area.innerHTML+=html;});}
     function searchProduct(text){renderProducts(applyFilters(text.toLowerCase().trim()))}
     function filterCategory(cat){selectedCategory=cat; renderProducts(applyFilters(document.querySelector('.search-wrap input').value.toLowerCase().trim()))}
     function adjustCardQty(id,delta){const el=document.getElementById(`cardqty-${id}`); let n=parseInt(el.textContent||'1',10); n+=delta; if(n<1)n=1; el.textContent=n}
     function getCardQty(id){const el=document.getElementById(`cardqty-${id}`); return el?parseInt(el.textContent||'1',10):1}
+    function openProductModal(id){const p=products.find(x=>x.id===id); if(!p) return; currentModalProduct=p; const imgs=getImagesForProduct(p.id,p.image); document.getElementById('productModalCategory').textContent=p.category||'Sem categoria'; document.getElementById('productModalName').textContent=p.name||''; document.getElementById('productModalDescription').textContent=p.description||''; document.getElementById('productModalPrice').textContent=`R$ ${Number(p.price||0).toFixed(2).replace('.',',')}`; document.getElementById('productModalQty').textContent='1'; document.getElementById('productMainPhoto').src=imgs[0]||p.image||''; const thumbs=document.getElementById('productThumbs'); thumbs.innerHTML=''; imgs.forEach((img,idx)=>{thumbs.innerHTML += `<img src="${img}" class="${idx===0?'active':''}" onclick="selectProductPhoto('${img.replace(/'/g,"\\'")}', this)">`;}); document.getElementById('productModal').style.display='flex';}
+    function selectProductPhoto(src,el){document.getElementById('productMainPhoto').src=src; document.querySelectorAll('#productThumbs img').forEach(i=>i.classList.remove('active')); el.classList.add('active')}
+    function changeModalQty(delta){const el=document.getElementById('productModalQty'); let n=parseInt(el.textContent||'1',10); n+=delta; if(n<1)n=1; el.textContent=n}
+    function addModalProductToCart(){if(!currentModalProduct) return; const qty=parseInt(document.getElementById('productModalQty').textContent||'1',10); cart.push({product:currentModalProduct,qty,obs:''}); updateCart(); closeProductModal(); toggleCart(true)}
+    function closeProductModal(){document.getElementById('productModal').style.display='none'}
 
     function addCart(id){const p=products.find(x=>x.id===id); if(!p) return; const qty=getCardQty(id); cart.push({product:p,qty,obs:''}); updateCart(); toggleCart(true)}
     function toggleCart(forceOpen=false){const c=document.getElementById('cart'); c.style.display=forceOpen?'block':(c.style.display==='block'?'none':'block')}
@@ -348,18 +132,8 @@
 
     function openCheckout(total){pendingTotal=total; document.getElementById('checkoutModal').style.display='flex'; document.getElementById('checkoutMsg').textContent=''} function closeCheckout(){document.getElementById('checkoutModal').style.display='none'}
     function applyCoupon(total,code){if(!code) return {final:total,discount:0}; const cup=coupons.find(c=>(c.code||'').toUpperCase()===(code||'').toUpperCase()); if(!cup) return {final:total,discount:0,invalid:true}; const discount=(total*(Number(cup.discount_percent)||0))/100; return {final:Math.max(0,total-discount),discount}}
-    async function generateOrderCode(){
-      const now=new Date();
-      const year=now.getFullYear();
-      const month=String(now.getMonth()+1).padStart(2,'0');
-      const prefix=`PED-${year}-${month}`;
-      const {data,error}=await supabaseClient.from('orders').select('code').like('code', `${prefix}-%`);
-      if(error){console.log(error); return `${prefix}-0001`;}
-      const seq=String((data?.length||0)+1).padStart(4,'0');
-      return `${prefix}-${seq}`;
-    }
-
-    async function confirmCheckout(){const name=document.getElementById('customerName').value.trim(); const phone=document.getElementById('customerPhone').value.trim(); const coupon=document.getElementById('couponCode').value.trim(); const msgEl=document.getElementById('checkoutMsg'); if(!name||!phone){msgEl.textContent='Informe nome e telefone.'; return} const cup=applyCoupon(pendingTotal,coupon); if(cup.invalid){msgEl.textContent='Cupom inválido.'; return} const finalTotal=cup.final; const code = await generateOrderCode(); let msg=`Olá! Gostaria de fazer este pedido:%0A%0ACódigo: ${code}%0ANome: ${name}%0ATelefone: ${phone}%0A`; cart.forEach(i=>{msg+=`${i.product.name} x${i.qty}${i.obs?` | Obs: ${i.obs}`:''}%0A`}); if(coupon&&!cup.invalid){msg+=`Cupom: ${coupon}%0ADesconto: R$ ${cup.discount.toFixed(2).replace('.',',')}%0A`} msg+=`%0ATotal: R$ ${finalTotal.toFixed(2).replace('.',',')}`; const {error}=await supabaseClient.from('orders').insert([{code,customer_name:name,customer_phone:phone,product:cart.map(i=>`${i.product.name} x${i.qty}${i.obs?` (${i.obs})`:''}`).join(' | '),total:finalTotal,status:'Novo',coupon_code:coupon||null}]); if(error){console.log(error); msgEl.textContent='Erro ao salvar pedido.'; return} window.open(`https://wa.me/5591984233046?text=${msg}`,'_blank'); cart=[]; updateCart(); closeCheckout(); toggleCart()}
+    async function generateOrderCode(){const now=new Date(); const year=now.getFullYear(); const month=String(now.getMonth()+1).padStart(2,'0'); const prefix=`PED-${year}-${month}`; const {data,error}=await supabaseClient.from('orders').select('code').like('code', `${prefix}-%`); if(error){console.log(error); return `${prefix}-0001`;} const seq=String((data?.length||0)+1).padStart(4,'0'); return `${prefix}-${seq}`;}
+    async function confirmCheckout(){const name=document.getElementById('customerName').value.trim(); const phone=document.getElementById('customerPhone').value.trim(); const coupon=document.getElementById('couponCode').value.trim(); const msgEl=document.getElementById('checkoutMsg'); if(!name||!phone){msgEl.textContent='Informe nome e telefone.'; return} const cup=applyCoupon(pendingTotal,coupon); if(cup.invalid){msgEl.textContent='Cupom inválido.'; return} const finalTotal=cup.final; const code=await generateOrderCode(); let msg=`Olá! Gostaria de fazer este pedido:%0A%0ACódigo: ${code}%0ANome: ${name}%0ATelefone: ${phone}%0A`; cart.forEach(i=>{msg+=`${i.product.name} x${i.qty}${i.obs?` | Obs: ${i.obs}`:''}%0A`}); if(coupon&&!cup.invalid){msg+=`Cupom: ${coupon}%0ADesconto: R$ ${cup.discount.toFixed(2).replace('.',',')}%0A`} msg+=`%0ATotal: R$ ${finalTotal.toFixed(2).replace('.',',')}`; const {error}=await supabaseClient.from('orders').insert([{code,customer_name:name,customer_phone:phone,product:cart.map(i=>`${i.product.name} x${i.qty}${i.obs?` (${i.obs})`:''}`).join(' | '),total:finalTotal,status:'Novo',coupon_code:coupon||null}]); if(error){console.log(error); msgEl.textContent='Erro ao salvar pedido.'; return} window.open(`https://wa.me/5591984233046?text=${msg}`,'_blank'); cart=[]; updateCart(); closeCheckout(); toggleCart()}
 
     function openStatus(){document.getElementById('statusModal').style.display='flex'} function closeStatus(){document.getElementById('statusModal').style.display='none'}
     async function checkStatus(){const code=document.getElementById('statusCode').value.trim(); const res=document.getElementById('statusResult'); if(!code) return; const {data,error}=await supabaseClient.rpc('lookup_order_status',{p_code:code}); if(error||!data||!data.length){res.textContent='Pedido não encontrado.'; return} res.textContent=`Código ${data[0].code} • Status: ${data[0].status}`}
@@ -370,10 +144,11 @@
     function showAdminSection(id,btn){['dashboardSection','productsSection','ordersSection','couponsSection','bannerSection','categoriesSection'].forEach(s=>document.getElementById(s).style.display=(s===id?'block':'none')); document.querySelectorAll('.admin-nav button').forEach(b=>b.classList.remove('active')); btn.classList.add('active')}
 
     function fillForm(p){document.getElementById('editingId').value=p.id||''; document.getElementById('pname').value=p.name||''; document.getElementById('pdescription').value=p.description||''; document.getElementById('pprice').value=p.price||''; document.getElementById('pcost').value=p.cost||''; document.getElementById('pcategory').value=p.category||''; document.getElementById('adminMsg').textContent='Editando produto selecionado.'; showAdminSection('productsSection',document.querySelectorAll('.admin-nav button')[1])}
-    function resetForm(){document.getElementById('editingId').value=''; document.getElementById('pname').value=''; document.getElementById('pdescription').value=''; document.getElementById('pprice').value=''; document.getElementById('pcost').value=''; document.getElementById('pcategory').value=''; document.getElementById('pimage').value=''}
+    function resetForm(){document.getElementById('editingId').value=''; document.getElementById('pname').value=''; document.getElementById('pdescription').value=''; document.getElementById('pprice').value=''; document.getElementById('pcost').value=''; document.getElementById('pcategory').value=''; document.getElementById('pimage').value=''; document.getElementById('pgallery').value=''}
     async function uploadFileToBucket(file,bucket){const {data:userData}=await supabaseClient.auth.getUser(); if(!userData?.user) throw new Error('Você precisa estar logado para enviar arquivo.'); const safeName=file.name.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9._-]/g,''); const fileName=`${Date.now()}_${safeName}`; const {error:uploadError}=await supabaseClient.storage.from(bucket).upload(fileName,file,{cacheControl:'3600',upsert:false,contentType:file.type||'image/*'}); if(uploadError) throw uploadError; const {data}=supabaseClient.storage.from(bucket).getPublicUrl(fileName); return data.publicUrl}
-    async function addOrUpdateProduct(){const id=document.getElementById('editingId').value; const name=document.getElementById('pname').value.trim(); const description=document.getElementById('pdescription').value.trim(); const price=parseFloat(document.getElementById('pprice').value); const cost=parseFloat(document.getElementById('pcost').value||0); const category=document.getElementById('pcategory').value; const file=document.getElementById('pimage').files[0]; const msg=document.getElementById('adminMsg'); msg.className='small'; if(!name||!description||isNaN(price)||!category){msg.textContent='Preencha nome, descrição, preço e categoria.'; msg.classList.add('error'); return} try{let image=null; if(file) image=await uploadFileToBucket(file,BUCKET_NAME); if(id){const payload={name,description,price,cost,category}; if(image) payload.image=image; const {error}=await supabaseClient.from('products').update(payload).eq('id',id); if(error) throw error; msg.textContent='Produto atualizado com sucesso.'} else {if(!image){msg.textContent='Selecione uma imagem para o novo produto.'; msg.classList.add('error'); return} const {error}=await supabaseClient.from('products').insert([{name,description,price,cost,category,image}]); if(error) throw error; msg.textContent='Cadastro concluído.'} msg.classList.add('success'); resetForm(); await loadProducts()} catch(error){console.log(error); msg.textContent=`Erro no upload/salvamento: ${error.message||'verifique bucket, policies e login admin.'}`; msg.classList.add('error')}}
-    function renderAdminProducts(){const area=document.getElementById('adminProducts'); if(!area) return; if(!products.length){area.innerHTML='<div class="empty">Nenhum produto cadastrado.</div>'; return} area.innerHTML=''; products.forEach(p=>{const safe=JSON.stringify(p).replace(/'/g,'&#39;'); area.innerHTML+=`<div class="admin-list-item"><div><strong>${p.name}</strong><br><span class="small">Venda: R$ ${Number(p.price).toFixed(2).replace('.',',')}</span><br><span class="small">Custo: R$ ${Number(p.cost||0).toFixed(2).replace('.',',')}</span><br><span class="badge">${p.category||'Sem categoria'}</span><br><span class="small">${p.description||''}</span></div><div class="row wrap"><button class="secondary" onclick='fillForm(${safe})'>Editar</button><button class="secondary" onclick='deleteProduct(${p.id})'>Excluir</button></div></div>`})}
+    async function saveGalleryImages(productId, files){for(let i=0;i<files.length;i++){const url=await uploadFileToBucket(files[i],BUCKET_NAME); await supabaseClient.from('product_images').insert([{product_id:productId,image_url:url,sort_order:i+1}]);}}
+    async function addOrUpdateProduct(){const id=document.getElementById('editingId').value; const name=document.getElementById('pname').value.trim(); const description=document.getElementById('pdescription').value.trim(); const price=parseFloat(document.getElementById('pprice').value); const cost=parseFloat(document.getElementById('pcost').value||0); const category=document.getElementById('pcategory').value; const file=document.getElementById('pimage').files[0]; const galleryFiles=Array.from(document.getElementById('pgallery').files||[]); const msg=document.getElementById('adminMsg'); msg.className='small'; if(!name||!description||isNaN(price)||!category){msg.textContent='Preencha nome, descrição, preço e categoria.'; msg.classList.add('error'); return} try{let image=null; if(file) image=await uploadFileToBucket(file,BUCKET_NAME); let productId=id; if(id){const payload={name,description,price,cost,category}; if(image) payload.image=image; const {error}=await supabaseClient.from('products').update(payload).eq('id',id); if(error) throw error; msg.textContent='Produto atualizado com sucesso.'} else {if(!image){msg.textContent='Selecione uma imagem principal para o novo produto.'; msg.classList.add('error'); return} const {data,error}=await supabaseClient.from('products').insert([{name,description,price,cost,category,image}]).select().single(); if(error) throw error; productId=data.id; msg.textContent='Cadastro concluído.'} if(galleryFiles.length && productId){await saveGalleryImages(productId,galleryFiles);} msg.classList.add('success'); resetForm(); await loadProducts()} catch(error){console.log(error); msg.textContent=`Erro no upload/salvamento: ${error.message||'verifique bucket, policies e login admin.'}`; msg.classList.add('error')}}
+    function renderAdminProducts(){const area=document.getElementById('adminProducts'); if(!area) return; if(!products.length){area.innerHTML='<div class="empty">Nenhum produto cadastrado.</div>'; return} area.innerHTML=''; products.forEach(p=>{const safe=JSON.stringify(p).replace(/'/g,'&#39;'); const imgCount=getImagesForProduct(p.id,p.image).length; area.innerHTML+=`<div class="admin-list-item"><div><strong>${p.name}</strong><br><span class="small">Venda: R$ ${Number(p.price).toFixed(2).replace('.',',')}</span><br><span class="small">Custo: R$ ${Number(p.cost||0).toFixed(2).replace('.',',')}</span><br><span class="small">Galeria: ${imgCount} foto(s)</span><br><span class="badge">${p.category||'Sem categoria'}</span><br><span class="small">${p.description||''}</span></div><div class="row wrap"><button class="secondary" onclick='fillForm(${safe})'>Editar</button><button class="secondary" onclick='deleteProduct(${p.id})'>Excluir</button></div></div>`})}
     async function deleteProduct(id){if(!confirm('Deseja excluir este produto?')) return; const {error}=await supabaseClient.from('products').delete().eq('id',id); if(error){console.log(error); alert('Erro ao excluir produto.'); return} loadProducts()}
 
     function renderOrders(list){const area=document.getElementById('adminOrders'); if(!area) return; if(!list.length){area.innerHTML='<div class="empty">Nenhum pedido encontrado.</div>'; return} area.innerHTML=''; list.forEach(o=>{area.innerHTML+=`<div class="admin-list-item"><div style="flex:1"><strong>${o.code||''}</strong><br><span class="small">${o.customer_name||''} • ${o.customer_phone||''}</span><br><span class="small">${o.product||''}</span><br><span class="small">Total atual: R$ ${Number(o.total||0).toFixed(2).replace('.',',')}</span>${o.coupon_code?`<br><span class="small">Cupom: ${o.coupon_code}</span>`:''}<br><span id="order-msg-${o.id}" class="small"></span></div><div style="min-width:260px"><input id="order-total-${o.id}" value="${o.total||0}" class="mb8" placeholder="Novo valor total"><select id="order-status-${o.id}" class="mb8">${ORDER_STATUSES.map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${s}</option>`).join('')}</select><button class="primary" style="width:100%" onclick="saveOrderChanges(${o.id})">Salvar alterações</button></div></div>`})}
