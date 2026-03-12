@@ -12,7 +12,7 @@
     .header{position:sticky;top:0;z-index:20;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
     .logo{height:48px}.actions{display:flex;gap:12px}.icon-btn{width:42px;height:42px;border-radius:12px;border:1px solid var(--b);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
     .hero{margin:18px 22px 0;background:linear-gradient(90deg,var(--cor),var(--cor2));color:#fff;border-radius:26px;padding:20px 24px;text-align:center;position:relative;overflow:hidden;min-height:120px;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center}
-    .hero::after{content:'';position:absolute;inset:0;background:rgba(76,0,58,.35)}
+    .hero::after{content:'';position:absolute;inset:0;background:var(--hero-overlay, rgba(0,0,0,0))}
     .hero-inner{position:relative;z-index:1}
     .hero h1{margin:0;font-size:26px;position:relative;z-index:1}.hero-sub{position:relative;z-index:1;font-size:13px;opacity:.95;margin-top:8px}
     .topbar{padding:18px 22px 8px;display:grid;grid-template-columns:1fr 260px;gap:12px}.search-wrap,.filter-wrap{background:#fff;border:1px solid var(--b);border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 4px 14px rgba(0,0,0,.04)}
@@ -29,7 +29,7 @@
     .admin-layout{display:grid;grid-template-columns:260px 1fr;gap:22px}.admin-sidebar{background:linear-gradient(180deg,#5b0044,#830064);color:#fff;border-radius:24px;padding:18px;box-shadow:var(--shadow)}.admin-sidebar h3{margin:0 0 14px}.admin-nav{display:grid;gap:8px}.admin-nav button{border:none;background:rgba(255,255,255,.12);color:#fff;padding:12px 14px;border-radius:14px;text-align:left;cursor:pointer}.admin-nav button.active{background:#fff;color:var(--cor)}
     .admin-main{display:grid;gap:18px}.admin-topcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.metric{background:#fff;border:1px solid var(--b);border-radius:20px;padding:16px;box-shadow:0 8px 20px rgba(0,0,0,.04)}.metric .n{font-size:28px;font-weight:700;color:var(--cor)}
     .admin-card{background:#fff;border:1px solid var(--b);border-radius:22px;padding:18px;box-shadow:0 8px 22px rgba(0,0,0,.04)}.admin-grid{display:grid;grid-template-columns:380px 1fr;gap:18px}.admin-list-item{display:flex;justify-content:space-between;gap:12px;align-items:start;padding:12px;border-bottom:1px solid var(--b)} .admin-list-item:last-child{border-bottom:none}
-    .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;background:#f3e8ff;color:#6b21a8}.preview-banner{width:100%;min-height:180px;border-radius:18px;background:linear-gradient(90deg,var(--cor),var(--cor2));display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;position:relative;overflow:hidden;padding:18px}.preview-banner::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.22)}.preview-banner-inner{position:relative;z-index:1;text-align:center}.preview-banner h2,.preview-banner p{margin:0}
+    .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;background:#f3e8ff;color:#6b21a8}.preview-banner{width:100%;min-height:180px;border-radius:18px;background:linear-gradient(90deg,var(--cor),var(--cor2));display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;position:relative;overflow:hidden;padding:18px}.preview-banner::after{content:'';position:absolute;inset:0;background:var(--preview-overlay, rgba(0,0,0,0))}.preview-banner-inner{position:relative;z-index:1;text-align:center}.preview-banner h2,.preview-banner p{margin:0}
     .footer{background:#111;color:#fff;text-align:center;padding:22px;margin-top:20px}.footer a{display:inline-flex;margin:0 8px}.footer img{width:28px;height:28px}.empty{padding:28px;text-align:center;color:var(--muted)} .success{color:#0f8a4b}.error{color:#b42318}.mt12{margin-top:12px}.mb8{margin-bottom:8px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     @media(max-width:1020px){.admin-layout,.product-layout,.grid2{grid-template-columns:1fr}.admin-topcards{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr}.topbar{grid-template-columns:1fr}}
     @media(max-width:860px){.header{padding:12px 14px}.hero h1{font-size:22px}.hero,.topbar,.products{margin-left:14px;margin-right:14px}.products{padding:18px 14px 30px}}
@@ -98,18 +98,22 @@
     function getBannerSetting(key, fallback){return settingsData[key] ?? fallback}
     function applyBanner(){
       const hero=document.getElementById('heroBanner');
-      const title=getBannerSetting('banner_title','Criando personalizados para momentos únicos');
-      const subtitle=getBannerSetting('banner_subtitle','Soluções criativas para festas, brindes e impressões');
+      const title=getBannerSetting('banner_title','');
+      const subtitle=getBannerSetting('banner_subtitle','');
       const image=getBannerSetting('banner_image','');
       const bgColor=getBannerSetting('banner_bg_color','#830064');
       const titleColor=getBannerSetting('banner_title_color','#ffffff');
       const subtitleColor=getBannerSetting('banner_subtitle_color','#ffffff');
       const titleSize=getBannerSetting('banner_title_size','26');
       const subtitleSize=getBannerSetting('banner_subtitle_size','13');
-      const overlay=Number(getBannerSetting('banner_overlay','0.35'));
+      const overlay=Number(getBannerSetting('banner_overlay','0'));
       document.getElementById('heroTitle').textContent=title;
+      document.getElementById('heroTitle').style.display=title ? 'block' : 'none';
       document.getElementById('heroSubtitle').textContent=subtitle;
-      hero.style.backgroundImage=image?`linear-gradient(rgba(0,0,0,${overlay}), rgba(0,0,0,${overlay})), url(${image})`:`linear-gradient(90deg, ${bgColor}, ${bgColor})`;
+      document.getElementById('heroSubtitle').style.display=subtitle ? 'block' : 'none';
+      hero.style.backgroundImage=image ? `url(${image})` : 'none';
+      hero.style.backgroundColor=bgColor;
+      hero.style.setProperty('--hero-overlay', `rgba(0,0,0,${overlay})`);
       hero.style.backgroundColor=bgColor;
       document.getElementById('heroTitle').style.color=titleColor;
       document.getElementById('heroSubtitle').style.color=subtitleColor;
@@ -119,44 +123,48 @@
     }
     function fillBannerFields(){
       const set=(id,val)=>{const el=document.getElementById(id); if(el) el.value=val};
-      set('bannerTitleInput',getBannerSetting('banner_title','Criando personalizados para momentos únicos'));
-      set('bannerSubtitleInput',getBannerSetting('banner_subtitle','Soluções criativas para festas, brindes e impressões'));
+      set('bannerTitleInput',getBannerSetting('banner_title',''));
+      set('bannerSubtitleInput',getBannerSetting('banner_subtitle',''));
       set('bannerBgColorInput',getBannerSetting('banner_bg_color','#830064'));
       set('bannerTitleColorInput',getBannerSetting('banner_title_color','#ffffff'));
       set('bannerSubtitleColorInput',getBannerSetting('banner_subtitle_color','#ffffff'));
       set('bannerTitleSizeInput',getBannerSetting('banner_title_size','26'));
       set('bannerSubtitleSizeInput',getBannerSetting('banner_subtitle_size','13'));
-      set('bannerOverlayInput',getBannerSetting('banner_overlay','0.35'));
+      set('bannerOverlayInput',getBannerSetting('banner_overlay','0'));
     }
     function previewBannerFromSettings(){
       const image=getBannerSetting('banner_image','');
       const bgColor=getBannerSetting('banner_bg_color','#830064');
-      const title=getBannerSetting('banner_title','Criando personalizados para momentos únicos');
-      const subtitle=getBannerSetting('banner_subtitle','Soluções criativas para festas, brindes e impressões');
+      const title=getBannerSetting('banner_title','');
+      const subtitle=getBannerSetting('banner_subtitle','');
       const titleColor=getBannerSetting('banner_title_color','#ffffff');
       const subtitleColor=getBannerSetting('banner_subtitle_color','#ffffff');
       const titleSize=getBannerSetting('banner_title_size','26');
       const subtitleSize=getBannerSetting('banner_subtitle_size','13');
-      const overlay=Number(getBannerSetting('banner_overlay','0.35'));
+      const overlay=Number(getBannerSetting('banner_overlay','0'));
       const box=document.getElementById('bannerPreview'); if(!box) return;
-      box.style.backgroundImage=image?`linear-gradient(rgba(0,0,0,${overlay}), rgba(0,0,0,${overlay})), url(${image})`:`linear-gradient(90deg, ${bgColor}, ${bgColor})`;
+      box.style.backgroundImage=image ? `url(${image})` : 'none';
+      box.style.backgroundColor=bgColor;
+      box.style.setProperty('--preview-overlay', `rgba(0,0,0,${overlay})`);
       box.style.backgroundColor=bgColor;
       document.getElementById('bannerPreviewTitle').textContent=title;
+      document.getElementById('bannerPreviewTitle').style.display=title ? 'block' : 'none';
       document.getElementById('bannerPreviewSubtitle').textContent=subtitle;
+      document.getElementById('bannerPreviewSubtitle').style.display=subtitle ? 'block' : 'none';
       document.getElementById('bannerPreviewTitle').style.color=titleColor;
       document.getElementById('bannerPreviewSubtitle').style.color=subtitleColor;
       document.getElementById('bannerPreviewTitle').style.fontSize=`${titleSize}px`;
       document.getElementById('bannerPreviewSubtitle').style.fontSize=`${subtitleSize}px`;
     }
     function previewBannerFromFields(){
-      settingsData.banner_title=document.getElementById('bannerTitleInput').value || 'Criando personalizados para momentos únicos';
-      settingsData.banner_subtitle=document.getElementById('bannerSubtitleInput').value || 'Soluções criativas para festas, brindes e impressões';
+      settingsData.banner_title=document.getElementById('bannerTitleInput').value || '';
+      settingsData.banner_subtitle=document.getElementById('bannerSubtitleInput').value || '';
       settingsData.banner_bg_color=document.getElementById('bannerBgColorInput').value || '#830064';
       settingsData.banner_title_color=document.getElementById('bannerTitleColorInput').value || '#ffffff';
       settingsData.banner_subtitle_color=document.getElementById('bannerSubtitleColorInput').value || '#ffffff';
       settingsData.banner_title_size=document.getElementById('bannerTitleSizeInput').value || '26';
       settingsData.banner_subtitle_size=document.getElementById('bannerSubtitleSizeInput').value || '13';
-      settingsData.banner_overlay=document.getElementById('bannerOverlayInput').value || '0.35';
+      settingsData.banner_overlay=document.getElementById('bannerOverlayInput').value || '0';
       previewBannerFromSettings();
     }
 
@@ -223,9 +231,9 @@
     function renderCoupons(){const area=document.getElementById('adminCoupons'); if(!area) return; if(!coupons.length){area.innerHTML='<div class="empty">Nenhum cupom cadastrado.</div>'; return} area.innerHTML=''; coupons.forEach(c=>{area.innerHTML+=`<div class="admin-list-item"><div><strong>${c.code}</strong><br><span class="small">${c.discount_percent}% de desconto</span></div><div><button class="secondary" onclick="deleteCoupon(${c.id})">Excluir</button></div></div>`})}
     async function deleteCoupon(id){const {error}=await supabaseClient.from('coupons').delete().eq('id',id); if(error){console.log(error); alert('Erro ao excluir cupom'); return} loadCoupons()}
 
-    async function saveBanner(){const msg=document.getElementById('bannerMsg'); try{const title=document.getElementById('bannerTitleInput').value.trim(); const subtitle=document.getElementById('bannerSubtitleInput').value.trim(); const bgColor=document.getElementById('bannerBgColorInput').value; const titleColor=document.getElementById('bannerTitleColorInput').value; const subtitleColor=document.getElementById('bannerSubtitleColorInput').value; const titleSize=document.getElementById('bannerTitleSizeInput').value||'26'; const subtitleSize=document.getElementById('bannerSubtitleSizeInput').value||'13'; const overlay=document.getElementById('bannerOverlayInput').value||'0.35'; const file=document.getElementById('bannerImageInput').files[0]; await upsertSetting('banner_title',title||'Criando personalizados para momentos únicos'); await upsertSetting('banner_subtitle',subtitle||'Soluções criativas para festas, brindes e impressões'); await upsertSetting('banner_bg_color',bgColor); await upsertSetting('banner_title_color',titleColor); await upsertSetting('banner_subtitle_color',subtitleColor); await upsertSetting('banner_title_size',String(titleSize)); await upsertSetting('banner_subtitle_size',String(subtitleSize)); await upsertSetting('banner_overlay',String(overlay)); if(file){const image=await uploadFileToBucket(file,BUCKET_NAME); await upsertSetting('banner_image',image)} msg.textContent='Banner atualizado com sucesso.'; await loadSettings()}catch(error){console.log(error); msg.textContent='Erro ao salvar banner.'}}
+    async function saveBanner(){const msg=document.getElementById('bannerMsg'); try{const title=document.getElementById('bannerTitleInput').value.trim(); const subtitle=document.getElementById('bannerSubtitleInput').value.trim(); const bgColor=document.getElementById('bannerBgColorInput').value; const titleColor=document.getElementById('bannerTitleColorInput').value; const subtitleColor=document.getElementById('bannerSubtitleColorInput').value; const titleSize=document.getElementById('bannerTitleSizeInput').value||'26'; const subtitleSize=document.getElementById('bannerSubtitleSizeInput').value||'13'; const overlay=document.getElementById('bannerOverlayInput').value||'0.35'; const file=document.getElementById('bannerImageInput').files[0]; await upsertSetting('banner_title',title); await upsertSetting('banner_subtitle',subtitle); await upsertSetting('banner_bg_color',bgColor); await upsertSetting('banner_title_color',titleColor); await upsertSetting('banner_subtitle_color',subtitleColor); await upsertSetting('banner_title_size',String(titleSize)); await upsertSetting('banner_subtitle_size',String(subtitleSize)); await upsertSetting('banner_overlay',String(overlay)); if(file){const image=await uploadFileToBucket(file,BUCKET_NAME); await upsertSetting('banner_image',image)} msg.textContent='Banner atualizado com sucesso.'; await loadSettings()}catch(error){console.log(error); msg.textContent='Erro ao salvar banner.'}}
     async function removeBannerImage(){await upsertSetting('banner_image',''); await loadSettings(); document.getElementById('bannerMsg').textContent='Imagem removida.';}
-    async function resetBannerSettings(){const defaults={banner_title:'Criando personalizados para momentos únicos',banner_subtitle:'Soluções criativas para festas, brindes e impressões',banner_bg_color:'#830064',banner_title_color:'#ffffff',banner_subtitle_color:'#ffffff',banner_title_size:'26',banner_subtitle_size:'13',banner_overlay:'0.35',banner_image:''}; for(const [k,v] of Object.entries(defaults)){await upsertSetting(k,v)} await loadSettings(); document.getElementById('bannerMsg').textContent='Banner resetado com sucesso.';}
+    async function resetBannerSettings(){const defaults={banner_title:'',banner_subtitle:'',banner_bg_color:'#830064',banner_title_color:'#ffffff',banner_subtitle_color:'#ffffff',banner_title_size:'26',banner_subtitle_size:'13',banner_overlay:'0',banner_image:''}; for(const [k,v] of Object.entries(defaults)){await upsertSetting(k,v)} await loadSettings(); document.getElementById('bannerMsg').textContent='Banner resetado com sucesso.';}
     async function upsertSetting(key,value){const {error}=await supabaseClient.from('store_settings').upsert([{key,value}],{onConflict:'key'}); if(error) throw error}
 
     function downloadFile(data,file){const blob=new Blob([data],{type:'text/csv;charset=utf-8;'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=file; a.click()}
