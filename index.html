@@ -56,7 +56,7 @@
     <div class="filter-wrap"><select id="categoryFilter" onchange="filterCategory(this.value)"><option value="">Todas categorias</option></select></div>
   </div>
 
-  <section class="products" id="productList"></section>
+  <section id="productSections"></section>
   <div class="cart" id="cart"></div>
 
   <div class="checkout-modal" id="checkoutModal"><div class="login-box"><h3 style="margin-top:0">Finalizar pedido</h3><input id="customerName" placeholder="Nome do cliente"><input id="customerPhone" placeholder="Telefone / WhatsApp"><input id="couponCode" placeholder="Cupom de desconto (opcional)"><button class="primary mt12" style="width:100%" onclick="confirmCheckout()">Continuar para o WhatsApp</button><button class="secondary mt12" style="width:100%" onclick="closeCheckout()">Cancelar</button><p id="checkoutMsg" class="small mt12"></p></div></div>
@@ -317,7 +317,25 @@
     }
 
     function applyFilters(search=''){let list=[...products]; if(selectedCategory) list=list.filter(p=>(p.category||'')===selectedCategory); if(search) list=list.filter(p=>(p.name||'').toLowerCase().includes(search)||(p.description||'').toLowerCase().includes(search)); return list}
-    function renderProducts(list){const area=document.getElementById('productList'); if(!list.length){area.innerHTML='<div class="empty">Nenhum produto encontrado.</div>';return} area.innerHTML=''; list.forEach(p=>{area.innerHTML+=`<div class="card"><img src="${p.image||''}" alt="${p.name||''}" onerror="this.src='https://via.placeholder.com/500x500?text=Produto'"><h4>${p.name||''}</h4><p>${p.description||''}</p><div class="badge">${p.category||'Sem categoria'}</div><div class="row between"><div class="price">R$ ${Number(p.price||0).toFixed(2).replace('.',',')}</div><div class="qty-box"><button onclick="adjustCardQty(${p.id},-1)">-</button><span id="cardqty-${p.id}">1</span><button onclick="adjustCardQty(${p.id},1)">+</button></div></div><button class="primary" style="width:100%" onclick="addCart(${p.id})">Adicionar ao carrinho</button></div>`})}
+    function renderProducts(list){
+      const area=document.getElementById('productSections');
+      if(!list.length){area.innerHTML='<div class="empty">Nenhum produto encontrado.</div>';return}
+      area.innerHTML='';
+      const grouped={};
+      list.forEach(p=>{
+        const cat=p.category||'Sem categoria';
+        if(!grouped[cat]) grouped[cat]=[];
+        grouped[cat].push(p);
+      });
+      Object.entries(grouped).forEach(([cat,items])=>{
+        let html=`<section style="padding:0 22px 12px"><div class="row between" style="margin:8px 0 14px"><h3 style="margin:0">${cat}</h3><span class="small">${items.length} produto(s)</span></div><div class="products" style="padding:0">`;
+        items.forEach(p=>{
+          html+=`<div class="card"><img src="${p.image||''}" alt="${p.name||''}" onerror="this.src='https://via.placeholder.com/500x500?text=Produto'"><h4>${p.name||''}</h4><p>${p.description||''}</p><div class="badge">${p.category||'Sem categoria'}</div><div class="row between"><div class="price">R$ ${Number(p.price||0).toFixed(2).replace('.',',')}</div><div class="qty-box"><button onclick="adjustCardQty(${p.id},-1)">-</button><span id="cardqty-${p.id}">1</span><button onclick="adjustCardQty(${p.id},1)">+</button></div></div><button class="primary" style="width:100%" onclick="addCart(${p.id})">Adicionar ao carrinho</button></div>`;
+        });
+        html+='</div></section>';
+        area.innerHTML+=html;
+      });
+    }
     function searchProduct(text){renderProducts(applyFilters(text.toLowerCase().trim()))}
     function filterCategory(cat){selectedCategory=cat; renderProducts(applyFilters(document.querySelector('.search-wrap input').value.toLowerCase().trim()))}
     function adjustCardQty(id,delta){const el=document.getElementById(`cardqty-${id}`); let n=parseInt(el.textContent||'1',10); n+=delta; if(n<1)n=1; el.textContent=n}
